@@ -1,5 +1,6 @@
 import React from 'react'
 import {Row, Col, PageHeader} from 'react-bootstrap'
+import TopNav from './TopNav'
 
 const Dashboard = (props) => (
   <Row>
@@ -7,6 +8,7 @@ const Dashboard = (props) => (
       <PageHeader>
         uStaq <small>u learn</small>
       </PageHeader>
+      <TopNav />
     </Col>
   </Row>
 )

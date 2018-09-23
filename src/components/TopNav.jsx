@@ -7,18 +7,30 @@ const TopNav = (props) => (
     <Navbar.Header>
       <Navbar.Brand>
         <Link to='/'>
-          The app!
+          uStaq
         </Link>
       </Navbar.Brand>
     </Navbar.Header>
 
     <Nav>
-      <NavItem eventKey={1}>
-        <Link to="/products">Products</Link>
+      <NavItem className="nav-item" eventKey={1}>
+        <Link to="/stacks">Stacks</Link>
       </NavItem>
 
-      <NavItem eventKey={2}>
-        <Link to="/clients">Clients</Link>
+      <NavItem className="nav-item" eventKey={2}>
+        <Link to="/users">Users</Link>
+      </NavItem>
+
+      <NavItem className="nav-item" eventKey={3}>
+        <Link to="/create">Create</Link>
+      </NavItem>
+
+      <NavItem className="nav-item" eventKey={4}>
+        <Link to="/sign-in">Sign in</Link>
+      </NavItem>
+
+      <NavItem className="nav-item" eventKey={5}>
+        <Link to="/sign-up">Sign up</Link>
       </NavItem>
     </Nav>
 

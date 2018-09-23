@@ -11,7 +11,6 @@ import { render } from 'react-dom';
 // import react router
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-
 const App = () => (
   <BrowserRouter>
     <div className="sans-serif">
