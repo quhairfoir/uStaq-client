@@ -1,4 +1,6 @@
-import api from './api'
+// jshint esversion: 6
+
+import api from './api';
 
 /*
 This file will represent each data endpoint on your api. It's designed to look a
@@ -17,8 +19,8 @@ const Resource = (endpoint) => {
     return new Promise((resolve, reject) => {
       api.get(`/${endpoint}`)
       .then((result) => resolve(result.data))
-      .catch((errors) => reject(errors))
-    })
+      .catch((errors) => reject(errors));
+    });
   }
 
   // Same as above
@@ -26,20 +28,20 @@ const Resource = (endpoint) => {
     return new Promise((resolve, reject) => {
       api.get(`/${endpoint}/${id}`)
       .then((result) => resolve(result.data))
-      .catch((errors) => reject(errors))
-    })
+      .catch((errors) => reject(errors));
+    });
   }
 
   function create(data) {
-    return api.post(`/${endpoint}`, data)
+    return api.post(`/${endpoint}`, data);
   }
 
   function update(id, data) {
-    return api.patch(`/${endpoint}/${id}`, data)
+    return api.patch(`/${endpoint}/${id}`, data);
   }
 
   function destroy(id) {
-    return api.delete(`/${endpoint}`)
+    return api.delete(`/${endpoint}`);
   }
 
   return {
@@ -48,8 +50,8 @@ const Resource = (endpoint) => {
     create,
     update,
     destroy
-  }
+  };
 
-}
+};
 
-export default Resource
+export default Resource;

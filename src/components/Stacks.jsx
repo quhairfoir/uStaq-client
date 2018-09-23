@@ -1,13 +1,21 @@
 import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
-
+import Filter from './Filter'
+import _ from 'lodash'
+import faker from 'faker'
 // Product details modal dialog
 import Card from './Card'
 
 // Client-side model
 import Resource from '../models/resource'
-const ProductStore = Resource('stacks')
+
+// const source = _.times(5, () => ({
+//   title: faker.random.word,
+//   description: faker.company.catchPhrase(),
+//   image: faker.internet.avatar(),
+//   price: faker.finance.amount(0, 100, 2, '$'),
+// }))
 
 
 class Stacks extends React.Component {
@@ -21,15 +29,10 @@ class Stacks extends React.Component {
     }
   }
 
-  componentWillMount() {
-    ProductStore.findAll() // ProductStore does the API fetching!
-    .then((result) => this.setState({stacks: result.data, errors: null}))
-    .catch((errors) => this.setState({errors: errors}))
-  }
-
   render() {
     return (
       <Row>
+          <h1>This is the page of a user's personal collection</h1>
         <Col xs={12}>
 
           <PageHeader>
@@ -39,7 +42,7 @@ class Stacks extends React.Component {
           <Table>
 
             <tbody>
-              {this.state.products.map((stack, index) => (
+              {this.state.stacks.map((stack, index) => (
                 <tr key={index}>
                   <td>{stack.id}</td>
                   <td>
@@ -66,4 +69,4 @@ class Stacks extends React.Component {
   }
 }
 
-export default Products
+export default Stacks

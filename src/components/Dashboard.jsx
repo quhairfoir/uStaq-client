@@ -9,6 +9,7 @@ const Dashboard = (props) => (
         uStaq <small>u learn</small>
       </PageHeader>
       <TopNav />
+      You got to the Main page
     </Col>
   </Row>
 )
