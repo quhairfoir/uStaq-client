@@ -14,22 +14,20 @@ import {Grid} from 'react-bootstrap'
 import { render } from 'react-dom';
 
 // import react router
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 
 const App = () => (
   <div className="App">
-    <BrowserRouter>
-      <div className="sans-serif">
-        <Route path="/" component={Main} />
-        <Route path="/stacks" component={Stacks} />
-        <Route path="/users" component={Users} />
-        <Route path="/create" component={Create} />
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
-        <Route path="/search" component={Filter} />
-        <Route path="/users/:userId" component={Users} />
-      </div>
-    </BrowserRouter>
+    <Switch>
+    <Route exact path="/" component={Main} />
+    <Route path="/stacks" component={Stacks} />
+    <Route path="/users" component={Users} />
+    <Route path="/create" component={Create} />
+    <Route path="/sign-in" component={SignIn} />
+    <Route path="/sign-up" component={SignUp} />
+    <Route path="/search" component={Filter} />
+    <Route path="/users/:userId" component={Users} />
+    </Switch>
   </div>
 );
 
