@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from '../logo.svg';
 import './App.css';
-import Dashboard from './components/Dashboard'
-import Users from './components/Users'
-import Create from './components/Create'
-import TopNav from './components/TopNav'
+import Dashboard from './Dashboard'
+import Main from './Main'
+import Users from './Users'
+import Create from './Create'
+import Stacks from './Stacks'
+import SignIn from './Sign-in'
+import SignUp from './Sign-up'
+import Filter from './Filter'
+import TopNav from './TopNav'
 import {Grid} from 'react-bootstrap'
 import { render } from 'react-dom';
 
@@ -12,14 +17,21 @@ import { render } from 'react-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 const App = () => (
-  <BrowserRouter>
-    <div className="sans-serif">
-      <Route path="/" component={Dashboard} />
-      <Route path="/users/:userId" component={Users} />
-    </div>
-  </BrowserRouter>
+  <div className="App">
+    <BrowserRouter>
+      <div className="sans-serif">
+        <Route path="/" component={Main} />
+        <Route path="/stacks" component={Stacks} />
+        <Route path="/users" component={Users} />
+        <Route path="/create" component={Create} />
+        <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/search" component={Filter} />
+        <Route path="/users/:userId" component={Users} />
+      </div>
+    </BrowserRouter>
+  </div>
 );
-
 
 
 // class App extends Component {
