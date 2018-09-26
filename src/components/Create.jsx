@@ -9,7 +9,7 @@ class Create extends React.Component {
     return (
       <div>
         <h1>This is the page to create new collections of cue stacks.</h1>
-        <h3>It is for testing purposes only and should be changed for production.</h3>
+        <h3>It is for testing purposes only and should be changed for stackion.</h3>
         <FormExample />
           
       </div>
