@@ -1,72 +1,47 @@
+
 import React from 'react'
 import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
-import Filter from './Filter'
-import _ from 'lodash'
-import faker from 'faker'
-// Product details modal dialog
+
+// Stack details modal dialog
 import Card from './Card'
 
 // Client-side model
 import Resource from '../models/resource'
-
-// const source = _.times(5, () => ({
-//   title: faker.random.word,
-//   description: faker.company.catchPhrase(),
-//   image: faker.internet.avatar(),
-//   price: faker.finance.amount(0, 100, 2, '$'),
-// }))
+const StackStore = Resource('stacks')
 
 
-class Stacks extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      stacks: [],
-      selectedStack: {},
-      showCard: false,
-      errors: null
-    }
-  }
+const Stacks = (props) => (
+  <Row>
+    <Col xs={12}>
 
-  render() {
-    return (
-      <Row>
-          <h1>This is the page of a user's personal collection</h1>
-        <Col xs={12}>
+      <PageHeader>
+        Stacks collection
+      </PageHeader>
 
-          <PageHeader>
-            Stacks
-          </PageHeader>
+      <Table>
+        <tbody>
+          {props.stacks.map((stack, index) => (
+            <tr key={index}>
+              <td>{stack.id}</td>
+              <td>
+                {/* <Link> is a react-router component that works pretty much like <a href> */}
+                <Link to={`/stacks/${stack.id}`}>
+                  <strong>'{stack.name}'</strong> has <strong>{stack.quantity}</strong> cue cards
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
-          <Table>
+      {/* If the URL has an id at the end, we show the details dialog */}
+      {/*<Switch>*/}
+        <Route exact path="/stacks/:id" component={(routeprops) => <Card {...routeprops} {...props} />}/>
+      {/*}</Switch>*/}
 
-            <tbody>
-              {this.state.stacks.map((stack, index) => (
-                <tr key={index}>
-                  <td>{stack.id}</td>
-                  <td>
-                    {/* <Link> is a react-router component that works pretty much like <a href> */}
-                    <Link to={`/stacks/${stack.id}`}>
-                      {stack.name}
-                    </Link>
-                  </td>
-                  <td>{stack.price}</td>
-                  <td>{stack.quantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-
-          {/* If the URL has an id at the end, we show the details dialog */}
-          <Switch>
-            <Route path="/stacks/:id" component={Card} />
-          </Switch>
-
-        </Col>
-      </Row>
-    )
-  }
-}
+    </Col>
+  </Row>
+)
 
 export default Stacks

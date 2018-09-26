@@ -6,7 +6,7 @@
 # testing
 /coverage
 
-# production
+# stackion
 /build
 
 # misc
@@ -14,7 +14,7 @@
 .env.local
 .env.development.local
 .env.test.local
-.env.production.local
+.env.stackion.local
 
 npm-debug.log*
 yarn-debug.log*

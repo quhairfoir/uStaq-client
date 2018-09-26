@@ -603,7 +603,7 @@ i.icon.podcast:before { content: "\f2ce"; }
 i.icon.pound.sign:before { content: "\f154"; }
 i.icon.power.off:before { content: "\f011"; }
 i.icon.print:before { content: "\f02f"; }
-i.icon.product.hunt:before { content: "\f288"; }
+i.icon.stack.hunt:before { content: "\f288"; }
 i.icon.pushed:before { content: "\f3e1"; }
 i.icon.puzzle.piece:before { content: "\f12e"; }
 i.icon.python:before { content: "\f3e2"; }
@@ -1598,7 +1598,7 @@ i.icon.youtube.play:before { content: "\f167"; }
   i.icon.pinterest.p,
   i.icon.pinterest.square,
   i.icon.playstation,
-  i.icon.product.hunt,
+  i.icon.stack.hunt,
   i.icon.pushed,
   i.icon.python,
   i.icon.qq,

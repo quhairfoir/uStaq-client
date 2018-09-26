@@ -1,40 +1,25 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Navbar, Grid} from 'react-bootstrap'
 
 const TopNav = (props) => (
+  <Grid>
   <Navbar>
-    <Nav>
-      <Navbar.Brand>
-        <Link to='/'>uStaq <small>u learn</small></Link>
-      </Navbar.Brand>
 
-      <NavItem className="nav-item" eventKey={1}>
-        <Link to="/stacks">Stacks</Link>
-      </NavItem>
+    <Link to='/' className="nav-item">uStaq <small>u learn</small></Link>
 
-      <NavItem className="nav-item" eventKey={2}>
-        <Link to="/users">Users</Link>
-      </NavItem>
+    <Link to="/stacks" className="nav-item">Stacks</Link>
 
-      <NavItem className="nav-item" eventKey={3}>
-        <Link to="/create">Create</Link>
-      </NavItem>
+    <Link to="/users" className="nav-item">Users</Link>
 
-      <NavItem className="nav-item" eventKey={4}>
-        <Link to="/sign-in">Sign in</Link>
-      </NavItem>
+    <Link to="/create" className="nav-item">Create</Link>
 
-      <NavItem className="nav-item" eventKey={5}>
-        <Link to="/sign-up">Sign up</Link>
-      </NavItem>
+    <Link to="/sign-in" className="nav-item">Sign in</Link>
 
-      <NavItem className="nav-item" eventKey={6}>
-        <Link to="/search">Search</Link>
-      </NavItem>
-    </Nav>
+    <Link to="/sign-up" className="nav-item">Sign up</Link>
 
   </Navbar>
+</Grid>
 )
 
 export default TopNav
