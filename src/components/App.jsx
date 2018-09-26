@@ -17,46 +17,46 @@ import faker from 'faker'
 // import react router
 import {Route, Switch} from 'react-router-dom'
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       stacks: [
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
-          id: faker.random.number({ min: 2, max: 100 }),
+          id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
           description: faker.random.words(),
-          quantity: faker.random.number({ min: 1, max: 100 }),
+          quantity: faker.random.number({ min: 2, max: 100 }),
         },
         {
           id: faker.random.number({ min: 2, max: 100 }),
@@ -90,7 +90,7 @@ class App extends React.Component {
         <TopNav />
         <Switch>
           <Route exact path="/" render={Main} />
-          <Route path="/stacks" render={({staticContext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
+          <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
           <Route path="/users" component={Users} />
           <Route path="/create" component={Create} />
           <Route path="/sign-in" component={SignIn} />

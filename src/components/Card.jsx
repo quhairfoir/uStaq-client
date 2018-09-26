@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom'
 import {Button, Modal} from 'react-bootstrap'
 
+
 // Client-side model
 import Resource from '../models/resource'
+import CardScroll from './CardScroll'
 const StackStore = Resource('stacks')
 
 
@@ -18,58 +20,48 @@ class Card extends Component {
       // stackId: (this.props.match.params.id || null),
       stackId: this.props.location.pathname.split("/")[2] || null,
       stack: {},
-      show: false,
+      show: 'false',
       redirect: '/stacks'
     };
   }
 
   handleShow() {
-    this.setState({ show: true });
+    this.setState({ show: 'true' });
   }
 
-  handleHide = event => {
-    this.setState({ show: false });
+  handleHide(){
+    this.setState({ show: 'false' });
   }
 
-  showCard() {
+
+render() {
+  const showCard = () => {
     console.log("Props here: ", this.props);
     console.log("stackId here: ", this.state.stackId);
-    let item = this.props.stacks.find(target => target.id == this.state.stackId)
-    console.log("Item here: ", item);
-    if (!item) {
-      return <Redirect to={this.state.redirect} />
-    } else {
-      return (
+      let item = this.props.stacks.find(target => target.id == this.state.stackId)
+      console.log("Item here: ", item);
+      if (!item) {
+        return <Redirect to={this.state.redirect} />
+      } else {
+        return (
 
-        <div
-          {...this.props}
-          className="dialog-modal"
-          show={this.state.show}
-          onKeyDown={this.handleHide}
-          >
-          <Modal.Dialog>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
+        <div>
 
-            <Modal.Body>{item.description}</Modal.Body>
 
-            <Modal.Footer>
-              <Button onClick={this.close}>Close</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
+
+          {item.description}
+          <CardScroll />
 
         </div>
 
       )
-    }
   }
-
-render() {
+}
   return (
 
     <div>
-      {this.showCard()}
+      {showCard()}
+
     </div>
   )
 }
