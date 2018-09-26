@@ -10,7 +10,6 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import './FormExample.css'
 import Example from './CardModal';
 
-
 class FormExample extends React.Component {
 
   constructor(props) {
@@ -25,6 +24,7 @@ class FormExample extends React.Component {
     this.setState({showCards: true})
   }
 
+  
   render() {
     const timsExample = {
       recommendation: 0,
@@ -57,7 +57,7 @@ class FormExample extends React.Component {
         },
       ]
     }
-
+    
     return (
       <Grid> 
         <div className="form-group purple-border">
@@ -80,7 +80,7 @@ class FormExample extends React.Component {
 
             <Col lg={6}>
 
-              { this.state.showCards ? <Example sentence={timsExample.sentence}/> : null }
+              { this.state.showCards ? <Example sentence={timsExample.sentence} /> : null }
 
             </Col>
           </Row>
@@ -89,6 +89,7 @@ class FormExample extends React.Component {
       </Grid>
     );
   }
+
 }
 
 export default FormExample
