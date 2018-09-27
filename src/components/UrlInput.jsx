@@ -14,50 +14,91 @@ class FormExample extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { showCards: false }
+    this.state = { showCards: false, sentences: [], currentSentence: 0 }
+    this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
+    this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const url = e.target.elements.urlInput.value //use the name attribute that you use on the form input to get what you need
-    // console.log(url);
-    this.setState({showCards: true})
+  componentDidMount() {
+    this.setState({
+      sentences: [
+        {
+          chefsRecommendation: 0,
+          sentence: [
+            {
+              text: 'Sea',
+              parent: 1,
+            },
+            {
+              text: 'otters',
+              parent: 'root',
+            },
+            {
+              text: 'are',
+            },
+            {
+              text: 'fuzzy',
+              parent: 4,
+            },
+            {
+              text: 'little',
+              parent: 5,
+            },
+            {
+              text: 'beasts',
+              parent: 'root',
+            },
+            {
+              text: '.',
+            },
+          ]
+      },
+      {
+        chefsRecommendation: 0,
+        sentence: [
+          {
+            text: 'potato',
+            parent: 1,
+          },
+          {
+            text: 'tomato',
+            parent: 'root',
+          },
+          {
+            text: 'are',
+          },
+          {
+            text: 'fuzzy',
+            parent: 4,
+          },
+          {
+            text: 'little',
+            parent: 5,
+          },
+          {
+            text: 'beasts',
+            parent: 'root',
+          },
+          {
+            text: '.',
+          },
+        ]
+    }
+    ]
+    })
   }
 
+  incrementCurrentSentence() {
+    this.setState({currentSentence: (this.state.currentSentence + 1) % this.state.sentences.length})
+  }
+
+  decrementCurrentSentence() {
+    this.setState({currentSentence: (this.state.currentSentence == 0 ? this.state.sentences.length - 1 : this.state.currentSentence - 1) })
+  }
+  
   
   render() {
-    const timsExample = {
-      recommendation: 0,
-      sentence: [
-        {
-          text: 'Sea',
-          parent: 1,
-        },
-        {
-          text: 'otters',
-          parent: 'root',
-        },
-        {
-          text: 'are',
-        },
-        {
-          text: 'fuzzy',
-          parent: 4,
-        },
-        {
-          text: 'little',
-          parent: 5,
-        },
-        {
-          text: 'beasts',
-          parent: 'root',
-        },
-        {
-          text: '.',
-        },
-      ]
-    }
-    
+  
     return (
       <Grid> 
         <div className="form-group purple-border">
@@ -80,7 +121,12 @@ class FormExample extends React.Component {
 
             <Col lg={6}>
 
-              { this.state.showCards ? <Example sentence={timsExample.sentence} /> : null }
+              { this.state.showCards ? <Example sentence={this.state.sentences[this.state.currentSentence].sentence} 
+                                                selectedNode={this.state.sentences.length ? this.state.sentences[this.state.currentSentence].chefsRecommendation : null} 
+                                                incrementCurrentSentence={this.incrementCurrentSentence } 
+                                                decrementCurrentSentence={this.decrementCurrentSentence}
+                                                currentIndex={this.state.currentSentence}
+                                                sentences={this.state.sentences} /> : null }
 
             </Col>
           </Row>
@@ -88,8 +134,20 @@ class FormExample extends React.Component {
         </div>
       </Grid>
     );
-  }
+  };
 
+  handleWordClick = (index) => {
+  
+  };
+
+
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const url = e.target.elements.urlInput.value //use the name attribute that you use on the form input to get what you need
+    // console.log(url);
+    this.setState({showCards: true})
+  };
 }
 
 export default FormExample
