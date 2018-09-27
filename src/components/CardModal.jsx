@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Popover, Tooltip, Button, Modal, OverlayTrigger } from 'react-bootstrap';
+import { Popover, Tooltip, Button, Modal, OverlayTrigger, Carousel } from 'react-bootstrap';
 
 class Example extends React.Component {
   constructor(props, context) {
@@ -9,6 +9,7 @@ class Example extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.upperDiv = this.upperDiv.bind(this);
     this.lowerDiv = this.lowerDiv.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     // this.handleCards = this.handleCards.bind(this);
 
     this.state = {
@@ -17,36 +18,60 @@ class Example extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // this.determineHiddenIndexes(this.props.selectedNode);
+    // alert(`${this.props.selectedNode} should be 0`);
+  }
+
   determineHiddenIndexes(index) {
-    let indexes = [index];
+    let indexes = [];
     let currentIndex = index;
 
-    while ('parent' in this.props.sentence[currentIndex]) {
-      let currentTextObject = this.props.sentence[currentIndex];
-
-      if (currentTextObject.parent === 'root') break;
-
-      currentIndex = currentTextObject.parent;
+    if ('parent' in this.props.sentence[currentIndex]) {
       indexes.push(currentIndex);
-    }
+
+      while ('parent' in this.props.sentence[currentIndex]) {
+        let currentTextObject = this.props.sentence[currentIndex];
+
+        if (currentTextObject.parent === 'root') break;
+
+        currentIndex = currentTextObject.parent;
+        indexes.push(currentIndex);
+        console.log("this is current Index", currentIndex)
+      }
+    } 
 
     this.setState({
       indexesToHide: indexes
     });
   }
 
-  upperDiv() {
-    return this.props.sentence.map((token, index) => 
-      <span key={index} data-parent={token.parent} id={"upperdiv" + index} onMouseOver={() => this.determineHiddenIndexes(index)}
-                                                                           onMouseOut={() => this.setState({ indexesToHide: [] })}>
+  showCarouselItems() {
+    return this.props.sentences.map((sentenceObj, index) => <Carousel.Item key={index}>
+      <div className="card-text">
+        <div className="blanko"> {this.upperDiv(sentenceObj)}</div>
+      </div>
+      <div className="blanko"> {this.lowerDiv(sentenceObj)}</div>
+    </Carousel.Item>)
+  }
+  
+  upperDiv(sentenceObj) {
+    let sentence = sentenceObj.sentence;
+
+    return sentence.map((token, index) => 
+      <span key={index} onMouseOver={() => this.determineHiddenIndexes(index)}
+                        onMouseOut={() => this.determineHiddenIndexes(this.props.selectedNode)}
+                        onClick={() => this.props.selectedNode = index}>
         {token.text}
       </span>
     )
   }
 
-  lowerDiv() {
-    return this.props.sentence.map((token, index) => 
-      <span key={index} data-parent={token.parent} id={"lowerdiv" + index} className={ this.state.indexesToHide.includes(index) ? 'ghostly' : '' }>
+  lowerDiv(sentenceObj) {
+    let sentence = sentenceObj.sentence;
+
+    return sentence.map((token, index) => 
+      <span key={index} className={ this.state.indexesToHide.includes(index) ? 'ghostly' : '' }>
         {token.text}
       </span>
     )
@@ -57,7 +82,22 @@ class Example extends React.Component {
   }
 
   handleShow() {
+    this.determineHiddenIndexes(this.props.selectedNode);
     this.setState({ show: true });
+  }
+
+  handleSelect(_, event) {
+    let { direction } = event;
+  
+    console.log("DIRECTION IS:", direction)
+    switch (direction) {
+      case 'next':
+        this.props.incrementCurrentSentence()
+        break;
+      case 'prev':
+        this.props.decrementCurrentSentence();
+        break;
+    }
   }
 
   render() {
@@ -81,13 +121,15 @@ class Example extends React.Component {
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+
             <div className="card card-body">
               <h4 className="card-title"></h4>
-                <div className="card-text">
-                  <div className="blanko"> {this.upperDiv()}</div>
-                </div>
-                <hr />
-              <div className="blanko"> {this.lowerDiv()}</div>
+                <Carousel
+                    activeIndex={this.props.currentIndex}
+                    // direction={direction}
+                    onSelect={this.handleSelect}>
+                                  {this.showCarouselItems()}
+                </Carousel>;
             </div>
           </Modal.Body>
 
@@ -95,6 +137,9 @@ class Example extends React.Component {
             <Button onClick={this.handleClose}>Close</Button>
           </Modal.Footer>
         </Modal>
+
+
+
       </div>
     );
   }
