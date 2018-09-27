@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import {Button, Modal} from 'react-bootstrap'
-
 
 // Client-side model
 import Resource from '../models/resource'
-import CardScroll from './CardScroll'
+// import CardScroll from './CardScroll'
 const StackStore = Resource('stacks')
 
 
@@ -47,10 +46,7 @@ render() {
 
         <div>
 
-
-
           {item.description}
-          <CardScroll />
 
         </div>
 
