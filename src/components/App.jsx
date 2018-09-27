@@ -79,17 +79,13 @@ class App extends Component {
       ]
     }
   }
-  // findById = id => {
-  //
-  // }
-  // {<Stacks stacks={this.findById(this.state.stacks)}/> } />
 
   render(){
     return (
       <div className="App">
         <TopNav />
         <Switch>
-          <Route exact path="/" render={Main} />
+          <Route exact path="/" component={Main} />
           <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
           <Route path="/users" component={Users} />
           <Route path="/create" component={Create} />
