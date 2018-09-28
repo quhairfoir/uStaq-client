@@ -90,16 +90,16 @@ class FormExample extends React.Component {
   incrementCurrentSentence() {
     this.setState({
       currentSentence:
-        (this.state.currentSentence + 1) % this.state.sentences.length
+        (this.state.currentSentence + 1) % this.state.sentences.length //resets the variable currentSentence from the state
     });
   }
 
   decrementCurrentSentence() {
     this.setState({
       currentSentence:
-        this.state.currentSentence == 0
-          ? this.state.sentences.length - 1
-          : this.state.currentSentence - 1
+        this.state.currentSentence === 0
+          ? this.state.sentences.length - 1 //go back to end of list
+          : this.state.currentSentence - 1 //this one decrements by 1
     });
   }
 
@@ -158,7 +158,7 @@ class FormExample extends React.Component {
     );
   }
 
-  handleWordClick = index => {};
+  // handleWordClick = index => {};
 
   handleSubmit = e => {
     e.preventDefault();

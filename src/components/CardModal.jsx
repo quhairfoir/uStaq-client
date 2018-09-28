@@ -43,18 +43,20 @@ class Example extends React.Component {
 
     this.setState({
       indexesToHide: indexes
-    });
+    })
   }
 
   showCarouselItems() {
-    return this.props.sentences.map((sentenceObj, index) => <Carousel.Item key={index}>
+    // console.log(this.props.sentences)
+    return this.props.sentences.map((sentenceObj, index) => 
+    <Carousel.Item key={index}>
       <div className="card-text">
         <div className="blanko"> {this.upperDiv(sentenceObj)}</div>
       </div>
       <div className="blanko"> {this.lowerDiv(sentenceObj)}</div>
     </Carousel.Item>)
   }
-  
+  //create the upperDiv using sentenceObj from showCarouselItems
   upperDiv(sentenceObj) {
     let sentence = sentenceObj.sentence;
 
@@ -128,8 +130,8 @@ class Example extends React.Component {
                     activeIndex={this.props.currentIndex}
                     // direction={direction}
                     onSelect={this.handleSelect}>
-                                  {this.showCarouselItems()}
-                </Carousel>;
+                             {this.showCarouselItems()}
+                </Carousel>
             </div>
           </Modal.Body>
 
