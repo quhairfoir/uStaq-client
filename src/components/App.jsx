@@ -14,6 +14,8 @@ import QuizRoom from './QuizRoom'
 // import {Grid} from 'react-bootstrap'
 // import { render } from 'react-dom';
 import faker from 'faker'
+import 'font-awesome/css/font-awesome.css';
+import 'bootstrap-social/bootstrap-social.css';
 
 // import react router
 import {Route, Switch} from 'react-router-dom'
@@ -79,6 +81,13 @@ class App extends Component {
         },
       ]
     }
+  }
+
+  componentDidMount () {
+    const oauthScript = document.createElement("script");
+    oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+
+    document.body.appendChild(oauthScript);
   }
 
   render(){

@@ -1,27 +1,124 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Navbar, Grid} from 'react-bootstrap'
+import {Navbar, Nav, Modal, Button, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 
-const TopNav = (props) => (
-  <Grid>
-  <Navbar>
+class ModalNav extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-    <Link to='/' className="nav-item">uStaq <small>u learn</small></Link>
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
-    <Link to="/stacks" className="nav-item">Stacks</Link>
+    this.state = {
+      show: false
+    };
+  }
 
-    <Link to="/users" className="nav-item">Users</Link>
+  handleClose() {
+    this.setState({ show: false });
+  }
 
-    <Link to="/create" className="nav-item">Create</Link>
+  handleShow() {
+    this.setState({ show: true });
+  }
 
-    <Link to="/quizroom" className="nav-item">Quiz Room</Link>
+  handleClick(e) {
+    // Prevents page reload
+    e.preventDefault();
+  
+    // Initializes OAuth.io with API key
+    // Sign-up an account to get one
+    window.OAuth.initialize('_iSZVvDIMwLHtJgOQQ8gXsOftQI');
+  
+    // Popup Github and ask for authorization
+    window.OAuth.popup('github').then((provider) => {
+  
+      // Prompts 'welcome' message with User's name on successful login
+      // Check console logs for additional User info
+      provider.me().then((data) => {
+        console.log("data: ", data);
+        alert("Welcome " + data.name + "!");
+      });
+  
+      // You can also call Github's API using .get()
+      provider.get('/user').then((data) => {
+         console.log('self data:', data);
+      });
+  
+    });
+  }
 
-    <Link to="/sign-in" className="nav-item">Sign in</Link>
+  render() {
 
-    <Link to="/sign-up" className="nav-item">Sign up</Link>
+    return (
+    <div>
+  
 
-  </Navbar>
-</Grid>
-)
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#brand">uStaq</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={1} href="/stacks">
+                Stacks
+              </NavItem>
+              <NavItem eventKey={2} href="/users">
+                Users
+              </NavItem>
+              <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                <MenuItem eventKey={3.1}>Action</MenuItem>
+                <MenuItem eventKey={3.2}>Another action</MenuItem>
+                <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                <MenuItem divider />
+                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+              </NavDropdown>
+            </Nav>
+            <Nav pullRight>
+              <NavItem eventKey={1} >
 
-export default TopNav
+              <Button bsStyle="link" onClick={this.handleShow}>
+                Sign in
+              </Button>
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                  <Modal.Header closeButton>
+                      <Modal.Title>Welcome back.</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <h4>Sign in to access your personalized homepage.</h4>
+                      <a href="" onClick={this.handleClick} className="btn btn-social btn-github">
+                        <span className="fa fa-github"></span> Sign in with Github
+                      </a>
+
+                      <hr />
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button onClick={this.handleClose}>Close</Button>
+                    </Modal.Footer>
+                  </Modal>
+              </NavItem>
+
+              <NavItem eventKey={2} href="#">
+                Link Right
+              </NavItem>
+            </Nav>
+          </Navbar.Collapse>
+      </Navbar>
+
+
+    
+
+      </div>
+      
+    );
+  }
+
+
+}
+
+export default ModalNav;
