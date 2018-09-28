@@ -25,6 +25,13 @@ class App extends Component {
         {
           id: faker.random.number({ min: 1, max: 100 }),
           name: faker.random.word(),
+          // title: faker.random.word(),
+          // owner: '',
+          // cards: [
+          //   sentence: [
+          //
+          //   ]
+          // ],
           description: faker.random.words(),
           quantity: faker.random.number({ min: 2, max: 100 }),
         },
