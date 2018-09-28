@@ -9,6 +9,7 @@ import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
 import "./FormExample.css";
 import Example from "./CardModal";
+import axios from 'axios';
 
 class FormExample extends React.Component {
   constructor(props) {
@@ -766,6 +767,38 @@ class FormExample extends React.Component {
     });
   }
 
+  makeProtoStack = (event) => {
+    let protoStack = {
+      query: event.target.elements.wikiQuery.value ? event.target.elements.wikiQuery.value : null,
+      text: event.target.elements.textBox.value ? event.target.elements.textBox.value : null,
+      type: event.target.elements.wikiQuery.value ? 'wiki' : event.target.elements.textBox.value ? 'text' : null
+    }
+    return protoStack
+  }
+
+  // unused, but functional method for sending new stacks
+  handleSave = e => {
+    e.preventDefault()
+    const pkg = { 
+      userId: 2,
+      newStack: []
+    }
+    console.log(pkg)
+    axios.post('http://localhost:8080/stacks', pkg)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    this.setState({ showCards: true })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    let newProtoStack = this.makeProtoStack(e)
+    console.log(newProtoStack)
+    axios.post('http://localhost:8080/proto', newProtoStack)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    this.setState({ showCards: true })
+  }
   determineIndicesToHide(startIndex) {
     let indicesToHide = [];
 
@@ -793,13 +826,6 @@ class FormExample extends React.Component {
     this.state.sentences[this.state.currentSentence].selectedToken = index;
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const url = e.target.elements.urlInput.value; //use the name attribute that you use on the form input to get what you need
-    // console.log(url);
-    this.setState({ showCards: true });
-  };
-
   render() {
     return (
       <Grid>
@@ -808,26 +834,26 @@ class FormExample extends React.Component {
             <Col lg={6}>
               <Form inline onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formInlineUrl">
-                  <ControlLabel>Enter a URL:</ControlLabel>{" "}
+                  <ControlLabel>Enter a topic:</ControlLabel>{" "}
                   <FormControl
-                    name="urlInput"
-                    type="Url"
-                    placeholder="http://"
+                    name="wikiQuery"
+                    placeholder="Teach me about..."
                   />{" "}
                   <Button className="btn btn-primary" type="submit">
                     Submit{" "}
                   </Button>
                 </FormGroup>
+                <br />
+                <FormGroup controlId="formControlsTextarea">
+                  <ControlLabel>Or paste your text here:</ControlLabel>
+                  <br />
+                  <FormControl 
+                    componentClass="textarea" 
+                    name="textBox"
+                    placeholder="Teach me about..."
+                    rows="9" />
+                </FormGroup>
               </Form>
-              <br />
-
-              <h4>...or simply paste your text below:</h4>
-              <label htmlFor="exampleFormControlTextarea4"> </label>
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea4"
-                rows="9"
-              />
             </Col>
 
             <Col lg={6}>
