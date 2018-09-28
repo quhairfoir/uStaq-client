@@ -9,7 +9,7 @@ import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
 import "./FormExample.css";
 import Example from "./CardModal";
-import axios from 'axios'
+import axios from 'axios';
 
 class FormExample extends React.Component {
   constructor(props) {
@@ -117,34 +117,9 @@ class FormExample extends React.Component {
     e.preventDefault()
     let newProtoStack = this.makeProtoStack(e)
     console.log(newProtoStack)
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://localhost:8080/proto",
-      "method": "POST",
-      "headers": {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Cache-Control": "no-cache",
-        "Postman-Token": "86dbab3d-5b55-4762-8fb6-927734787ab2"
-      },
-      "data": {
-        "type": "wiki",
-        "query": "coffee"
-      }
-    }
-    
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
-    // fetch('http://localhost:8080/proto', {
-    //   method: 'get',
-    //   body: newProtoStack,
-    //   headers: { 'Content-Type': 'application/json'}
-    // })
-    // axios.post('http://localhost:8080/proto', {
-    //   body: this.newProtoStack
-    //  })
-    //  .then(response => console.log(response))
+    axios.post('http://localhost:8080/proto', newProtoStack)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
     this.setState({ showCards: true })
   }
 
