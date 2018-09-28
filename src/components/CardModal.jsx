@@ -14,36 +14,29 @@ class Example extends React.Component {
 
     this.state = {
       show: false,
-      indexesToHide: []
+      indicesToHide: []
     };
   }
 
-  componentDidMount() {
-    // this.determineHiddenIndexes(this.props.selectedNode);
-    // alert(`${this.props.selectedNode} should be 0`);
-  }
+  determineIndicesToHide(startIndex) {
+    let indicesToHide = [];
 
-  determineHiddenIndexes(index) {
-    let indexes = [];
-    let currentIndex = index;
-
-    if ('parent' in this.props.sentence[currentIndex]) {
-      indexes.push(currentIndex);
-
-      while ('parent' in this.props.sentence[currentIndex]) {
-        let currentTextObject = this.props.sentence[currentIndex];
-
-        if (currentTextObject.parent === 'root') break;
-
-        currentIndex = currentTextObject.parent;
-        indexes.push(currentIndex);
-        console.log("this is current Index", currentIndex)
-      }
+    if ('hoverable' in this.props.sentence[startIndex]) {
+      indicesToHide = this.buildHoverSubTree(startIndex)
     } 
 
     this.setState({
-      indexesToHide: indexes
+      indicesToHide
     })
+  }
+
+  buildHoverSubTree(index) {
+    let result = [index];
+
+    for (let child of this.props.sentence[index].hoverInfo.children) {
+      result = result.concat(this.buildHoverSubTree(child))
+    }
+    return result;
   }
 
   showCarouselItems() {
@@ -58,23 +51,23 @@ class Example extends React.Component {
   }
   //create the upperDiv using sentenceObj from showCarouselItems
   upperDiv(sentenceObj) {
-    let sentence = sentenceObj.sentence;
+    let sentence = sentenceObj.tokens;
 
     return sentence.map((token, index) => 
-      <span key={index} onMouseOver={() => this.determineHiddenIndexes(index)}
-                        onMouseOut={() => this.determineHiddenIndexes(this.props.selectedNode)}
-                        onClick={() => this.props.selectedNode = index}>
-        {token.text}
+      <span key={index} onMouseOver={() => this.determineIndicesToHide(index)}
+                        onMouseOut={() => this.determineIndicesToHide(this.props.selectedToken)}
+                        onClick={() => this.props.selectedToken = index}>
+        {token.text.content}
       </span>
     )
   }
 
   lowerDiv(sentenceObj) {
-    let sentence = sentenceObj.sentence;
+    let sentence = sentenceObj.tokens;
 
     return sentence.map((token, index) => 
-      <span key={index} className={ this.state.indexesToHide.includes(index) ? 'ghostly' : '' }>
-        {token.text}
+      <span key={index} className={ this.state.indicesToHide.includes(index) ? 'ghostly' : '' }>
+        {token.text.content}
       </span>
     )
   }
@@ -84,7 +77,7 @@ class Example extends React.Component {
   }
 
   handleShow() {
-    this.determineHiddenIndexes(this.props.selectedNode);
+    this.determineIndicesToHide(this.props.selectedToken);
     this.setState({ show: true });
   }
 
@@ -110,7 +103,7 @@ class Example extends React.Component {
     // );
     // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
 
-     // this.props.senteces.map(s => s.text).join(' ')
+     // this.props.sentences.map(s => s.text).join(' ')
 
     return (
       <div>
