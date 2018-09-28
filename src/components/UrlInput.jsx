@@ -9,6 +9,7 @@ import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
 import "./FormExample.css";
 import Example from "./CardModal";
+import axios from 'axios'
 
 class FormExample extends React.Component {
   constructor(props) {
@@ -103,6 +104,50 @@ class FormExample extends React.Component {
     });
   }
 
+  makeProtoStack = (event) => {
+    let protoStack = {
+      query: event.target.elements.wikiQuery.value ? event.target.elements.wikiQuery.value : null,
+      text: event.target.elements.textBox.value ? event.target.elements.textBox.value : null,
+      type: event.target.elements.wikiQuery.value ? 'wiki' : event.target.elements.textBox.value ? 'text' : null
+    }
+    return protoStack
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    let newProtoStack = this.makeProtoStack(e)
+    console.log(newProtoStack)
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://localhost:8080/proto",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cache-Control": "no-cache",
+        "Postman-Token": "86dbab3d-5b55-4762-8fb6-927734787ab2"
+      },
+      "data": {
+        "type": "wiki",
+        "query": "coffee"
+      }
+    }
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+    // fetch('http://localhost:8080/proto', {
+    //   method: 'get',
+    //   body: newProtoStack,
+    //   headers: { 'Content-Type': 'application/json'}
+    // })
+    // axios.post('http://localhost:8080/proto', {
+    //   body: this.newProtoStack
+    //  })
+    //  .then(response => console.log(response))
+    this.setState({ showCards: true })
+  }
+
   render() {
     return (
       <Grid>
@@ -111,26 +156,26 @@ class FormExample extends React.Component {
             <Col lg={6}>
               <Form inline onSubmit={this.handleSubmit}>
                 <FormGroup controlId="formInlineUrl">
-                  <ControlLabel>Enter a URL:</ControlLabel>{" "}
+                  <ControlLabel>Enter a topic:</ControlLabel>{" "}
                   <FormControl
-                    name="urlInput"
-                    type="Url"
-                    placeholder="http://"
+                    name="wikiQuery"
+                    placeholder="Teach me about..."
                   />{" "}
                   <Button className="btn btn-primary" type="submit">
                     Submit{" "}
                   </Button>
                 </FormGroup>
+                <br />
+                <FormGroup controlId="formControlsTextarea">
+                  <ControlLabel>Or paste your text here:</ControlLabel>
+                  <br />
+                  <FormControl 
+                    componentClass="textarea" 
+                    name="textBox"
+                    placeholder="Teach me about..."
+                    rows="9" />
+                </FormGroup>
               </Form>
-              <br />
-
-              <h4>...or simply paste your text below:</h4>
-              <label htmlFor="exampleFormControlTextarea4"> </label>
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea4"
-                rows="9"
-              />
             </Col>
 
             <Col lg={6}>
@@ -157,15 +202,6 @@ class FormExample extends React.Component {
       </Grid>
     );
   }
-
-  handleWordClick = index => {};
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const url = e.target.elements.urlInput.value; //use the name attribute that you use on the form input to get what you need
-    // console.log(url);
-    this.setState({ showCards: true });
-  };
 }
 
 export default FormExample;
