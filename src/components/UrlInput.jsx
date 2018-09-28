@@ -113,13 +113,51 @@ class FormExample extends React.Component {
     return protoStack
   }
 
-  handleSubmit = e => {
+  // unused, but functional method for sending new stacks
+  handleSave = e => {
     e.preventDefault()
     const pkg = { 
       userId: 2,
-      newStack: { woah: "is this a thing?" }
+      newStack: {
+        title: "Sea Otters",
+        owner: { "_id" : 2},
+        tags: [],
+        cards: [ 
+          {
+            "chefsReccomendation": 0,
+            setence: [ 
+              {
+                token: 'Sea',
+                parent: 1,
+              },
+              {
+                token: 'otters',
+                parent: 'root',
+              },
+              {
+                token: 'are',
+              },
+              {
+                token: 'fuzzy',
+                parent: 4,
+              },
+              {
+                token: 'little',
+                parent: 5,
+              },
+              {
+                token: 'beasts',
+                parent: 'root',
+              },
+              {
+                token: '.',
+              },
+    
+            ]
+          }
+        ]
+      }
     }
-    const userId = 2
     console.log(pkg)
     axios.post('http://localhost:8080/stacks', pkg)
     .then(response => console.log(response))
@@ -127,15 +165,15 @@ class FormExample extends React.Component {
     this.setState({ showCards: true })
   }
 
-  // handleSubmit = e => {
-  //   e.preventDefault()
-  //   let newProtoStack = this.makeProtoStack(e)
-  //   console.log(newProtoStack)
-  //   axios.post('http://localhost:8080/proto', newProtoStack)
-  //   .then(response => console.log(response))
-  //   .catch(error => console.log(error))
-  //   this.setState({ showCards: true })
-  // }
+  handleSubmit = e => {
+    e.preventDefault()
+    let newProtoStack = this.makeProtoStack(e)
+    console.log(newProtoStack)
+    axios.post('http://localhost:8080/proto', newProtoStack)
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
+    this.setState({ showCards: true })
+  }
 
   render() {
     return (
