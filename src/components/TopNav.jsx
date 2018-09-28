@@ -14,6 +14,8 @@ const TopNav = (props) => (
 
     <Link to="/create" className="nav-item">Create</Link>
 
+    <Link to="/quizroom" className="nav-item">Quiz Room</Link>
+
     <Link to="/sign-in" className="nav-item">Sign in</Link>
 
     <Link to="/sign-up" className="nav-item">Sign up</Link>
