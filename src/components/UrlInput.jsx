@@ -13,9 +13,11 @@ import Example from "./CardModal";
 class FormExample extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showCards: false, sentences: [], currentSentence: 0 };
+    this.state = { showCards: false, sentences: [], currentSentence: 0, indicesToHide: [] };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
     this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
+    this.determineIndicesToHide = this.determineIndicesToHide.bind(this);
+    this.handleWordClick = this.handleWordClick.bind(this);
   }
 
   componentDidMount() {
@@ -739,15 +741,17 @@ class FormExample extends React.Component {
       sentence.selectedToken = sentence.chefsRecommendation;
     }
     
-    this.setState({ sentences: exampleSentences })
+    this.setState({ sentences: exampleSentences }, () => {
+      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
+    });
   }
-
 
   incrementCurrentSentence() {
     this.setState({
       currentSentence:
-        (this.state.currentSentence + 1) % this.state.sentences.length,
-      selectedToken: this.state.currentSentence.selectedToken
+      (this.state.currentSentence + 1) % this.state.sentences.length,
+    }, () => {
+      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken);
     });
   }
 
@@ -757,9 +761,44 @@ class FormExample extends React.Component {
         this.state.currentSentence == 0
           ? this.state.sentences.length - 1
           : this.state.currentSentence - 1,
-      selectedToken: this.state.currentSentence.selectedToken
+    }, () => {
+      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken);
     });
   }
+
+  determineIndicesToHide(startIndex) {
+    let indicesToHide = [];
+
+    let sentence = this.state.sentences[this.state.currentSentence];
+    if ('hoverable' in sentence.tokens[startIndex]) {
+      indicesToHide = this.buildHideSubTree(startIndex)
+    } 
+
+    this.setState({
+      indicesToHide,
+    })
+  }
+
+  buildHideSubTree(index) {
+    let result = [index];
+
+    let sentence = this.state.sentences[this.state.currentSentence];
+    for (let child of sentence.tokens[index].hoverInfo.children) {
+      result = result.concat(this.buildHideSubTree(child));
+    }
+    return result;
+  }
+
+  handleWordClick = index => {
+    this.state.sentences[this.state.currentSentence].selectedToken = index;
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const url = e.target.elements.urlInput.value; //use the name attribute that you use on the form input to get what you need
+    // console.log(url);
+    this.setState({ showCards: true });
+  };
 
   render() {
     return (
@@ -794,19 +833,14 @@ class FormExample extends React.Component {
             <Col lg={6}>
               {this.state.showCards ? (
                 <Example
-                  sentence={
-                    this.state.sentences[this.state.currentSentence].tokens
-                  }
-                  selectedToken={
-                    this.state.sentences.length
-                      ? this.state.sentences[this.state.currentSentence]
-                          .selectedToken
-                      : null
-                  }
                   incrementCurrentSentence={this.incrementCurrentSentence}
                   decrementCurrentSentence={this.decrementCurrentSentence}
-                  currentIndex={this.state.currentSentence}
                   sentences={this.state.sentences}
+                  currentIndex={this.state.currentSentence}
+                  indicesToHide={this.state.indicesToHide}
+                  handleUpperMouseOver={this.determineIndicesToHide}
+                  handleUpperMouseOut={this.determineIndicesToHide}
+                  handleUpperClick={this.handleWordClick}
                 />
               ) : null}
             </Col>
@@ -815,15 +849,6 @@ class FormExample extends React.Component {
       </Grid>
     );
   }
-
-  handleWordClick = index => {};
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const url = e.target.elements.urlInput.value; //use the name attribute that you use on the form input to get what you need
-    // console.log(url);
-    this.setState({ showCards: true });
-  };
 }
 
 export default FormExample;

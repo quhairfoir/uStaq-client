@@ -14,33 +14,10 @@ class Example extends React.Component {
 
     this.state = {
       show: false,
-      indicesToHide: []
     };
   }
 
-  determineIndicesToHide(startIndex) {
-    let indicesToHide = [];
-
-    if ('hoverable' in this.props.sentence[startIndex]) {
-      indicesToHide = this.buildHoverSubTree(startIndex)
-    } 
-
-    this.setState({
-      indicesToHide
-    })
-  }
-
-  buildHoverSubTree(index) {
-    let result = [index];
-
-    for (let child of this.props.sentence[index].hoverInfo.children) {
-      result = result.concat(this.buildHoverSubTree(child))
-    }
-    return result;
-  }
-
   showCarouselItems() {
-    // console.log(this.props.sentences)
     return this.props.sentences.map((sentenceObj, index) => 
     <Carousel.Item key={index}>
       <div className="card-text">
@@ -54,9 +31,9 @@ class Example extends React.Component {
     let sentence = sentenceObj.tokens;
 
     return sentence.map((token, index) => 
-      <span key={index} onMouseOver={() => this.determineIndicesToHide(index)}
-                        onMouseOut={() => this.determineIndicesToHide(this.props.selectedToken)}
-                        onClick={() => this.props.selectedToken = index}>
+      <span key={index} onMouseOver={() => this.props.handleUpperMouseOver(index)}
+                        onMouseOut={() => this.props.handleUpperMouseOut(sentenceObj.selectedToken)}
+                        onClick={() => this.props.handleUpperClick(index)}>
         {token.text.content}
       </span>
     )
@@ -66,7 +43,7 @@ class Example extends React.Component {
     let sentence = sentenceObj.tokens;
 
     return sentence.map((token, index) => 
-      <span key={index} className={ this.state.indicesToHide.includes(index) ? 'ghostly' : '' }>
+      <span key={index} className={ this.props.indicesToHide.includes(index) ? 'ghostly' : '' }>
         {token.text.content}
       </span>
     )
@@ -77,14 +54,13 @@ class Example extends React.Component {
   }
 
   handleShow() {
-    this.determineIndicesToHide(this.props.selectedToken);
+    // this.determineIndicesToHide(this.props.selectedToken); <-- this prop no longer exists
     this.setState({ show: true });
   }
 
   handleSelect(_, event) {
     let { direction } = event;
   
-    console.log("DIRECTION IS:", direction)
     switch (direction) {
       case 'next':
         this.props.incrementCurrentSentence()
