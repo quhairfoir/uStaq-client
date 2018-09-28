@@ -57,3 +57,7 @@
 body {
   margin: 20px;
 }
+
+#messageBox {
+  height: 500px;
+}
