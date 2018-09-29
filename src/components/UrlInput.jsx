@@ -112,12 +112,12 @@ class FormExample extends React.Component {
     })
   }
 
-  buildHideSubTree(index) {
-    let result = [index];
-
+  buildHideSubTree(index) {  //builds the list of indexes to hide -- returns the indices to hide (gets all the indixies - starts at the starting index - wtv the word is, and looks at all of its children and for each one of the children it calls the function on the child to find that childs children - get its children and for each children get their children - propagates the result back up)
+    let result = [index]; //the first word is many, index 0, result is an array with only 0 in it, then add the children of methods into the array and keep doing this, for each one of methods children you keep doing this
+    //many has one child, method has no child
     let sentence = this.state.sentences[this.state.currentSentence];
     for (let child of sentence.tokens[index].hoverInfo.children) {
-      result = result.concat(this.buildHideSubTree(child));
+      result = result.concat(this.buildHideSubTree(child));                //recursive tree: child is equal to 1 - result, concatenate to the result the result of calling that function to that child
     }
     return result;
   }
@@ -139,8 +139,13 @@ class FormExample extends React.Component {
                     name="wikiQuery"
                     placeholder="Teach me about..."
                   />{" "}
+<<<<<<< HEAD
+                  <Button className="btn btn-outline-primary" type="submit">
+                    Submit{" "}
+=======
                   <Button className="btn btn-primary" type="submit">
                     Create Cards!{" "}
+>>>>>>> master
                   </Button>
                 </FormGroup>
                 <br />
