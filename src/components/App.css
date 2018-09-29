@@ -1,5 +1,5 @@
 .App {
-  text-align: left;
+  text-align: center;
 }
 /*
 .App-logo {
@@ -54,6 +54,46 @@
   box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
 }
 
+.show-grid {
+  display: flex;
+}
+
+.tile {
+  display: inline;
+}
+
+#filterStacks {
+  width: 35%;
+  position: relative;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  font-style: italic;
+}
+
+.eachTile {
+  background-image: url("Tile.png");
+  min-height: 121px;
+  min-width: 311px;
+  display: block;
+  margin: 20px;
+  text-align: center;
+  position: inherit;
+  padding-top: 3em;
+}
+
+.eachTile:hover {
+  box-shadow: 10px 10px 5px grey;
+}
+
 body {
   margin: 20px;
+}
+
+#messageBox {
+  height: 475px;
+}
+
+#smallerHeader {
+  margin-top: 0;
 }
