@@ -60,9 +60,9 @@ class Stacks extends Component {
                   this.props.stacks.map((stack, index) => (
                     <li key={index} style={{ listStyleType: 'none' }}>
                       <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
-                        <Link to={`/stacks/${stack.id}`}>
+                        <Link to={`/stacks/${stack.owner._id}`}>
                           <Col sm={6} md={3} className='eachTile eachTile:hover'>
-                            <strong>'{stack.name}'</strong> has <strong>{stack.quantity}</strong> cue cards
+                            <strong>'{stack.title}'</strong> has <strong>{stack.sentences.length}</strong> cue cards
                           </Col>
                         </Link>
                       </tr>

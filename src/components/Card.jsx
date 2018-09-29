@@ -60,14 +60,14 @@ class Card extends Component {
 
   render() {
     const showCard = () => {
-      let item = this.props.stacks.find(target => target.id == this.state.stackId)
+      let item = this.props.stacks.find(target => target.owner._id == this.state.stackId)
       if (!item) {
         return <Redirect to={this.state.redirect}/>
       } else {
         return (
           <Modal show={this.state.isOpen} onClose={this.toggleModal} onKeyDown={this.keyHandle}>
             <Modal.Body>
-              <CardCarousel description={this.state.stack.description} />
+              <CardCarousel sentences={this.state.stack.sentences} />
               <h5 className="card-tip">Press <strong>Esc</strong> or <strong>Close</strong> button to exit focused view</h5>
               <br /><br />
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
