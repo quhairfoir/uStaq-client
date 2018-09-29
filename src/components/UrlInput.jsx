@@ -14,7 +14,12 @@ import axios from 'axios';
 class FormExample extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showCards: false, sentences: [], currentSentence: 0, indicesToHide: [] };
+    this.state = { 
+      showCards: false, 
+      sentences: [], 
+      currentSentence: 0, 
+      indicesToHide: [] 
+    };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
     this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
     this.determineIndicesToHide = this.determineIndicesToHide.bind(this);
@@ -54,12 +59,14 @@ class FormExample extends React.Component {
     return protoStack
   }
 
-  // unused, but functional method for sending new stacks
   handleStackSave = e => {
     e.preventDefault()
+    if (this.state.sentences == false) {
+      throw "ERROR -- trying to save empty stack"
+    }
     const pkg = {
-      userId: 2,
-      newStack: []
+      userId: 1,
+      newStack: this.state.sentences
     }
     console.log(pkg)
     axios.post('http://localhost:8080/stacks', pkg)
@@ -71,7 +78,10 @@ class FormExample extends React.Component {
   handleSubmitQuery = e => {
     e.preventDefault()
     let newProtoStack = this.makeProtoStack(e)
-    console.log(newProtoStack)
+    if (newProtoStack.query === null && newProtoStack.text === null) {
+      throw "ERROR -- cannot send empty request to server"
+    }
+    console.log('This is newProtoStack in handleSubmitQuery:', newProtoStack)
     axios.post('http://localhost:8080/proto', newProtoStack)
       .then(response => {
         this.handleReceiveProto(response.data)
@@ -87,7 +97,6 @@ class FormExample extends React.Component {
     this.setState({ sentences }, () => {
       this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
     })
-
   }
 
   determineIndicesToHide(startIndex) {
@@ -146,7 +155,7 @@ class FormExample extends React.Component {
                 </FormGroup>
               </Form>
 
-              <Button className="btn btn-primary" id="create4realz" onClick={this.handleSubmitStack}>
+              <Button className="btn btn-primary" id="create4realz" onClick={this.handleStackSave}>
                 Stack Me!{" "}
               </Button>
             </Col>
