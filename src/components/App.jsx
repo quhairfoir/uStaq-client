@@ -24,6 +24,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      userObj: null,
       stacks: [
         {
           id: faker.random.number({ min: 1, max: 100 }),
@@ -88,9 +89,17 @@ class App extends Component {
         },
       ]
     }
+    this.handleStoringUsers = this.handleStoringUsers.bind(this);
   }
 
-  componentDidMount () {
+  //make a function that sets the state in the app and bind that function in the constructor and pass it down to the nav, so from the nav we can set the state
+
+  handleStoringUsers(userObj) {
+    this.setState({ userObj });
+    console.log("this.state!!!", this.state.userObj)
+  }
+
+  componentDidMount() {
     const oauthScript = document.createElement("script");
     oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
 
@@ -98,14 +107,15 @@ class App extends Component {
   }
 
   render(){
+    debugger
     return (
       <div className="App">
-        <TopNav />
+        <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
           <Route exact path="/" component={Main} />
           <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
           {/* <Route path="/users" component={Users} /> */}
-          <Route path="/create" component={Create} />
+          <Route path="/create" component={(props) => <Create {...props} userObj={this.state.userObj} />} />
           <Route path="/quizroom" component={QuizRoom} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />

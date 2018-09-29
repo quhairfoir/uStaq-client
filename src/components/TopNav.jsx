@@ -11,7 +11,8 @@ class ModalNav extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      show: false
+      show: false,
+      user: null
     };
   }
 
@@ -21,6 +22,13 @@ class ModalNav extends React.Component {
 
   handleShow() {
     this.setState({ show: true });
+  }
+
+  componentDidMount() {
+    const oauthScript = document.createElement("script");
+    oauthScript.src = "https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js";
+
+    document.body.appendChild(oauthScript);
   }
 
   handleClick(e) {
@@ -38,6 +46,8 @@ class ModalNav extends React.Component {
       // Check console logs for additional User info
       provider.me().then((data) => {
         console.log("data: ", data);
+        let userObj = data;
+        this.props.handleStoringUsers(userObj);
         alert("Welcome " + data.name + "!");
       });
 
@@ -48,13 +58,13 @@ class ModalNav extends React.Component {
 
     });
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({user: nextProps.userObj})
+  }
 
   render() {
-
     return (
       <div>
-
-
         <Navbar inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -65,13 +75,13 @@ class ModalNav extends React.Component {
           <Navbar.Collapse>
             <Nav>
               <NavDropdown eventKey={1} title="Stacks" id="basic-nav-dropdown">
-                <MenuItem eventKey={1.1} href="/stacks">My Stacks</MenuItem>
+                <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
                 <MenuItem eventKey={1.2}>All Stacks</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={1.3} href="create">Create</MenuItem>
+                <MenuItem eventKey={1.3}><Link to={`/create`}>Create</Link></MenuItem>
               </NavDropdown>
-              <NavItem eventKey={2} href="/quizroom">
-                Quiz
+              <NavItem eventKey={2}>
+                <Link to={`/quizroom`}>Quiz</Link>
               </NavItem>
               {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                 <MenuItem eventKey={3.1}>Action</MenuItem>
@@ -83,10 +93,13 @@ class ModalNav extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} >
-
+                {this.state.user ? 
+                <div>{this.state.user.email}</div>
+                :                
                 <Button bsStyle="link" onClick={this.handleShow}>
                   Sign in
                 </Button>
+                }
                 <Modal show={this.state.show} onHide={this.handleClose}>
                   <Modal.Header closeButton>
                     <Modal.Title>Welcome back.</Modal.Title>
@@ -108,9 +121,6 @@ class ModalNav extends React.Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
-
-
 
       </div>
 
