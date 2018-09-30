@@ -6,74 +6,25 @@ import carousel from './carousel.css';
 import {Carousel} from 'react-responsive-carousel';
 
 const CardCarousel = (props) => (
-          // {props.description}
   <Carousel showArrows={true} infiniteLoop useKeyboardArrows showIndicators={false} showThumbs={false} width="100%">
-
-
-    <div className="container">
-    	<div className="row">
-    		<div className="info-card">
-  				<div className="front">
-            <p className="legend">{props.description}Card 1. Front Side</p>
-  				</div>
-    			<div className="back">
-            <p className="legend">{props.description}Card 1. Reverse Side</p>
-    			</div>
-    		</div>
-      </div>
-    </div>
-
-    <div className="container">
-      <div className="row">
-        <div className="info-card">
-          <div className="front">
-            <p className="legend">{props.description}Card 2. Front Side</p>
+    {
+      props.stacks.map((stack, index) => (
+        stack.sentences.map((sentence, i) =>
+          <div className="container">
+            <div className="row">
+              <div className="info-card">
+                <div className="front">
+                  <p className="legend">{sentence.front}</p>
+                </div>
+                <div className="back">
+                  <p className="legend">{sentence.back}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="back">
-            <p className="legend">{props.description}Card 2. Reverse Side</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="container">
-      <div className="row">
-        <div className="info-card">
-          <div className="front">
-            <p className="legend">{props.description}Card 3. Front Side</p>
-          </div>
-          <div className="back">
-            <p className="legend">{props.description}Card 3. Reverse Side</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="container">
-      <div className="row">
-        <div className="info-card">
-          <div className="front">
-            <p className="legend">{props.description}Card 4. Front Side</p>
-          </div>
-          <div className="back">
-            <p className="legend">{props.description}Card 4. Reverse Side</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div className="container">
-      <div className="row">
-        <div className="info-card">
-          <div className="front">
-            <p className="legend">{props.description}Card 5. Front Side</p>
-          </div>
-          <div className="back">
-            <p className="legend">{props.description}Card 5. Reverse Side</p>
-          </div>
-        </div>
-      </div>
-    </div>
+        )
+      ))
+    }
   </Carousel>
 
 )

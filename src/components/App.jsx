@@ -27,6 +27,7 @@ class App extends Component {
     this.state = {
       userObj: null,
       stacks: []
+
     }
     this.handleStoringUsers = this.handleStoringUsers.bind(this);
     this.handleSubmitStack = this.handleSubmitStack.bind(this)

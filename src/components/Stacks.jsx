@@ -21,11 +21,13 @@ class Stacks extends Component {
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
   }
 
-  deleteStackHandle(e) {
-    let array = [...this.state.stacks]; // make a separate copy of the array
-    let index = array.indexOf(e.target.value)
-    array.splice(array, 1);
-    this.setState({ stacks: array });
+
+  deleteStackHandle(stack, index) {
+    if(window.confirm("Are you sure you want to delete this stack?")){
+      let stacks = [...this.state.stacks]
+      stacks.splice(index, 1);
+      this.setState({stacks: stacks})
+   }
   }
 
   filterStacksHandle() {
@@ -93,9 +95,8 @@ class Stacks extends Component {
                 {stacksData}
               </ul>
             </tbody>
+            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
           </Table>
-          <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />} />
-
         </Row>
       </Grid>
     )
