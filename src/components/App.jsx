@@ -5,7 +5,7 @@ import './App.css';
 import Main from './Main'
 // import Users from './Users'
 import Create from './Create'
-import Stacks from './Stacks'
+import ViewOrCreateStacks from './ViewOrCreateStacks'
 import SignIn from './Sign-in'
 import SignUp from './Sign-up'
 // import Filter from './Filter'
@@ -123,7 +123,7 @@ class App extends Component {
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
+          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} stacks={this.state.stacks} />}/>
           {/* <Route path="/users" component={Users} /> */}
           <Route path="/create" component={(props) => <Create {...props} userObj={this.state.userObj} />} />
           <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
