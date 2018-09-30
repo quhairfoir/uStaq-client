@@ -33,11 +33,12 @@ class Stacks extends Component {
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
   }
 
-  deleteStackHandle(e) {
-    let array = [...this.state.stacks]; // make a separate copy of the array
-    let index = array.indexOf(e.target.value)
-    array.splice(array, 1);
-    this.setState({stacks: array});
+  deleteStackHandle(stack, index) {
+    if(window.confirm("Are you sure you want to delete this stack?")){
+      let stacks = [...this.state.stacks]
+      stacks.splice(index, 1);
+      this.setState({stacks: stacks})
+   }
   }
 
   filterStacksHandle() {
@@ -78,13 +79,19 @@ class Stacks extends Component {
                               <Button href="/edit" bsStyle="info">
                                 <span className="glyphicon glyphicon-edit"></span>
                               </Button>
-                              <Button onClick={this.deleteStackHandle} bsStyle="danger">
+                              <Button
+                                onClick={(e)=>{
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  this.deleteStackHandle(stack, index);
+                                }}
+                                bsStyle="danger">
                                 <span className="glyphicon glyphicon-trash"></span>
                               </Button>
                             </ButtonGroup>
                           </Row>
                           <Row className="stack-summary">
-                            <Link to={`/stacks/${stack.id}`}>
+                            <Link to={`/stacks/${stack._id}`}>
                               <strong>'{stack.title}'</strong> has <strong>{stack.sentences.length}</strong> cue cards
                             </Link>
                           </Row>
@@ -95,8 +102,8 @@ class Stacks extends Component {
                 }
               </ul>
             </tbody>
+            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
           </Table>
-          <Route exact path="/stacks/:id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
 
         </Row>
       </Grid>

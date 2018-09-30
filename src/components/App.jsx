@@ -29,97 +29,97 @@ class App extends Component {
       stacks: [
         {
           title: 'Title of Stack 1',
-          id: '1',
+          _id: '1',
           owner:
             {
               _id : '1'
             },
           sentences: [
             {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
+              front: 'Front Side of Card 1 of Stack with Id 1 and "Title of Stack 1"',
+              back: 'Back Side of Card 1 of Stack with Id 1 and "Title of Stack 1"'
             },
             {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
+              front: 'Front Side of Card 2 of Stack with Id 1 and "Title of Stack 1"',
+              back: 'Back Side of Card 2 of Stack with Id 1 and "Title of Stack 1"'
             },
             {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
+              front: 'Front Side of Card 3 of Stack with Id 1 and "Title of Stack 1"',
+              back: 'Back Side of Card 3 of Stack with Id 1 and "Title of Stack 1"'
             },
             {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
+              front: 'Front Side of Card 4 of Stack with Id 1 and "Title of Stack 1"',
+              back: 'Back Side of Card 4 of Stack with Id 1 and "Title of Stack 1"'
             },
             {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
+              front: 'Front Side of Card 5 of Stack with Id 1 and "Title of Stack 1"',
+              back: 'Back Side of Card 5 of Stack with Id 1 and "Title of Stack 1"'
             },
           ],
         },
         {
           title: 'Title of Stack 2',
-          id: '2',
+          _id: '2',
           owner:
             {
               _id : '2'
             },
           sentences: [
             {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
+              front: 'Front Side of Card 1 of Stack with Id 2 and "Title of Stack 2"',
+              back: 'Back Side of Card 1 of Stack with Id 2 and "Title of Stack 2"'
             },
             {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
+              front: 'Front Side of Card 2 of Stack with Id 2 and "Title of Stack 2"',
+              back: 'Back Side of Card 2 of Stack with Id 2 and "Title of Stack 2"'
             },
             {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
+              front: 'Front Side of Card 3 of Stack with Id 2 and "Title of Stack 2"',
+              back: 'Back Side of Card 3 of Stack with Id 2 and "Title of Stack 2"'
             },
             {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
+              front: 'Front Side of Card 4 of Stack with Id 2 and "Title of Stack 2"',
+              back: 'Back Side of Card 4 of Stack with Id 2 and "Title of Stack 2"'
             },
             {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
+              front: 'Front Side of Card 5 of Stack with Id 2 and "Title of Stack 2"',
+              back: 'Back Side of Card 5 of Stack with Id 2 and "Title of Stack 2"'
             },
           ],
         },
         {
           title: 'Title of Stack 3',
-          id: '3',
+          _id: '3',
           owner:
             {
               _id : '2'
             },
           sentences: [
             {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
+              front: 'Front Side of Card 1 of Stack with Id 3 and "Title of Stack 3"',
+              back: 'Back Side of Card 1 of Stack with Id 2 and "Title of Stack 3"'
             },
             {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
+              front: 'Front Side of Card 2 of Stack with Id 3 and "Title of Stack 3"',
+              back: 'Back Side of Card 2 of Stack with Id 2 and "Title of Stack 3"'
             },
             {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
+              front: 'Front Side of Card 3 of Stack with Id 3 and "Title of Stack 3"',
+              back: 'Back Side of Card 3 of Stack with Id 2 and "Title of Stack 3"'
             },
             {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
+              front: 'Front Side of Card 4 of Stack with Id 3 and "Title of Stack 3"',
+              back: 'Back Side of Card 4 of Stack with Id 3 and "Title of Stack 3"'
             },
             {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
+              front: 'Front Side of Card 5 of Stack with Id 3 and "Title of Stack 3"',
+              back: 'Back Side of Card 5 of Stack with Id 3 and "Title of Stack 3"'
             },
           ],
         },
         {
           title: 'Title of Stack 4',
-          id: '4',
+          _id: '4',
           owner:
             {
               _id : '3'
@@ -149,7 +149,7 @@ class App extends Component {
         },
         {
           title: 'Title of Stack 5',
-          id: '5',
+          _id: '5',
           owner:
             {
               _id : '4'
