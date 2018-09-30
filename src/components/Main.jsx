@@ -9,7 +9,7 @@ class Main extends React.Component {
   render() {
     return (
       <div className='title-page'>
-        <div className='overlay'></div>
+        {/* <div className='overlay'></div> */}
         <div className='title-box-container'>
           <span>
             <div id="title-card-0" className='card bottom'>

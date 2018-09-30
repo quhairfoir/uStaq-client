@@ -1,18 +1,5 @@
 import React, {Component} from 'react'
-import {
-  Row,
-  Col,
-  PageHeader,
-  Table,
-  Grid,
-  Clearfix,
-  Modal,
-  Dialog,
-  Button,
-  Body,
-  ButtonGroup
-} from 'react-bootstrap'
-
+import { Row, Col, PageHeader, Table, Grid, Clearfix, Modal, Dialog, Body, Button, ButtonGroup } from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 
 // Stack details modal dialog
