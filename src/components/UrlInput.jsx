@@ -14,11 +14,11 @@ import axios from 'axios';
 class FormExample extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      showCards: false, 
-      sentences: [], 
-      currentSentence: 0, 
-      indicesToHide: [] 
+    this.state = {
+      showCards: false,
+      sentences: [],
+      currentSentence: 0,
+      indicesToHide: []
     };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
     this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
