@@ -10,7 +10,6 @@ const CardCarousel = (props) => (
   <Carousel showArrows={true} infiniteLoop useKeyboardArrows showIndicators={false} showThumbs={false} width="100%">
 
 
-
     <div className="container">
     	<div className="row">
     		<div className="info-card">

@@ -62,6 +62,17 @@
   display: inline;
 }
 
+.stack-summary {
+  padding-top: 1.5em;
+}
+
+.edit-delete-btn-group {
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+
 #filterStacks {
   width: 35%;
   position: relative;
@@ -73,17 +84,20 @@
 
 .eachTile {
   background-image: url("Tile.png");
-  min-height: 121px;
-  min-width: 311px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 121px;
+  width: 310.5px;
   display: block;
   margin: 20px;
   text-align: center;
   position: inherit;
-  padding-top: 3em;
+
+  margin-bottom: 3em
 }
 
 .eachTile:hover {
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 5px 5px 5px grey;
 }
 
 body {

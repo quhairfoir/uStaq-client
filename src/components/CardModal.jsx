@@ -72,22 +72,14 @@ class Example extends React.Component {
   }
 
   render() {
-    // const popover = (
-    //   <Popover id="modal-popover" title="popover">
-    //     very popover. such engagement
-    //   </Popover>
-    // );
-    // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
-     // this.props.sentences.map(s => s.text).join(' ')
 
     return (
       <div>
-        <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
+        <Button bsStyle="info" bsSize="large" onClick={this.handleShow}>
           Create a card
         </Button>
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal bsSize="large" show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>

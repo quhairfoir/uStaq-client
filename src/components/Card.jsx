@@ -32,13 +32,6 @@ class Card extends Component {
     });
   }
 
-  spaceBarHandle(e){
-    e.preventDefault();
-    this.setState({
-      redirect : '/reverse'
-    })
-  }
-
   keyHandle(event) {
     switch (event.keyCode) {
       case 32:
@@ -60,7 +53,7 @@ class Card extends Component {
 
   render() {
     const showCard = () => {
-      let item = this.props.stacks.find(target => target.owner._id == this.state.stackId)
+      let item = this.props.stacks.find(target => target.id == this.state.stackId)
       if (!item) {
         return <Redirect to={this.state.redirect}/>
       } else {
@@ -69,7 +62,6 @@ class Card extends Component {
             <Modal.Body>
               <CardCarousel sentences={this.state.stack.sentences} />
               <h5 className="card-tip">Press <strong>Esc</strong> or <strong>Close</strong> button to exit focused view</h5>
-              <br /><br />
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
           </Modal>
