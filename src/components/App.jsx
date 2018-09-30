@@ -26,177 +26,30 @@ class App extends Component {
     super(props)
     this.state = {
       userObj: null,
-      stacks: [
-        {
-          title: 'Title of Stack 1',
-          id: '1',
-          owner:
-            {
-              _id : '1'
-            },
-          sentences: [
-            {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
-            },
-            {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
-            },
-            {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
-            },
-            {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
-            },
-            {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
-            },
-          ],
-        },
-        {
-          title: 'Title of Stack 2',
-          id: '2',
-          owner:
-            {
-              _id : '2'
-            },
-          sentences: [
-            {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
-            },
-            {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
-            },
-            {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
-            },
-            {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
-            },
-            {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
-            },
-          ],
-        },
-        {
-          title: 'Title of Stack 3',
-          id: '3',
-          owner:
-            {
-              _id : '2'
-            },
-          sentences: [
-            {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
-            },
-            {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
-            },
-            {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
-            },
-            {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
-            },
-            {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
-            },
-          ],
-        },
-        {
-          title: 'Title of Stack 4',
-          id: '4',
-          owner:
-            {
-              _id : '3'
-            },
-          sentences: [
-            {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
-            },
-            {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
-            },
-            {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
-            },
-            {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
-            },
-            {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
-            },
-          ],
-        },
-        {
-          title: 'Title of Stack 5',
-          id: '5',
-          owner:
-            {
-              _id : '4'
-            },
-          sentences: [
-            {
-              front: 'Front Side of Card 1',
-              back: 'Back Side of Card 1'
-            },
-            {
-              front: 'Front Side of Card 2',
-              back: 'Back Side of Card 2'
-            },
-            {
-              front: 'Front Side of Card 3',
-              back: 'Back Side of Card 3'
-            },
-            {
-              front: 'Front Side of Card 4',
-              back: 'Back Side of Card 4'
-            },
-            {
-              front: 'Front Side of Card 5',
-              back: 'Back Side of Card 5'
-            },
-          ],
-        },
-      ]
+      stacks: []
     }
     this.handleStoringUsers = this.handleStoringUsers.bind(this);
     this.handleSubmitStack = this.handleSubmitStack.bind(this)
   }
 
-  //make a function that sets the state in the app and bind that function in the constructor and pass it down to the nav, so from the nav we can set the state
-
   handleStoringUsers(userObj) { //creat the shape of user and set it here, in app, login will eventually need to check whether or not you've alredy been here, if so, don't create the user in the db
-  // console.log("this is userOBJ", userObj)
     let newUser = {
       _id: userObj.id,
       email: userObj.email,
       owned: []
     }
-    console.log("NEW USER", newUser)
     axios.post('http://localhost:8080/users', newUser)
       .then(response => console.log(response))
       .catch(error => console.log(error))
     this.setState({ userObj });
+    let userId = this.state.userObj.id
+    let stacks = this.getUserStacks(userId)
+  }
+
+  getUserStacks(userId) {
+    axios(`http://localhost:8080/stacks/user/${userId}`)
+    .then(stacks => this.setState({ stacks: stacks.data }))
+    .catch(error => console.log(error))
   }
 
   componentDidMount() {

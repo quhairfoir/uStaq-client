@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Row, Col, PageHeader, Table, Grid, Clearfix, Modal, Dialog, Body, Button, ButtonGroup } from 'react-bootstrap'
-import {Route, Switch, Link} from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
+import axios from 'axios'
 
 // Stack details modal dialog
 import Card from './Card'
@@ -24,7 +25,7 @@ class Stacks extends Component {
     let array = [...this.state.stacks]; // make a separate copy of the array
     let index = array.indexOf(e.target.value)
     array.splice(array, 1);
-    this.setState({stacks: array});
+    this.setState({ stacks: array });
   }
 
   filterStacksHandle() {
@@ -42,7 +43,41 @@ class Stacks extends Component {
     }
   }
 
+  stacksData() {
+    if (this.props.stacks) {
+      return (
+          this.props.stacks.map((stack, index) => (
+            <li key={index} style={{ listStyleType: 'none' }}>
+              <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
+                <Col sm={6} md={3} className='eachTile eachTile:hover'>
+                  <Row>
+                    <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
+                      <Button href="/edit" bsStyle="info">
+                        <span className="glyphicon glyphicon-edit"></span>
+                      </Button>
+                      <Button onClick={this.deleteStackHandle} bsStyle="danger">
+                        <span className="glyphicon glyphicon-trash"></span>
+                      </Button>
+                    </ButtonGroup>
+                  </Row>
+                  <Row className="stack-summary">
+                    <Link to={`/stacks/${stack._id}`}>
+                      <strong>'{stack.title}'</strong> <br/> <strong>{stack.sentences.length}</strong> cue cards
+                </Link>
+                  </Row>
+                </Col>
+              </tr>
+            </li>
+          ))
+        )
+    } else {
+      return <p>EMPTY</p>
+    }
+  }
+
   render() {
+    let stacksData = this.stacksData()
+
     return (
       <Grid>
         <Row className='show-grid'>
@@ -53,37 +88,13 @@ class Stacks extends Component {
                 id="filterStacks"
                 onChange={this.filterStacksHandle}
                 placeholder='Search in your stacks...'
-                />
+              />
               <ul id='myUL'>
-                {
-                  this.state.stacks.map((stack, index) => (
-                    <li key={index} style={{ listStyleType: 'none' }}>
-                      <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
-                        <Col sm={6} md={3} className='eachTile eachTile:hover'>
-                          <Row>
-                            <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
-                              <Button href="/edit" bsStyle="info">
-                                <span className="glyphicon glyphicon-edit"></span>
-                              </Button>
-                              <Button onClick={this.deleteStackHandle} bsStyle="danger">
-                                <span className="glyphicon glyphicon-trash"></span>
-                              </Button>
-                            </ButtonGroup>
-                          </Row>
-                          <Row className="stack-summary">
-                            <Link to={`/stacks/${stack.id}`}>
-                              <strong>'{stack.title}'</strong> has <strong>{stack.sentences.length}</strong> cue cards
-                            </Link>
-                          </Row>
-                          </Col>
-                      </tr>
-                    </li>
-                  ))
-                }
+                {stacksData}
               </ul>
             </tbody>
           </Table>
-          <Route exact path="/stacks/:id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
+          <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />} />
 
         </Row>
       </Grid>
