@@ -32,13 +32,6 @@ class Card extends Component {
     });
   }
 
-  spaceBarHandle(e){
-    e.preventDefault();
-    this.setState({
-      redirect : '/reverse'
-    })
-  }
-
   keyHandle(event) {
     switch (event.keyCode) {
       case 32:
@@ -67,9 +60,8 @@ class Card extends Component {
         return (
           <Modal show={this.state.isOpen} onClose={this.toggleModal} onKeyDown={this.keyHandle}>
             <Modal.Body>
-              <CardCarousel description={this.state.stack.description} />
+              <CardCarousel sentences={this.state.stack.sentences} />
               <h5 className="card-tip">Press <strong>Esc</strong> or <strong>Close</strong> button to exit focused view</h5>
-              <br /><br />
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
           </Modal>

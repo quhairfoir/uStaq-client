@@ -66,6 +66,17 @@
   display: inline;
 }
 
+.stack-summary {
+  padding-top: 1.5em;
+}
+
+.edit-delete-btn-group {
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+
 #filterStacks {
   width: 35%;
   position: relative;
@@ -83,10 +94,12 @@
   max-height: 300px;
   min-width: 100px;
   max-width: 250px;
+  
   display: block;
   margin: 20px;
   text-align: center;
   position: inherit;
+
   padding-top: 3em;
   border: 1px solid black;
 
@@ -103,7 +116,7 @@
   }
 
 .eachTile:hover {
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 5px 5px 5px grey;
 }
 
 body {
