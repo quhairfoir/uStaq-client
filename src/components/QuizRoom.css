@@ -1,0 +1,14 @@
+#messageBox {
+  height: 350px;
+}
+
+#smallerHeader {
+  margin-top: 0;
+}
+
+.panel-footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+}
