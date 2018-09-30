@@ -1,5 +1,5 @@
 // https://www.npmjs.com/package/react-responsive-carousel
-import React from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom'
 import carousel from './carousel.css';
 
@@ -8,6 +8,7 @@ import {Carousel} from 'react-responsive-carousel';
 const CardCarousel = (props) => (
           // {props.description}
   <Carousel showArrows={true} infiniteLoop useKeyboardArrows showIndicators={false} showThumbs={false} width="100%">
+
 
     <div className="container">
     	<div className="row">
