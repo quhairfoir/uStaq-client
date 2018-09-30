@@ -11,9 +11,11 @@ class QuizRoom extends React.Component {
     super(props)
 
     this.state = {
-        username: 'Morag',
+        username: '',
         message: '',
-        messages
+        messages,
+        question: 'Coffee comes from [blank].',
+        answer: 'Ethiopia'
     }
     this.socket = io('localhost:3001')
     this.socket.on('RECEIVE_MESSAGE', function(data){
@@ -24,6 +26,19 @@ class QuizRoom extends React.Component {
         console.log(data);
         this.setState({messages: [...this.state.messages, data]})
         console.log(this.state.messages);
+    }
+  }
+
+  componentDidMount() {
+    //ask do you have this.props.userObj?
+    // console.log("this is PROPS", this.props)
+    let username = this.props.userObj ? this.props.userObj.alias : ''
+    this.setState({username})
+  }
+
+  checkMessageForAnswer() {
+    if (this.state.answer === this.state.message) {
+      console.log("this is GOOOOOOD!")
     }
   }
 
@@ -38,6 +53,7 @@ class QuizRoom extends React.Component {
 
   onChange = (event) => {
    this.setState({message: event.target.value})
+  //  this.checkMessageForAnswer();
   }
 
   render() {
@@ -51,7 +67,7 @@ class QuizRoom extends React.Component {
         <Row>
           <Panel>
             <Panel.Heading>
-              <h2>Q: _________ are small fuzzy creatures.</h2>
+              <h2>{this.state.question}</h2>
             </Panel.Heading>
             <Panel.Body id="messageBox">
               <div className="messages">
@@ -68,7 +84,7 @@ class QuizRoom extends React.Component {
                   <ControlLabel>Your answer...?</ControlLabel>
                   <FormControl componentClass="textarea" placeholder="..." value={this.state.message} onChange={this.onChange}/>
                 </FormGroup>
-                <Button type="submit" onClick={this.sendMessage} bsStyle="primary">Send</Button>
+                <Button type="submit" onClick={this.sendMessage} onSubmit={this.checkMessageForAnswer} bsStyle="primary">Send</Button>
               </form>
             </Panel.Footer>
           </Panel>

@@ -16,6 +16,7 @@ import QuizRoom from './QuizRoom'
 import faker from 'faker'
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
+import axios from 'axios';
 
 // import react router
 import {Route, Switch} from 'react-router-dom'
@@ -94,9 +95,19 @@ class App extends Component {
 
   //make a function that sets the state in the app and bind that function in the constructor and pass it down to the nav, so from the nav we can set the state
 
-  handleStoringUsers(userObj) {
+  handleStoringUsers(userObj) { //creat the shape of user and set it here, in app, login will eventually need to check whether or not you've alredy been here, if so, don't create the user in the db
+  // console.log("this is userOBJ", userObj)
+    let newUser = {
+      _id: userObj.id,
+      email: userObj.email,
+      owned: []
+    }
+    console.log("NEW USER", newUser)
+    axios.post('http://localhost:8080/users', newUser)
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
     this.setState({ userObj });
-    console.log("this.state!!!", this.state.userObj)
+    // console.log("this.state!!!", this.state.userObj)
   }
 
   componentDidMount() {
@@ -107,7 +118,6 @@ class App extends Component {
   }
 
   render(){
-    debugger
     return (
       <div className="App">
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
@@ -116,7 +126,7 @@ class App extends Component {
           <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} stacks={this.state.stacks} />}/>
           {/* <Route path="/users" component={Users} /> */}
           <Route path="/create" component={(props) => <Create {...props} userObj={this.state.userObj} />} />
-          <Route path="/quizroom" component={QuizRoom} />
+          <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
         </Switch>
