@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { Popover, Tooltip, Button, Modal, OverlayTrigger, Carousel } from 'react-bootstrap';
 
-class Example extends React.Component {
+class CardModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -108,4 +108,4 @@ class Example extends React.Component {
   }
 }
 
-export default Example;
+export default CardModal;

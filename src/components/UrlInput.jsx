@@ -139,13 +139,8 @@ class FormExample extends React.Component {
                     name="wikiQuery"
                     placeholder="Teach me about..."
                   />{" "}
-<<<<<<< HEAD
-                  <Button className="btn btn-outline-primary" type="submit">
-                    Submit{" "}
-=======
                   <Button className="btn btn-primary" type="submit">
                     Create Cards!{" "}
->>>>>>> master
                   </Button>
                 </FormGroup>
                 <br />

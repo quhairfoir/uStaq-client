@@ -72,15 +72,31 @@
 }
 
 .eachTile {
-  background-image: url("Tile.png");
+  /* background-image: url("Tile.png");
   min-height: 121px;
-  min-width: 311px;
+  min-width: 311px; */
+  min-height: 120px;
+  max-height: 300px;
+  min-width: 100px;
+  max-width: 250px;
   display: block;
   margin: 20px;
   text-align: center;
   position: inherit;
   padding-top: 3em;
-}
+  border: 1px solid black;
+
+  background: #eee;
+
+  clip-path:
+    polygon(
+      10px 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      0 10px
+    );
+  }
 
 .eachTile:hover {
   box-shadow: 10px 10px 5px grey;

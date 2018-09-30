@@ -61,8 +61,8 @@ class Stacks extends Component {
                     <li key={index} style={{ listStyleType: 'none' }}>
                       <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
                         <Link to={`/stacks/${stack.id}`}>
-                          <Col sm={6} md={3} className='eachTile eachTile:hover'>
-                            <strong>'{stack.name}'</strong> has <strong>{stack.quantity}</strong> cue cards
+                          <Col sm={4} md={2} className='eachTile eachTile:hover'>
+                            <strong>'{stack.name}'</strong><br/><strong>{stack.quantity}</strong> cue cards
                           </Col>
                         </Link>
                       </tr>
