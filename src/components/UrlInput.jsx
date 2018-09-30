@@ -127,6 +127,7 @@ class FormExample extends React.Component {
   };
 
   render() {
+    
     return (
       <Grid>
         <div className="form-group purple-border">
@@ -139,14 +140,8 @@ class FormExample extends React.Component {
                     name="wikiQuery"
                     placeholder="Teach me about..."
                   />{" "}
-
-                  <Button className="btn btn-outline-primary" type="submit">
-                    Submit{" "}
-                  </Button>
-                  
                   <Button className="btn btn-primary" type="submit">
                     Create Cards!{" "}
-
                   </Button>
                 </FormGroup>
                 <br />

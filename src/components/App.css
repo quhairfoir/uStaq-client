@@ -83,18 +83,33 @@
 }
 
 .eachTile {
-  background-image: url("Tile.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 121px;
-  width: 310.5px;
+  /* background-image: url("Tile.png");
+  min-height: 121px;
+  min-width: 311px; */
+  min-height: 120px;
+  max-height: 300px;
+  min-width: 100px;
+  max-width: 250px;
+  
   display: block;
   margin: 20px;
   text-align: center;
   position: inherit;
 
-  margin-bottom: 3em
-}
+  padding-top: 3em;
+  border: 1px solid black;
+
+  background: #eee;
+
+  clip-path:
+    polygon(
+      10px 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      0 10px
+    );
+  }
 
 .eachTile:hover {
   box-shadow: 5px 5px 5px grey;
