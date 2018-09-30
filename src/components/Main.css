@@ -1,3 +1,9 @@
+/* #ffbe4f	(255,190,79)
+#6bd2db	(107,210,219)
+#0ea7b5	(14,167,181)
+#0c457d	(12,69,125)
+#e8702a	(232,112,42) */
+
 .title-page {
   /* position: fixed; */
   top: 0;
@@ -22,12 +28,11 @@
 }
 
 .title-box-container {
-  background: #f02050f0;
+  background: #ffffff;
 
   height: 60%;
   width: 800px;
   padding: 20px;
-
   max-width: 80%;
   min-width: 600px;
 
@@ -113,6 +118,7 @@
   animation-delay: 200ms;
 }
 #title-card-1 {
+  background-color: #f4f2e8;
   animation-delay: 400ms;
 }
 #title-card-2 {
@@ -122,6 +128,7 @@
   animation-delay: 1000ms;
 }
 #title-card-4 {
+  background-color: #f4f2e8;
   animation-delay: 1200ms;
 }
 #title-card-5 {
@@ -137,6 +144,8 @@
   animation-delay: 2200ms;
 }
 #title-card-9 {
+  color: #442fd0;
+  background-color: #f4f2e8;
   animation-delay: 3000ms;
 }
 
