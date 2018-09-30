@@ -97,6 +97,18 @@ class App extends Component {
     document.body.appendChild(oauthScript);
   }
 
+  handleProtoSubmitAnd = e => {
+    e.preventDefault()
+    let proto = this.makeProtoStack(e)
+    if (proto.info.query === null && proto.info.text === null) {
+      throw "ERROR -- cannot send empty request to server"
+    }
+    axios.post('http://localhost:8080/proto', proto)
+      .then(response => {
+      })
+      .catch(error => console.log(error))
+  }
+
   render(){
     return (
       <div className="App">
@@ -104,7 +116,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
-          {/* <Route path="/users" component={Users} /> */}
           <Route path="/create" component={Create} />
           <Route path="/quizroom" component={QuizRoom} />
           <Route path="/sign-in" component={SignIn} />

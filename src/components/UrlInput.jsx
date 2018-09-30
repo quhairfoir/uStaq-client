@@ -26,9 +26,19 @@ class FormExample extends React.Component {
     this.handleWordClick = this.handleWordClick.bind(this);
   }
 
-  // componentDidMount() {
+  componentDidMount() {
 
-  // }
+      axios.get('http://localhost:8080/stacks',  )
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+
+    for (let sentence of sentences) {
+      sentence.selectedToken = sentence.chefsRecommendation;
+    }
+    this.setState({ sentences }, () => {
+      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
+    })
+  }
 
   incrementCurrentSentence() {
     this.setState({
@@ -50,55 +60,34 @@ class FormExample extends React.Component {
     });
   }
 
+  // MOVE TO NEW FILE
   makeProtoStack = (e) => {
-    let protoStack = {
+    let info = {
       query: e.target.elements.wikiQuery.value ? e.target.elements.wikiQuery.value : null,
       text: e.target.elements.textBox.value ? e.target.elements.textBox.value : null,
       type: e.target.elements.wikiQuery.value ? 'wiki' : e.target.elements.textBox.value ? 'text' : null
     }
-    return protoStack
+    return  {
+      userId: 1, // TODO: change from hardcoded
+      info
+    }
   }
 
+  // STAYS, but must be re-written based on new page
   handleStackSave = e => {
     e.preventDefault()
     if (this.state.sentences == false) {
       throw "ERROR -- trying to save empty stack"
     }
-    const pkg = {
-      userId: 1,
-      newStack: this.state.sentences
-    }
-    console.log(pkg)
-    axios.post('http://localhost:8080/stacks', pkg)
+    // TODO
+    axios.post('http://localhost:8080/stacks', ITEM_HERE )
       .then(response => console.log(response))
       .catch(error => console.log(error))
-    this.setState({ showCards: true })
   }
 
-  handleSubmitQuery = e => {
-    e.preventDefault()
-    let newProtoStack = this.makeProtoStack(e)
-    if (newProtoStack.query === null && newProtoStack.text === null) {
-      throw "ERROR -- cannot send empty request to server"
-    }
-    console.log('This is newProtoStack in handleSubmitQuery:', newProtoStack)
-    axios.post('http://localhost:8080/proto', newProtoStack)
-      .then(response => {
-        this.handleReceiveProto(response.data)
-      })
-      .catch(error => console.log(error))
-    this.setState({ showCards: true })
-  }
-
-  handleReceiveProto = sentences => {
-    for (let sentence of sentences) {
-      sentence.selectedToken = sentence.chefsRecommendation;
-    }
-    this.setState({ sentences }, () => {
-      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
-    })
-  }
-
+  // MOVE TO NEW FILE
+  
+  
   determineIndicesToHide(startIndex) {
     let indicesToHide = [];
 
@@ -139,13 +128,8 @@ class FormExample extends React.Component {
                     name="wikiQuery"
                     placeholder="Teach me about..."
                   />{" "}
-<<<<<<< HEAD
-                  <Button className="btn btn-outline-primary" type="submit">
-                    Submit{" "}
-=======
                   <Button className="btn btn-primary" type="submit">
                     Create Cards!{" "}
->>>>>>> master
                   </Button>
                 </FormGroup>
                 <br />
