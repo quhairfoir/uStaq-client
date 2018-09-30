@@ -3,6 +3,7 @@ import {Row, Button, Grid, FormGroup, FormControl, ControlLabel, PageHeader, Wel
 // import {Route, Switch, Link} from 'react-router-dom'
 import io from "socket.io-client"
 
+import './QuizRoom.css';
 
 let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }]
 
@@ -80,9 +81,9 @@ class QuizRoom extends React.Component {
             </Panel.Body>
             <Panel.Footer>
               <form>
-                <FormGroup controlId="formControlsTextarea" className="quizTextArea">
-                  <ControlLabel>Your answer...?</ControlLabel>
-                  <FormControl componentClass="textarea" placeholder="..." value={this.state.message} onChange={this.onChange}/>
+                <FormGroup bsSize="large" className="quizTextArea">
+                  {/* <ControlLabel>Your answer...?</ControlLabel> */}
+                  <FormControl type="text" placeholder="" value={this.state.message} onChange={this.onChange}/>
                 </FormGroup>
                 <Button type="submit" onClick={this.sendMessage} onSubmit={this.checkMessageForAnswer} bsStyle="primary">Send</Button>
               </form>
