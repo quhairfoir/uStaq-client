@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Modal, Button, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { bootstrapUtils } from 'react-bootstrap/lib/utils';
+
+bootstrapUtils.addStyle(Navbar, 'custom');
 
 class ModalNav extends React.Component {
   constructor(props, context) {
@@ -63,9 +66,14 @@ class ModalNav extends React.Component {
   }
 
   render() {
+    var styles={
+      "backgroundColor" : "purple",
+      "color"           : "white"
+  };
+
     return (
       <div>
-        <Navbar inverse collapseOnSelect>
+        <Navbar style={styles} inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#brand">uStaq</a>
@@ -78,7 +86,7 @@ class ModalNav extends React.Component {
                 <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
                 <MenuItem eventKey={1.2}>All Stacks</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={1.3}><Link to={`/create`}>Create</Link></MenuItem>
+                <MenuItem eventKey={1.3}><Link to={`/edit`}>Edit</Link></MenuItem>
               </NavDropdown>
               <NavItem eventKey={2}>
                 <Link to={`/quizroom`}>Quiz</Link>

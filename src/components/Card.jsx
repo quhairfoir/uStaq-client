@@ -21,7 +21,7 @@ class Card extends Component {
       // stackId: (this.props.match.params.id || null),
       stackId: this.props.location.pathname.split("/")[2] || null,
       stack: {},
-      isOpen: 'false',
+      isOpen: 'true',
       redirect: '/stacks'
     };
   }
