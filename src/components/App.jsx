@@ -211,16 +211,16 @@ class App extends Component {
       <div className="App">
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
-          <Route exact path="/" component={Main} />
           <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} stacks={this.state.stacks} />}/>
           {/* <Route path="/users" component={Users} /> */}
-          <Route path="/create" component={(props) => <Create {...props} userObj={this.state.userObj} />} />
+          {/* <Route path="/create" component={(props) => <Create {...props} userObj={this.state.userObj} />} /> */}
           <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
+          <Route path="/" component={Main} />
         </Switch>
       </div>
-      )
+    )
   }
 };
 

@@ -5,7 +5,7 @@ import io from "socket.io-client"
 
 import './QuizRoom.css';
 
-let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }]
+let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }]
 
 class QuizRoom extends React.Component {
   constructor(props){
@@ -60,11 +60,6 @@ class QuizRoom extends React.Component {
   render() {
     return (
       <Grid>
-        <Row>
-          <PageHeader id="smallerHeader">
-            <small>The (mostly) educational trivia game</small>
-          </PageHeader>
-        </Row>
         <Row>
           <Panel>
             <Panel.Heading>
