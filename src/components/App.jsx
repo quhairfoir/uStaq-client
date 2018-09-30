@@ -4,7 +4,7 @@ import './App.css';
 // import Dashboard from './Dashboard'
 import Main from './Main'
 // import Users from './Users'
-import Create from './Create'
+import Edit from './Edit'
 import ViewOrCreateStacks from './ViewOrCreateStacks'
 import SignIn from './Sign-in'
 import SignUp from './Sign-up'
@@ -180,6 +180,7 @@ class App extends Component {
       ]
     }
     this.handleStoringUsers = this.handleStoringUsers.bind(this);
+    this.handleSubmitStack = this.handleSubmitStack.bind(this)
   }
 
   //make a function that sets the state in the app and bind that function in the constructor and pass it down to the nav, so from the nav we can set the state
@@ -196,7 +197,6 @@ class App extends Component {
       .then(response => console.log(response))
       .catch(error => console.log(error))
     this.setState({ userObj });
-    // console.log("this.state!!!", this.state.userObj)
   }
 
   componentDidMount() {
@@ -206,15 +206,16 @@ class App extends Component {
     document.body.appendChild(oauthScript);
   }
 
-  handleProtoSubmitAnd = e => {
-    e.preventDefault()
-    let proto = this.makeProtoStack(e)
-    if (proto.info.query === null && proto.info.text === null) {
+  handleSubmitStack (proto) {
+    if (proto.query === null && proto.text === null) {
       throw "ERROR -- cannot send empty request to server"
     }
-    axios.post('http://localhost:8080/proto', proto)
-      .then(response => {
-      })
+    let protoStack = {
+      userId: this.state.userObj.id,
+      proto
+    }
+    axios.post('http://localhost:8080/proto', protoStack)
+      .then(response => console.log(response))
       .catch(error => console.log(error))
   }
 
@@ -224,8 +225,8 @@ class App extends Component {
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route path="/stacks" render={({staticcontext, ...props }) => <Stacks {...props} stacks={this.state.stacks} />}/>
-          <Route path="/create" component={Create} />
+          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} />}/>
+          <Route path="/edit" component={Edit} />
           <Route path="/quizroom" component={QuizRoom} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />

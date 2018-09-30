@@ -60,7 +60,26 @@ class Edit extends React.Component {
     return result;
   }
 
+  // TODO####
+  handleReceiveStack = (sentences) => {
+    for (let sentence of sentences) {
+      sentence.selectedToken = sentence.chefsRecommendation;
+    }
+    this.setState({ sentences }, () => {
+      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
+    })
+  }
+
   handleWordClick = index => {
     this.state.sentences[this.state.currentSentence].selectedToken = index;
   };
+
+  render() {
+    return(
+      <h1>EDIT</h1>
+    )
+  }
 }
+
+
+export default Edit
