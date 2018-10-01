@@ -31,7 +31,7 @@ class Create extends Component {
   onSubmit (e) {
     e.preventDefault()
     let protoStack = this.makeProtoStack(e)
-    console.log(protoStack)
+    // console.log(protoStack)
     this.props.handleSubmitStack(protoStack)
   }
 
@@ -63,6 +63,7 @@ class Create extends Component {
             <FormGroup>
             <FormControl
               type="text"
+              name="textBox"
               placeholder="Teach me about..."
               />
             </FormGroup>
