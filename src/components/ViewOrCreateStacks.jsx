@@ -21,8 +21,9 @@ class ViewOrCreateStacks extends Component {
 
   togglePageMode = (stackId) => {
     let edit = this.state.edit ? false : true
-    this.setState({ edit })
-    this.setState({ stackId })
+    this.setState({ stackId }, () => {
+      this.setState({ edit })
+    })
   }
 
   renderPage() {
