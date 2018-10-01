@@ -3,7 +3,7 @@ import {Row, Button, Grid, FormGroup, FormControl, ControlLabel, PageHeader, Wel
 // import {Route, Switch, Link} from 'react-router-dom'
 import io from "socket.io-client"
 
-import './QuizRoom.css';
+import '../styles/QuizRoom.css';
 
 let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' }]
 

@@ -1,13 +1,15 @@
 import React from "react";
 import CardModal from "./CardModal";
 import { Grid, Row, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap'
+import '../styles/Edit.css'
+import axios from 'axios'
 
 class Edit extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       showCards: false, 
-      sentences: [], 
+      sentences: null, 
       currentSentence: 0, 
       indicesToHide: [] 
     };
@@ -15,6 +17,17 @@ class Edit extends React.Component {
     this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
     this.determineIndicesToHide = this.determineIndicesToHide.bind(this);
     this.handleWordClick = this.handleWordClick.bind(this);
+  }
+
+  componentDidMount() {
+    console.log(this.props.stackId)
+    axios(`http://localhost:8080/stacks/${this.props.stackId}`)
+    .then(stack => {
+      console.log(stack)
+      let sentences = stack.data[0].sentences
+      this.setState({ sentences })
+    })
+    .catch(error => alert(error))
   }
 
   incrementCurrentSentence() {
@@ -76,13 +89,17 @@ class Edit extends React.Component {
   };
 
   makeCardList() {
-    this.props.sentences.map(sentence => {
-      <ListGroupItem>sentence.text.content</ListGroupItem>
-    })
+    console.log("this.state.sentences", this.state.sentences)
+    return this.state.sentences.map(sentence => (
+      <ListGroupItem>{sentence.text.content}</ListGroupItem>
+    ))
   }
 
   render() {
-    let cardList = this.props.sentences? this.makeCardList() : <ListGroupItem>NOPE</ListGroupItem>
+    let cardList = this.state.sentences === null ? <ListGroupItem>NOPE</ListGroupItem> : this.makeCardList() 
+    
+    console.log(cardList)
+    
     return(
       <Grid>
         <Row>
