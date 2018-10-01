@@ -73,13 +73,22 @@ class App extends Component {
       .catch(error => console.log(error))
   }
 
+  // handleStackDelete(stackId) {
+  //   if(window.confirm("Are you sure you want to delete this stack?")){
+  //     console.log('Here  is what I am looking for');
+  //     axios.delete(`http://localhost:8080/stacks/delete/${stackId}`, {params: { _id: stackId }} )
+  //       .then(response => console.log(response))
+  //       .catch(error => console.log(error))
+  //   }
+  // }
+
   render(){
     return (
       <div className="App">
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} />}/>
+          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleStackDelete={this.handleStackDelete} stacks={this.state.stacks} />}/>
           <Route path="/edit" component={Edit} />
           <Route path="/quizroom" component={QuizRoom} />
           <Route path="/sign-in" component={SignIn} />
