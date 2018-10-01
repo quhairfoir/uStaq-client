@@ -155,7 +155,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}>{sentence.text.content}<br />Score: <strong>{sentence.score}</strong></ListGroupItem>
+      <ListGroupItem data-index={index}><strong>Card {index}</strong>: {sentence.text.content}</ListGroupItem>
     ))
   }
 
