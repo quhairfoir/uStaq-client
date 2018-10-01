@@ -25,14 +25,17 @@ class Create extends Component {
       text: e.target.elements.textBox.value ? e.target.elements.textBox.value : null,
       type: e.target.elements.wikiQuery.value ? 'wiki' : e.target.elements.textBox.value ? 'text' : null
     }
+    e.target.title.value = ''
+    e.target.wikiQuery.value = ''
+    e.target.textBox.value = ''
     return protoStack
   }
 
   onSubmit (e) {
     e.preventDefault()
     let protoStack = this.makeProtoStack(e)
-    console.log(protoStack)
     this.props.handleSubmitStack(protoStack)
+
   }
 
   render() {
@@ -63,6 +66,7 @@ class Create extends Component {
             <FormGroup>
             <FormControl
               type="text"
+              name="textBox"
               placeholder="Teach me about..."
               />
             </FormGroup>

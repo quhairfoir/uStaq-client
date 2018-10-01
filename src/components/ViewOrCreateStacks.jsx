@@ -21,8 +21,9 @@ class ViewOrCreateStacks extends Component {
 
   togglePageMode = (stackId) => {
     let edit = this.state.edit ? false : true
-    this.setState({ edit })
-    this.setState({ stackId })
+    this.setState({ stackId }, () => {
+      this.setState({ edit })
+    })
   }
 
   renderPage() {
@@ -32,7 +33,7 @@ class ViewOrCreateStacks extends Component {
     else {
       return (<div className="row">
         <div className="col-sm-9">
-          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} />
+          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} />
         </div>
         <div className="col-sm-3">
           <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />

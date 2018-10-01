@@ -39,22 +39,8 @@ class App extends Component {
     })
   }
 
-  // handleStoringUsers(userObj) { //creat the shape of user and set it here, in app, login will eventually need to check whether or not you've alredy been here, if so, don't create the user in the db
-  //   let newUser = {
-  //     _id: userObj.id,
-  //     email: userObj.email,
-  //     owned: []
-  //   }
-
-  //   axios.post('http://localhost:8080/users', newUser)
-  //     .then(response => console.log(response))
-  //     .catch(error => console.log(error))
-  //   this.setState({ userObj });
-  //   let userId = this.state.userObj.id
-    
-  // }
-
-  getUserStacks(userId) {
+  getUserStacks = () => {
+    let userId = this.state.userObj.id
     axios(`http://localhost:8080/stacks/user/${userId}`)
     .then(stacks => this.setState({ stacks: stacks.data }))
     .catch(error => console.log(error))
@@ -79,10 +65,24 @@ class App extends Component {
       userId: this.state.userObj.id,
       proto
     }
+
     axios.post('http://localhost:8080/proto', protoStack)
-      .then(response => console.log(response))
+      .then(response => {
+        this.setState({
+          stacks: [...this.state.stacks, response.data]
+       })
+      })
       .catch(error => console.log(error))
   }
+
+  // handleStackDelete(stackId) {
+  //   if(window.confirm("Are you sure you want to delete this stack?")){
+  //     console.log('Here  is what I am looking for');
+  //     axios.delete(`http://localhost:8080/stacks/delete/${stackId}`, {params: { _id: stackId }} )
+  //       .then(response => console.log(response))
+  //       .catch(error => console.log(error))
+  //   }
+  // }
 
   render(){
     return (
@@ -90,7 +90,7 @@ class App extends Component {
         <TopNav fetchingUser={this.fetchingUser} userObj={this.state.userObj}/>
         <Switch>
           <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
-          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} />}/>
+          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} getUserStacks={this.getUserStacks} />}/>
           <Route path="/" component={Main} />
         </Switch>
       </div>

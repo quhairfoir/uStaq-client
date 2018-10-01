@@ -9,6 +9,8 @@ import Card from './Card'
 // Client-side model
 import Resource from '../models/resource'
 const StackStore = Resource('stacks')
+// const db = require('mongodb');
+
 
 class Stacks extends Component {
   constructor(props) {
@@ -21,14 +23,16 @@ class Stacks extends Component {
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
   }
 
-
-  deleteStackHandle(stack, index) {
+  deleteStackHandle(_id) {
     if(window.confirm("Are you sure you want to delete this stack?")){
-      let stacks = [...this.state.stacks]
-      stacks.splice(index, 1);
-      this.setState({stacks: stacks})
-   }
-  }
+      return axios.post(`http://localhost:8080/stacks/delete/${_id}`)
+        .then(response => {
+          console.log(response)
+          this.props.getUserStacks()
+        })
+        .catch(error => console.log(error));
+    };
+  };
 
   filterStacksHandle() {
     let input = document.getElementById('filterStacks');
@@ -59,10 +63,10 @@ class Stacks extends Component {
                 <Col sm={6} md={3} className='eachTile eachTile:hover'>
                   <Row>
                     <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
-                      <Button onClick={this.handleEdit} bsStyle="info">
+                      <Button onClick={this.handleEdit} bsStyle="info" data-id={stack._id}>
                         <span className="glyphicon glyphicon-edit" data-id={stack._id}></span>
                       </Button>
-                      <Button onClick={this.deleteStackHandle} bsStyle="danger">
+                      <Button onClick={() => this.deleteStackHandle(stack._id)} bsStyle="danger">
                         <span className="glyphicon glyphicon-trash"></span>
                       </Button>
                     </ButtonGroup>
@@ -100,7 +104,7 @@ class Stacks extends Component {
                 {stacksData}
               </ul>
             </tbody>
-            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
+            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} stack={this.stack}/>}/>
           </Table>
         </Row>
       </Grid>
