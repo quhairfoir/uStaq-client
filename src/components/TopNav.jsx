@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Modal, Button, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
+import axios from 'axios';
 
 bootstrapUtils.addStyle(Navbar, 'custom');
 
@@ -38,28 +39,39 @@ class ModalNav extends React.Component {
     // Prevents page reload
     e.preventDefault();
 
-    // Initializes OAuth.io with API key
-    // Sign-up an account to get one
-    window.OAuth.initialize('_iSZVvDIMwLHtJgOQQ8gXsOftQI');
+    axios(`http://localhost:8080/users/token`, {withCredentials: true})
+    .then( (response) => {  
+      window.OAuth.initialize('_iSZVvDIMwLHtJgOQQ8gXsOftQI');
 
-    // Popup Github and ask for authorization
-    window.OAuth.popup('github').then((provider) => {
-
-      // Prompts 'welcome' message with User's name on successful login
-      // Check console logs for additional User info
-      provider.me().then((data) => {
-        console.log("data: ", data);
-        let userObj = data;
-        this.props.handleStoringUsers(userObj);
-        alert("Welcome " + data.name + "!");
+      // console.log("this is token", token)
+  
+      // Popup Github and ask for authorization
+      window.OAuth.popup('github', {
+        state: response.data.token
+      })
+      .done((result) => {
+        // Prompts 'welcome' message with User's name on successful login
+        // Check console logs for additional User info
+        console.log("this is result", result)
+        axios.post('http://localhost:8080/users/auth', {code: result.code}, {withCredentials: true})
+        .then(() => {
+          this.props.fetchingUser();
+          this.handleClose();
+        })
+        // result.me().then((data) => {
+        //   console.log("data: ", data);
+        //   let userObj = data;
+          
+        //   // alert("Welcome " + data.name + "!");
+        // });
+  
+        // // You can also call Github's API using .get()
+        // result.get('/user').then((data) => {
+        //   console.log('self data:', data);
+        // });
       });
-
-      // You can also call Github's API using .get()
-      provider.get('/user').then((data) => {
-        console.log('self data:', data);
-      });
-
     });
+
   }
   componentWillReceiveProps(nextProps){
     this.setState({user: nextProps.userObj})
