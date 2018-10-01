@@ -66,8 +66,13 @@ class App extends Component {
       userId: this.state.userObj.id,
       proto
     }
+
     axios.post('http://localhost:8080/proto', protoStack)
-      .then(response => console.log(response))
+      .then(response => {
+        this.setState({
+          stacks: [...this.state.stacks, response.data]
+       })
+      })
       .catch(error => console.log(error))
   }
 

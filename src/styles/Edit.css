@@ -6,3 +6,12 @@
 .list-group li:hover {
   color: #337ab7;
 }
+
+.create-form {
+  margin-top: 40px;
+}
+
+.add-title {
+  display: flex;
+
+}
