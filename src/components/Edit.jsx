@@ -2,6 +2,7 @@ import React from "react";
 import CardModal from "./CardModal";
 import { Grid, Row, PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import '../styles/Edit.css'
+import '../styles/CardModal.css'
 import axios from 'axios'
 
 class Edit extends React.Component {
@@ -97,8 +98,8 @@ class Edit extends React.Component {
   }
 
   makeCardList() {
-    return this.state.sentences.map(sentence => (
-      <ListGroupItem onClick={this.handleCardClick}>{sentence.text.content}</ListGroupItem>
+    return this.state.sentences.map((sentence, index) => (
+      <ListGroupItem data-index={index}>{sentence.text.content}<br />Score: <strong>{sentence.score}</strong></ListGroupItem>
     ))
   }
 
@@ -112,13 +113,25 @@ class Edit extends React.Component {
           </PageHeader>
         </Row>
         <Row>
-          <ListGroup>
+          <ListGroup onClick={this.handleCardClick}>
             {cardList}
           </ListGroup>
         </Row>
         <Row>
           <Button onClick={this.handleSave}>Save</Button>
         </Row>
+        {this.state.showCards ? (
+          <CardModal
+            incrementCurrentSentence={this.incrementCurrentSentence}
+            decrementCurrentSentence={this.decrementCurrentSentence}
+            sentences={this.state.sentences}
+            currentIndex={this.state.currentSentence}
+            indicesToHide={this.state.indicesToHide}
+            handleUpperMouseOver={this.determineIndicesToHide}
+            handleUpperMouseOut={this.determineIndicesToHide}
+            handleUpperClick={this.handleWordClick}
+          />
+        ) : null}
       </Grid>
     )
   }
