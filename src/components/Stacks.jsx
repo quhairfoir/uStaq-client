@@ -59,7 +59,7 @@ class Stacks extends Component {
                 <Col sm={6} md={3} className='eachTile eachTile:hover'>
                   <Row>
                     <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
-                      <Button onClick={this.handleEdit} bsStyle="info">
+                      <Button onClick={this.handleEdit} bsStyle="info" data-id={stack._id}>
                         <span className="glyphicon glyphicon-edit" data-id={stack._id}></span>
                       </Button>
                       <Button onClick={this.deleteStackHandle} bsStyle="danger">
