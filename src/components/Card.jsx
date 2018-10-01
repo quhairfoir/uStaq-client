@@ -60,7 +60,7 @@ class Card extends Component {
         return (
           <Modal show={this.state.isOpen} onClose={this.toggleModal} onKeyDown={this.keyHandle}>
             <Modal.Body>
-              <CardCarousel sentences={this.state.stack.sentences} {...this.props} />
+              <CardCarousel stack={this.state.stack} {...this.props} />
               <h5 className="card-tip">Press <strong>Esc</strong> or <strong>Close</strong> button to exit focused view</h5>
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
