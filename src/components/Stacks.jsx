@@ -54,6 +54,11 @@ class Stacks extends Component {
     }
   }
 
+  handleEdit = (event) => {
+    let stackId = event.target.getAttribute("data-id")
+    this.props.toggleEdit(stackId)
+  }
+
   stacksData() {
     if (this.props.stacks) {
       return (
@@ -63,8 +68,8 @@ class Stacks extends Component {
                 <Col sm={6} md={3} className='eachTile eachTile:hover'>
                   <Row>
                     <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
-                      <Button href="/edit" bsStyle="info">
-                        <span className="glyphicon glyphicon-edit"></span>
+                      <Button onClick={this.handleEdit} bsStyle="info">
+                        <span className="glyphicon glyphicon-edit" data-id={stack._id}></span>
                       </Button>
                       <Button onClick={() => this.deleteStackHandle(_id)} bsStyle="danger">
                         <span className="glyphicon glyphicon-trash"></span>

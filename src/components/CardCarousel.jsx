@@ -1,7 +1,7 @@
 // https://www.npmjs.com/package/react-responsive-carousel
 import React  from 'react';
 import ReactDOM from 'react-dom'
-import carousel from './carousel.css';
+import '../styles/carousel.css';
 
 import {Carousel} from 'react-responsive-carousel';
 

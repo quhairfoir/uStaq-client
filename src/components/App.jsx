@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
-import './App.css';
-// import Dashboard from './Dashboard'
+import '../styles/App.css';
 import Main from './Main'
-// import Users from './Users'
 import Edit from './Edit'
 import ViewOrCreateStacks from './ViewOrCreateStacks'
-import SignIn from './Sign-in'
-import SignUp from './Sign-up'
-// import Filter from './Filter'
 import TopNav from './TopNav'
 import QuizRoom from './QuizRoom'
 // import {Grid} from 'react-bootstrap'
@@ -62,7 +56,11 @@ class App extends Component {
 
   handleSubmitStack (proto) {
     if (proto.query === null && proto.text === null) {
-      throw "ERROR -- cannot send empty request to server"
+     return alert("ERROR - cannot send empty request")
+    } else if (proto.title === null) {
+      return alert("ERROR - stack must have a title")
+    } else if (proto.query && proto.text) {
+      return alert("ERROR - cannot submit both query and text")
     }
     let protoStack = {
       userId: this.state.userObj.id,
@@ -87,15 +85,12 @@ class App extends Component {
       <div className="App">
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
-          <Route exact path="/" component={Main} />
-          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleStackDelete={this.handleStackDelete} stacks={this.state.stacks} />}/>
-          <Route path="/edit" component={Edit} />
-          <Route path="/quizroom" component={QuizRoom} />
-          <Route path="/sign-in" component={SignIn} />
-          <Route path="/sign-up" component={SignUp} />
+          <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
+          <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} />}/>
+          <Route path="/" component={Main} />
         </Switch>
       </div>
-      )
+    )
   }
 };
 
