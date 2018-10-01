@@ -282,11 +282,11 @@
 	overflow: scroll;
 }
 
-.info-card:hover .back {
+.info-card.flipped .back {
 	-webkit-transform: rotateX(0);
 }
 
-.info-card:hover .front {
+.info-card.flipped .front {
 	-webkit-transform: rotateX(180deg);
 }
 
