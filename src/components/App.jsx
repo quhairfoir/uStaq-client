@@ -71,6 +71,15 @@ class App extends Component {
       .catch(error => console.log(error))
   }
 
+  // handleStackDelete(stackId) {
+  //   if(window.confirm("Are you sure you want to delete this stack?")){
+  //     console.log('Here  is what I am looking for');
+  //     axios.delete(`http://localhost:8080/stacks/delete/${stackId}`, {params: { _id: stackId }} )
+  //       .then(response => console.log(response))
+  //       .catch(error => console.log(error))
+  //   }
+  // }
+
   render(){
     return (
       <div className="App">
