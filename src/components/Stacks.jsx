@@ -18,6 +18,7 @@ class Stacks extends Component {
     this.state = {
       stacks: this.props.stacks,
       input: '',
+      userObj: {_id: null}
     }
     this.filterStacksHandle = this.filterStacksHandle.bind(this);
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
@@ -28,7 +29,7 @@ class Stacks extends Component {
       return axios.post(`http://localhost:8080/stacks/delete/${_id}`)
         .then(response => {
           console.log(response)
-          this.props.getUserStacks()
+          this.props.getUserStacks(this.props.userObj._id)
         })
         .catch(error => console.log(error));
     };

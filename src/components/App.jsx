@@ -39,8 +39,7 @@ class App extends Component {
     })
   }
 
-  getUserStacks = () => {
-    let userId = this.state.userObj.id
+  getUserStacks = (userId) => {
     axios(`http://localhost:8080/stacks/user/${userId}`)
     .then(stacks => this.setState({ stacks: stacks.data }))
     .catch(error => console.log(error))
@@ -90,7 +89,7 @@ class App extends Component {
         <TopNav fetchingUser={this.fetchingUser} userObj={this.state.userObj}/>
         <Switch>
           <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
-          <Route path="/stacks" component={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} getUserStacks={this.getUserStacks} />}/>
+          <Route path="/stacks" component={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} getUserStacks={this.getUserStacks} userObj={this.state.userObj} />}/>
           <Route path="/" component={Main} />
         </Switch>
       </div>
