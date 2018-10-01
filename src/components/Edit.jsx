@@ -1,5 +1,6 @@
 import React from "react";
 import CardModal from "./CardModal";
+import { Grid, Row, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 class Edit extends React.Component {
   constructor(props) {
@@ -74,9 +75,27 @@ class Edit extends React.Component {
     this.state.sentences[this.state.currentSentence].selectedToken = index;
   };
 
+  makeCardList() {
+    this.props.sentences.map(sentence => {
+      <ListGroupItem>sentence.text.content</ListGroupItem>
+    })
+  }
+
   render() {
+    let cardList = this.props.sentences? this.makeCardList() : <ListGroupItem>NOPE</ListGroupItem>
     return(
-      <h1>EDIT</h1>
+      <Grid>
+        <Row>
+          <PageHeader id="smallerHeader">
+            <small>Cards:</small>
+          </PageHeader>
+        </Row>
+        <Row>
+          <ListGroup>
+            {cardList}
+          </ListGroup>
+        </Row>
+      </Grid>
     )
   }
 }

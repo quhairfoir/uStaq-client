@@ -8,8 +8,6 @@ import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
 import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
-// import "./Create.css";
-import axios from 'axios';
 
 class Create extends Component {
   constructor(props) {
