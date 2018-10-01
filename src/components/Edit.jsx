@@ -37,6 +37,13 @@ class Edit extends React.Component {
 
   }
 
+  toggleCardModal = (event) => {
+    let index = Number(event.target.getAttribute("data-index"))
+    this.setState({ currentSentence: index})
+    let showCards = this.state.showCards ? false : true
+    this.setState({ showCards })
+  }
+
   incrementCurrentSentence() {
     this.setState({
       currentSentence:
@@ -150,7 +157,7 @@ class Edit extends React.Component {
           </PageHeader>
         </Row>
         <Row>
-          <ListGroup onClick={this.handleCardClick}>
+          <ListGroup onClick={this.toggleCardModal}>
             {cardList}
           </ListGroup>
         </Row>
@@ -159,6 +166,7 @@ class Edit extends React.Component {
         </Row>
         {this.state.showCards ? (
           <CardModal
+            toggleShow = {this.toggleCardModal}
             incrementCurrentSentence={this.incrementCurrentSentence}
             decrementCurrentSentence={this.decrementCurrentSentence}
             sentences={this.state.sentences}
