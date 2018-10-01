@@ -32,10 +32,10 @@ class ViewOrCreateStacks extends Component {
     }
     else {
       return (<div className="row">
-        <div className="col-sm-10">
+        <div className="col-sm-9">
           <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} />
         </div>
-        <div className="col-sm-2" style={{background: '#942'}}>
+        <div className="col-sm-3">
           <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />
         </div>
       </div>)
