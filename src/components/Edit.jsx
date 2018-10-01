@@ -49,7 +49,7 @@ class Edit extends React.Component {
       currentSentence:
         (this.state.currentSentence + 1) % this.state.sentences.length,
     }, () => {
-      this.resetIndicesToHide();
+      // this.resetIndicesToHide();
     });
   }
 
@@ -60,7 +60,7 @@ class Edit extends React.Component {
           ? this.state.sentences.length - 1
           : this.state.currentSentence - 1,
     }, () => {
-      this.resetIndicesToHide();
+      // this.resetIndicesToHide();
     });
   }
 
@@ -79,10 +79,14 @@ class Edit extends React.Component {
     if (event && event.metaKey) {
       // If Command key is pressed, retain list of indices and add another one corresponding to
       // hovered item.
-      indicesToHide = this.state.indicesToHide;
-      if (!indicesToHide.includes(startIndex)) {
-        indicesToHide.push(startIndex);
+      indicesToHide = this.state.indicesToHide.slice();
+      let indicesToHideSet = new Set(indicesToHide);
+      if (indicesToHide.includes(startIndex)) {
+        indicesToHideSet.delete(startIndex);
+      } else {
+        indicesToHideSet.add(startIndex);
       }
+      indicesToHide = Array.from(indicesToHideSet);
     } else {
       if (sentence.tokens[startIndex].hoverable) {
         indicesToHide = this.buildHideSubTree(startIndex)
@@ -125,6 +129,7 @@ class Edit extends React.Component {
     let stateSentences = JSON.parse(JSON.stringify(this.state.sentences));
     let indicesToHide = this.state.indicesToHide.slice();
     stateSentences[this.state.currentSentence].indicesToHide = indicesToHide;
+    // stateSentences[this.state.currentSentence].front = this.buildCardFront();
 
     this.setState({
       sentences: stateSentences,
@@ -136,6 +141,13 @@ class Edit extends React.Component {
     console.log(index)
     this.setState({ showCards: true })
   }
+
+  // buildCardFront() {
+  //   const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
+  //     this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "---" : token.text.content
+  //   )
+  //   alert(front);
+  // }
 
   handleSave = () => {
     this.props.handleSaveEdit(this.props.stackId)

@@ -23,7 +23,7 @@ class CardModal extends React.Component {
         <div className="blanko"> {this.lowerDiv(sentenceObj)}</div>
       </Carousel.Item>)
   }
-  //create the upperDiv using sentenceObj from showCarouselItems
+  
   upperDiv(sentenceObj) {
     let sentence = sentenceObj.tokens;
 
@@ -47,14 +47,6 @@ class CardModal extends React.Component {
     )
   }
 
-  handleClose() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
-  }
-
   handleSelect(_, event) {
     let { direction } = event;
 
@@ -72,28 +64,22 @@ class CardModal extends React.Component {
 
     return (
       <div>
-        <Button bsStyle="info" bsSize="large" onClick={this.handleShow}>
-          Create a card
-        </Button>
-
-        <Modal bsSize="large" show={this.state.show} onHide={this.handleClose}>
-          {/* <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header> */}
+        <Modal bsSize="large" show={true} onHide={this.props.toggleShow}>
+          <Modal.Header closeButton>
+          </Modal.Header>
           <Modal.Body>
             <div className="card card-body">
               <h4 className="card-title"></h4>
               <Carousel
                 activeIndex={this.props.currentIndex}
-                // direction={direction}
                 onSelect={this.handleSelect}>
                 {this.showCarouselItems()}
               </Carousel>
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          {/* <Modal.Footer>
             <Button onClick={this.props.toggleShow}>Close</Button>
-          </Modal.Footer>
+          </Modal.Footer> */}
         </Modal>
 
 
