@@ -109,7 +109,7 @@ class Stacks extends Component {
                 {stacksData}
               </ul>
             </tbody>
-            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
+            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} stack={this.stack}/>}/>
           </Table>
         </Row>
       </Grid>
