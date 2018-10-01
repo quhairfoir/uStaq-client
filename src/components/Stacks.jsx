@@ -23,10 +23,9 @@ class Stacks extends Component {
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
   }
 
-  deleteStackHandle(id) {
+  deleteStackHandle(_id) {
     if(window.confirm("Are you sure you want to delete this stack?")){
-      console.log("STACK ID TO DELETE:", id)
-      return axios.post(`http://localhost:8080/stacks/delete/${id}`)
+      return axios.post(`http://localhost:8080/stacks/delete/${_id}`)
         .then(response => {
           console.log(response)
           this.props.getUserStacks()
@@ -105,7 +104,7 @@ class Stacks extends Component {
                 {stacksData}
               </ul>
             </tbody>
-            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} />}/>
+            <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} stack={this.stack}/>}/>
           </Table>
         </Row>
       </Grid>

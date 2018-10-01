@@ -8,17 +8,18 @@ import axios from 'axios'
 class Edit extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      showCards: false, 
-      sentences: null, 
+    this.state = {
+      showCards: false,
+      sentences: null,
       title: null,
-      currentSentence: 0, 
-      indicesToHide: [] 
+      currentSentence: 0,
+      indicesToHide: [],
     };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
     this.decrementCurrentSentence = this.decrementCurrentSentence.bind(this);
-    this.determineIndicesToHide = this.determineIndicesToHide.bind(this);
-    this.handleWordClick = this.handleWordClick.bind(this);
+    this.handleUpperMouseOver = this.handleUpperMouseOver.bind(this);
+    this.handleUpperMouseOut = this.handleUpperMouseOut.bind(this);
+    this.handleUpperClick = this.handleUpperClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,12 +29,8 @@ class Edit extends React.Component {
       console.log(stack)
       let sentences = stack.data[0].sentences
       let title = stack.data[0].title
-      for (let sentence of sentences) {
-        sentence.selectedToken = sentence.chefsRecommendation;
-      }
-      this.setState({ sentences }, () => {
-        this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken)
-      })
+
+      this.setState({ sentences });
       this.setState({ title })
     })
     .catch(error => alert(error))
@@ -52,7 +49,7 @@ class Edit extends React.Component {
       currentSentence:
         (this.state.currentSentence + 1) % this.state.sentences.length,
     }, () => {
-      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken);
+      // this.resetIndicesToHide();
     });
   }
 
@@ -63,21 +60,42 @@ class Edit extends React.Component {
           ? this.state.sentences.length - 1
           : this.state.currentSentence - 1,
     }, () => {
-      this.determineIndicesToHide(this.state.sentences[this.state.currentSentence].selectedToken);
+      // this.resetIndicesToHide();
     });
   }
 
-  determineIndicesToHide(startIndex) {
-    let indicesToHide = [];
+  handleUpperMouseOver(startIndex, event) {
+    this.determineIndicesToHide(startIndex, event);
+  }
 
+  handleUpperMouseOut(startIndex, event) {
+    this.resetIndicesToHide();
+  }
+
+  determineIndicesToHide(startIndex, event) {
+    let indicesToHide = [];
     let sentence = this.state.sentences[this.state.currentSentence];
-    if ('hoverable' in sentence.tokens[startIndex]) {
-      indicesToHide = this.buildHideSubTree(startIndex)
+
+    if (event && event.metaKey) {
+      // If Command key is pressed, retain list of indices and add another one corresponding to
+      // hovered item.
+      indicesToHide = this.state.indicesToHide.slice();
+      let indicesToHideSet = new Set(indicesToHide);
+      if (indicesToHide.includes(startIndex)) {
+        indicesToHideSet.delete(startIndex);
+      } else {
+        indicesToHideSet.add(startIndex);
+      }
+      indicesToHide = Array.from(indicesToHideSet);
+    } else {
+      if (sentence.tokens[startIndex].hoverable) {
+        indicesToHide = this.buildHideSubTree(startIndex)
+      }
     }
 
     this.setState({
       indicesToHide,
-    })
+    });
   }
 
   // Build the list of indexes to hide: from a starting index, look at all of its children, and for
@@ -91,14 +109,45 @@ class Edit extends React.Component {
     return result;
   }
 
+  // Set indicesToHide back to what is stored in sentence (as opposed to temporary construction
+  // from mousover).
+  resetIndicesToHide() {
+    // TODO: When creating sentences, give them indicesToHide field from the beginning so that
+    // we don't have to check for it here. The following lines can then be collapsed.
+    let indicesToHide = [];
+    if (this.state.sentences[this.state.currentSentence].indicesToHide) {
+      indicesToHide = this.state.sentences[this.state.currentSentence].indicesToHide.slice();
+    }
+
+    this.setState({
+      indicesToHide,
+    });
+  };
+
+  handleUpperClick = (index, event) => {
+    // Make a deep copy of sentences and of indicesToHide.
+    let stateSentences = JSON.parse(JSON.stringify(this.state.sentences));
+    let indicesToHide = this.state.indicesToHide.slice();
+    stateSentences[this.state.currentSentence].indicesToHide = indicesToHide;
+    // stateSentences[this.state.currentSentence].front = this.buildCardFront();
+
+    this.setState({
+      sentences: stateSentences,
+      indicesToHide
+    })
+  };
+
   handleCardClick = (index) => {
     console.log(index)
     this.setState({ showCards: true })
   }
 
-  handleWordClick = index => {
-    this.state.sentences[this.state.currentSentence].selectedToken = index;
-  };
+  // buildCardFront() {
+  //   const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
+  //     this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "---" : token.text.content
+  //   )
+  //   alert(front);
+  // }
 
   handleSave = () => {
     this.props.handleSaveEdit(this.props.stackId)
@@ -111,7 +160,7 @@ class Edit extends React.Component {
   }
 
   render() {
-    let cardList = this.state.sentences === null ? <ListGroupItem>NOPE</ListGroupItem> : this.makeCardList() 
+    let cardList = this.state.sentences === null ? <ListGroupItem>NOPE</ListGroupItem> : this.makeCardList()
     return(
       <Grid>
         <Row>
@@ -135,9 +184,9 @@ class Edit extends React.Component {
             sentences={this.state.sentences}
             currentIndex={this.state.currentSentence}
             indicesToHide={this.state.indicesToHide}
-            handleUpperMouseOver={this.determineIndicesToHide}
-            handleUpperMouseOut={this.determineIndicesToHide}
-            handleUpperClick={this.handleWordClick}
+            handleUpperMouseOver={this.handleUpperMouseOver}
+            handleUpperMouseOut={this.handleUpperMouseOut}
+            handleUpperClick={this.handleUpperClick}
           />
         ) : null}
       </Grid>

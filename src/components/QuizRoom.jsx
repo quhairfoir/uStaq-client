@@ -1,10 +1,11 @@
 import React from 'react'
 import {Row, Button, Grid, FormGroup, FormControl, ControlLabel, PageHeader, Well, Panel} from 'react-bootstrap'
 // import {Route, Switch, Link} from 'react-router-dom'
-import io from "socket.io-client"
+
+// Use Damerau-Levenshtein edit distance to detect almost-answers (look for character substitution, deletion, addition, transposition)
+import getEditDistance from 'damerau-levenshtein';
 
 import '../styles/QuizRoom.css';
-import getEditDistance from '../utilities/levenshtein';
 
 let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' } ];
 
@@ -80,11 +81,11 @@ class QuizRoom extends React.Component {
   }
 
   checkMessageForAnswer() {
-    const dist = getEditDistance(this.state.message, this.state.answer);
-    if (dist === 0) {
-      this.sendSystemMessage('Yeah!');
-    } else if (dist === 1) {
-      this.sendSystemMessage('Close! ;)');
+    const { steps, similarity } = getEditDistance(this.state.message.toLowerCase(), this.state.answer.toLowerCase());
+    if (similarity === 1) {
+      this.sendSystemMessage('You got it!');
+    } else if (similarity >= 0.8) {
+      this.sendSystemMessage('Close...');
     }
   }
 
