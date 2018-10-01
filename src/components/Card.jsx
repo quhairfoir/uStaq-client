@@ -21,7 +21,7 @@ class Card extends Component {
       // stackId: (this.props.match.params.id || null),
       stackId: this.props.location.pathname.split("/")[2] || null,
       stack: {},
-      isOpen: 'false',
+      isOpen: 'true',
       redirect: '/stacks'
     };
   }
@@ -53,14 +53,14 @@ class Card extends Component {
 
   render() {
     const showCard = () => {
-      let item = this.props.stacks.find(target => target.id == this.state.stackId)
+      let item = this.props.stacks.find(target => target._id == this.state.stackId)
       if (!item) {
         return <Redirect to={this.state.redirect}/>
       } else {
         return (
           <Modal show={this.state.isOpen} onClose={this.toggleModal} onKeyDown={this.keyHandle}>
             <Modal.Body>
-              <CardCarousel sentences={this.state.stack.sentences} />
+              <CardCarousel sentences={this.state.stack.sentences} {...this.props} />
               <h5 className="card-tip">Press <strong>Esc</strong> or <strong>Close</strong> button to exit focused view</h5>
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
