@@ -31,9 +31,9 @@ class Stacks extends Component {
   //  }
   // }
 
-  deleteStackHandle(id) {
+  deleteStackHandle(_id) {
     if(window.confirm("Are you sure you want to delete this stack?")){
-      return axios.get(`http://localhost:8080/stacks/delete/${id}`)
+      axios.post(`http://localhost:8080/stacks/delete/${_id}`)
         .then(response => console.log(response))
         .catch(error => console.log(error));
     };
@@ -62,8 +62,8 @@ class Stacks extends Component {
   stacksData() {
     if (this.props.stacks) {
       return (
-          this.props.stacks.map((stack, _id) => (
-            <li key={_id} style={{ listStyleType: 'none' }}>
+          this.props.stacks.map((stack, index) => (
+            <li key={index} style={{ listStyleType: 'none' }}>
               <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
                 <Col sm={6} md={3} className='eachTile eachTile:hover'>
                   <Row>
@@ -71,7 +71,7 @@ class Stacks extends Component {
                       <Button onClick={this.handleEdit} bsStyle="info">
                         <span className="glyphicon glyphicon-edit" data-id={stack._id}></span>
                       </Button>
-                      <Button onClick={() => this.deleteStackHandle(_id)} bsStyle="danger">
+                      <Button onClick={() => this.deleteStackHandle(stack._id)} bsStyle="danger">
                         <span className="glyphicon glyphicon-trash"></span>
                       </Button>
                     </ButtonGroup>
