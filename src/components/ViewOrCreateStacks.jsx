@@ -13,6 +13,12 @@ class ViewOrCreateStacks extends Component {
     }
   }
 
+  // TODO - deal w/actual save...
+  handleSaveEdit = (stackId) => {
+    console.log(stackId)
+    this.togglePageMode(null)
+  }
+
   togglePageMode = (stackId) => {
     let edit = this.state.edit ? false : true
     this.setState({ edit })
@@ -21,15 +27,15 @@ class ViewOrCreateStacks extends Component {
 
   renderPage() {
     if (this.state.edit) {
-     return  <Edit stackId={this.state.stackId} />
+     return  <Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />
     }
     else {
       return (<div className="row">
         <div className="col-sm-10">
-          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode}/>
+          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} />
         </div>
         <div className="col-sm-2" style={{background: '#942'}}>
-          <Create handleSubmitStack={this.props.handleSubmitStack} />
+          <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />
         </div>
       </div>)
     }
@@ -42,7 +48,6 @@ class ViewOrCreateStacks extends Component {
     return(
     <div className="container" style={{width: '100%'}}>
       {editORstacks}
-      <button onClick={this.togglePageMode}>TOGGLE</button>
     </div>
   // <span>
   //   <div style={{width:'50%'}}>

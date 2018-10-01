@@ -19,6 +19,7 @@ class Create extends Component {
 
   makeProtoStack (e) {
     let protoStack = {
+      title: e.target.elements.title.value ? e.target.elements.title.value : null,
       query: e.target.elements.wikiQuery.value ? e.target.elements.wikiQuery.value : null,
       text: e.target.elements.textBox.value ? e.target.elements.textBox.value : null,
       type: e.target.elements.wikiQuery.value ? 'wiki' : e.target.elements.textBox.value ? 'text' : null
@@ -38,7 +39,12 @@ class Create extends Component {
       <div>
         <Form inline onSubmit={this.onSubmit}>
           <FormGroup controlId="formInlineUrl">
-            <ControlLabel>Enter a topic:</ControlLabel>{" "}
+            <ControlLabel>Add a title for your stack:</ControlLabel>{" "}
+              <FormControl
+                name="title"
+                placeholder="..."
+              />{" "}
+            <ControlLabel>Search topic:</ControlLabel>{" "}
             <FormControl
               name="wikiQuery"
               placeholder="Teach me about..."
@@ -49,7 +55,7 @@ class Create extends Component {
           </FormGroup>
           <br />
           <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>Or paste your text here:</ControlLabel>
+            <ControlLabel>OR, paste your text here:</ControlLabel>
             <br />
             <FormControl
               componentClass="textarea"
