@@ -41,7 +41,8 @@ class App extends Component {
     let stacks = this.getUserStacks(userId)
   }
 
-  getUserStacks = (userId) => {
+  getUserStacks = () => {
+    let userId = this.state.userObj.id
     axios(`http://localhost:8080/stacks/user/${userId}`)
     .then(stacks => this.setState({ stacks: stacks.data }))
     .catch(error => console.log(error))

@@ -25,7 +25,6 @@ class Stacks extends Component {
 
   deleteStackHandle(id) {
     if(window.confirm("Are you sure you want to delete this stack?")){
-      console.log("STACK ID TO DELETE:", id)
       return axios.post(`http://localhost:8080/stacks/delete/${id}`)
         .then(response => {
           console.log(response)
