@@ -8,22 +8,21 @@ import {Carousel} from 'react-responsive-carousel';
 const CardCarousel = (props) => (
   <Carousel showArrows={true} infiniteLoop useKeyboardArrows showIndicators={false} showThumbs={false} width="100%">
     {
-      props.stacks.map((stack, index) => (
-        stack.sentences.map((sentence, i) =>
-          <div className="container">
+        props.stack.sentences.map((sentence, index) =>
+          <div className="container" key={index}>
             <div className="row">
-              <div className="info-card">
-                <div className="front">
-                  <p className="legend">{sentence.front}</p>
+              <div className={`info-card ${props.isFlipped ? 'flipped' : ''}`}>
+                <div className='front'>
+                  <p className="legend">Card front. {sentence.text.content}</p>
                 </div>
-                <div className="back">
-                  <p className="legend">{sentence.back}</p>
+                <div className='back'>
+                  <p className="legend">Card reverse. {sentence.text.content}</p>
                 </div>
               </div>
             </div>
           </div>
-        )
-      ))
+
+      )
     }
   </Carousel>
 
