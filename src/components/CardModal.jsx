@@ -23,14 +23,15 @@ class CardModal extends React.Component {
         <div className="blanko"> {this.lowerDiv(sentenceObj)}</div>
       </Carousel.Item>)
   }
-  //create the upperDiv using sentenceObj from showCarouselItems
+  
   upperDiv(sentenceObj) {
     let sentence = sentenceObj.tokens;
 
-    return sentence.map((token, index) =>
-      <span key={index} onMouseOver={() => this.props.handleUpperMouseOver(index)}
-        onMouseOut={() => this.props.handleUpperMouseOut(sentenceObj.selectedToken)}
-        onClick={() => this.props.handleUpperClick(index)}>
+    return sentence.map((token, index) => 
+      <span key={index} onMouseOver={(event) => this.props.handleUpperMouseOver(index, event)}
+                        onMouseOut={(event) => this.props.handleUpperMouseOut(index, event)}
+                        onClick={(event) => this.props.handleUpperClick(index, event)}
+                        className={ token.hoverable ? 'hover-candidate' : '' }>
         {token.text.content}
       </span>
     )
@@ -65,22 +66,20 @@ class CardModal extends React.Component {
       <div>
         <Modal bsSize="large" show={true} onHide={this.props.toggleShow}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="card card-body">
               <h4 className="card-title"></h4>
               <Carousel
                 activeIndex={this.props.currentIndex}
-                // direction={direction}
                 onSelect={this.handleSelect}>
                 {this.showCarouselItems()}
               </Carousel>
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          {/* <Modal.Footer>
             <Button onClick={this.props.toggleShow}>Close</Button>
-          </Modal.Footer>
+          </Modal.Footer> */}
         </Modal>
 
 
