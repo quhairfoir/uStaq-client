@@ -31,9 +31,10 @@ class CardModal extends React.Component {
     let sentence = sentenceObj.tokens;
 
     return sentence.map((token, index) => 
-      <span key={index} onMouseOver={() => this.props.handleUpperMouseOver(index)}
-                        onMouseOut={() => this.props.handleUpperMouseOut(sentenceObj.selectedToken)}
-                        onClick={() => this.props.handleUpperClick(index)}>
+      <span key={index} onMouseOver={(event) => this.props.handleUpperMouseOver(index, event)}
+                        onMouseOut={(event) => this.props.handleUpperMouseOut(index, event)}
+                        onClick={(event) => this.props.handleUpperClick(index, event)}
+                        className={ token.hoverable ? 'hover-candidate' : '' }>
         {token.text.content}
       </span>
     )
@@ -54,7 +55,6 @@ class CardModal extends React.Component {
   }
 
   handleShow() {
-    // this.determineIndicesToHide(this.props.selectedToken); <-- this prop no longer exists
     this.setState({ show: true });
   }
 
@@ -80,9 +80,9 @@ class CardModal extends React.Component {
         </Button>
 
         <Modal bsSize="large" show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
+          {/* <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
+          </Modal.Header> */}
           <Modal.Body>
 
             <div className="card card-body">
