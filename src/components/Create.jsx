@@ -8,6 +8,7 @@ import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
 import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
+import '../styles/Edit.css'
 
 class Create extends Component {
   constructor(props) {
@@ -38,30 +39,34 @@ class Create extends Component {
     return (
       <div>
         <Form inline onSubmit={this.onSubmit}>
-          <FormGroup controlId="formInlineUrl">
-            <ControlLabel>Add a title for your stack:</ControlLabel>{" "}
-              <FormControl
+          <FormGroup controlId="formInlineUrl" className="create-form">
+            <ControlLabel className="add-title">Add a title for your stack:</ControlLabel>{" "}
+              <FormControl 
+                className="add-title"
                 name="title"
                 placeholder="..."
               />{" "}
-            <ControlLabel>Search topic:</ControlLabel>{" "}
+            <ControlLabel className="add-title">Search topic:</ControlLabel>{" "}
             <FormControl
+              className="add-title"
               name="wikiQuery"
               placeholder="Teach me about..."
             />{" "}
-            <Button className="btn btn-primary" type="submit">
+            <br />
+            <Button className="btn btn-primary add-title" type="submit">
               Create Cards!{" "}
             </Button>
           </FormGroup>
-          <br />
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>OR, paste your text here:</ControlLabel>
             <br />
+            <FormGroup>
             <FormControl
-              componentClass="textarea"
-              name="textBox"
+              type="text"
               placeholder="Teach me about..."
-              rows="9" />
+              />
+            </FormGroup>
+            
           </FormGroup>
         </Form>
       </div>
