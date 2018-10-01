@@ -38,7 +38,7 @@ class Edit extends React.Component {
   }
 
   toggleCardModal = (event) => {
-    let index = Number(event.target.getAttribute("data-index"))
+    let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
     this.setState({ currentSentence: index})
     let showCards = this.state.showCards ? false : true
     this.setState({ showCards })
