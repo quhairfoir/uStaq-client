@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
-import './App.css';
-// import Dashboard from './Dashboard'
+import '../styles/App.css';
 import Main from './Main'
-// import Users from './Users'
 import Edit from './Edit'
 import ViewOrCreateStacks from './ViewOrCreateStacks'
-import SignIn from './Sign-in'
-import SignUp from './Sign-up'
-// import Filter from './Filter'
 import TopNav from './TopNav'
 import QuizRoom from './QuizRoom'
 // import {Grid} from 'react-bootstrap'
@@ -62,7 +56,11 @@ class App extends Component {
 
   handleSubmitStack (proto) {
     if (proto.query === null && proto.text === null) {
-      throw "ERROR -- cannot send empty request to server"
+     return alert("ERROR - cannot send empty request")
+    } else if (proto.title === null) {
+      return alert("ERROR - stack must have a title")
+    } else if (proto.query && proto.text) {
+      return alert("ERROR - cannot submit both query and text")
     }
     let protoStack = {
       userId: this.state.userObj.id,

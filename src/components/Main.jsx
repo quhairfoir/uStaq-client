@@ -3,7 +3,7 @@ import {Row, Col, PageHeader, Table} from 'react-bootstrap'
 import {Route, Switch, Link} from 'react-router-dom'
 import TopNav from './TopNav'
 
-import './Main.css';
+import '../styles/Main.css';
 
 class Main extends React.Component {
   render() {
