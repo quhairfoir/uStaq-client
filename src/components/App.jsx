@@ -76,12 +76,12 @@ class App extends Component {
       <div className="App">
         <TopNav handleStoringUsers={this.handleStoringUsers} userObj={this.state.userObj}/>
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route path="/quizroom" component={(props) => <QuizRoom {...props} userObj={this.state.userObj} />} />
           <Route path="/stacks" render={({staticcontext, ...props }) => <ViewOrCreateStacks {...props} handleSubmitStack={this.handleSubmitStack} stacks={this.state.stacks} />}/>
-          <Route path="/quizroom" component={QuizRoom} />
+          <Route path="/" component={Main} />
         </Switch>
       </div>
-      )
+    )
   }
 };
 

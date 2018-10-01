@@ -1,5 +1,9 @@
 #messageBox {
-  height: 350px;
+  height: 500px;
+  min-height: 250px;
+  max-height: 450px;
+  text-align: left;
+  overflow: auto;
 }
 
 #smallerHeader {
@@ -11,4 +15,8 @@
   left: 0px;
   bottom: 0px;
   width: 100%;
+}
+
+.quizTextArea {
+  display: flex;
 }
