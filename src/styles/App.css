@@ -88,9 +88,9 @@
 }
 
 .eachTile {
-  /* background-image: url("Tile.png");
+  background-image: url("../assets/notecard.png");
   min-height: 121px;
-  min-width: 311px; */
+  min-width: 311px;
   min-height: 120px;
   max-height: 300px;
   min-width: 100px;
@@ -102,18 +102,18 @@
   position: inherit;
 
   /* padding-top: 3em; */
-  border: 1px solid black;
+  border: 0.5px solid lightgrey;
 
-  background: #eee;
+  /* background: #eee; */
 
-  clip-path:
+  /* clip-path:
     polygon(
       10px 0,
       100% 0,
       100% 100%,
       0 100%,
       0 10px
-    );
+    ); */
   }
 
 .eachTile:hover {
@@ -134,12 +134,7 @@
   padding-bottom: 3px;
 }
 
-.create-form {
-
-
-}
-
 
 body {
-  margin: 20px;
+  margin: 0px 20px;
 }

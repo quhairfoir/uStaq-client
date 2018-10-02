@@ -9,7 +9,7 @@ import notecard from '../assets/notecard.png';
 class Main extends React.Component {
   render() {
     return (
-      <div>
+      <div id="background">
         <div className='title-page'>
           {/* <div className='overlay'></div> */}
           <div className='title-box-container'>
@@ -55,10 +55,13 @@ class Main extends React.Component {
               </div>
             </span>
           </div>
-        </div>
-
-      <div id='tagline-text' className='intro-text'>
-          {/* <h2>An e-learning website application</h2> */}
+        <span>
+          <div id='title-card-10' className='title-card-new'>
+            <h1>
+              {/* An e-learning website application */}
+            </h1>
+          </div>
+        </span>
       </div>
     </div>
     )

@@ -74,11 +74,11 @@ class Create extends Component {
               name="wikiQuery"
               placeholder="Teach me about..."
             />{" "}
-            <Button className="btn btn-primary create-form-btn text-center" type="submit">
+            <Button bsStyle="danger" className="create-form-btn text-center" type="submit">
               Create Cards!
             </Button>
           </FormGroup>
-          <span style={{ fontFamily: 'Comic sans MS', fontSize: '2em' }}>OR</span>
+          <span style={{ fontFamily: 'Verdana', fontSize: '2em' }}>OR</span>
           <br /><br />
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel className="add-title">
@@ -96,7 +96,7 @@ class Create extends Component {
               name="textBox"
               placeholder="Paste text here..."
               />
-              <Button className="btn btn-primary create-form-btn text-center" type="submit">
+              <Button bsStyle="danger" className="create-form-btn text-center" type="submit">
                 Create Cards!
               </Button>
             </FormGroup>
