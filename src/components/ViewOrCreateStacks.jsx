@@ -15,7 +15,14 @@ class ViewOrCreateStacks extends Component {
       edit: false,
       stackId: null,
       loading: false,
-      loadingMsgs: "Loading..."
+      loadingMsgs: "Loading...",
+      userObj: null
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.userObj) {
+      this.setState({ userObj: this.props.userObj })
     }
   }
 
@@ -75,18 +82,22 @@ class ViewOrCreateStacks extends Component {
 
   renderPage() {
     let createORloading = this.renderSidebar()
-    if (this.state.edit) {
-      return  (<Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />)
-    } else {
-      return (
-        <div className="row">
-          <div className="col-sm-8">
-            <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
+    if (this.state.userObj) {
+      if (this.state.edit) {
+        return  (<Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />)
+      } else {
+        return (
+          <div className="row">
+            <div className="col-sm-8">
+              <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
+            </div>
+            {createORloading}
           </div>
-          {createORloading}
-        </div>
-      )
-    }
+        )
+      }  
+    } else {
+      return (<h3>Sign in to create and view stacks!</h3>)
+    } 
   }
 
 
