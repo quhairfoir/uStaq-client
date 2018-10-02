@@ -71,6 +71,10 @@
   padding-top: 1.5em;
 }
 
+.stack-summary a {
+  color: #393e46;
+}
+
 .edit-delete-btn-group {
   float: right;
   margin-top: 10px;

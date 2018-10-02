@@ -1,4 +1,4 @@
-// https://www.npmjs.com/package/react-responsive-carousel
+
 import React  from 'react';
 import ReactDOM from 'react-dom'
 import '../styles/carousel.css';
@@ -13,7 +13,8 @@ const CardCarousel = (props) => (
     showIndicators={false}
     showThumbs={false}
     width="100%"
-    onChange={props.selectedItemHandle}>
+    onChange={props.selectedItemHandle}
+    selectedItem={props.selectedItem}>
 
     {
         props.stack.sentences.map((sentence, index) =>
@@ -29,15 +30,10 @@ const CardCarousel = (props) => (
               </div>
             </div>
           </div>
-
       )
     }
+
   </Carousel>
 
 )
 export default CardCarousel
-// ReactDOM.render(<CardCarousel />, document.querySelector('.demo-carousel'));
-
-// Don't forget to include the css in your page
-// <link rel="stylesheet" href="carousel.css"/>
-// Begin DemoSliderControls

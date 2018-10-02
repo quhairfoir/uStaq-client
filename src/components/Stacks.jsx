@@ -61,7 +61,7 @@ class Stacks extends Component {
           this.props.stacks.map((stack, index) => (
             <li key={index} style={{ listStyleType: 'none' }}>
               <tr className='tile' data-toggle='modal' data-target='#exampleModal'>
-                <Col sm={6} md={3} className='eachTile eachTile:hover'>
+                <Col sm={6} md={3} className='eachTile eachTile:hover imgResponsive'>
                   <Row>
                     <ButtonGroup className="edit-delete-btn-group" bsSize="xsmall">
                       <Button onClick={this.handleEdit} bsStyle="info" data-id={stack._id}>

@@ -40,8 +40,13 @@ class ViewOrCreateStacks extends Component {
     }
     else {
       return (<div className="row">
-        <div className="col-sm-8">
-          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
+        <div className="col-sm-8 imgResponsive">
+          <Stacks
+            stacks={this.props.stacks}
+            toggleEdit={this.togglePageMode}
+            getUserStacks={this.props.getUserStacks}
+            userObj={this.props.userObj}
+            />
         </div>
         <div className="col-sm-4">
           <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />
@@ -55,7 +60,7 @@ class ViewOrCreateStacks extends Component {
 
     let editORstacks = this.renderPage()
     return(
-    <div className="container" style={{width: '100%'}}>
+    <div className="container imgResponsive" style={{width: '100%'}}>
       {editORstacks}
     </div>
   // <span>

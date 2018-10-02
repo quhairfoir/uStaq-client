@@ -57,12 +57,14 @@ class Create extends Component {
               <FormControl
                 style={{
                   width: '250px',
-                  backgroundColor: '#ECF6FE'
+                  backgroundColor: '#FEF9ED'
                 }}
                 className="add-title"
                 name="title"
                 placeholder="Title"
               />{" "}
+              <br /><br />
+              <span style={{ fontFamily: 'Comic sans MS', fontSize: '2em' }}>THEN</span>
               <br /><br />
             <ControlLabel className="add-title">Search topic in Wikipedia:</ControlLabel>{" "}
             <FormControl
