@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Navbar, Nav, Modal, Button, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 import axios from 'axios';
+import '../styles/Edit.css'
 
 bootstrapUtils.addStyle(Navbar, 'custom');
 
@@ -78,29 +79,24 @@ class ModalNav extends React.Component {
   }
 
   render() {
-    var styles={
-      "backgroundColor" : "dodgerblue",
-      "color"           : "white"
-  };
-
     return (
       <div>
-        <Navbar style={styles} collapseOnSelect>
+        <Navbar className="navBCustom" collapseOnSelect>
           <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#brand">uStaq</a>
+            <Navbar.Brand className="navuStaq">
+              <a href="/">uStaq</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavDropdown eventKey={1} title="Stacks" id="basic-nav-dropdown">
+              <NavDropdown className="navUstaqItems" eventKey={1} title="Stacks" id="basic-nav-dropdown">
                 <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={1.2}>All Stacks</MenuItem>
+                {/* <MenuItem divider />
+                <MenuItem eventKey={1.2}>All Stacks</MenuItem> */}
                 
               </NavDropdown>
-              <NavItem eventKey={2}>
+              <NavItem className="navUstaqItems" eventKey={2}>
                 <Link to={`/quizroom`}>Quiz</Link>
               </NavItem>
             </Nav>
@@ -108,8 +104,8 @@ class ModalNav extends React.Component {
               <NavItem eventKey={1} >
                 {this.state.user ?
                 <div>{this.state.user.email}</div>
-                :
-                <Button bsStyle="link" onClick={this.handleShow}>
+                :                
+                <Button className="navSignin" bsStyle="link" onClick={this.handleShow}>
                   Sign in
                 </Button>
                 }
@@ -123,7 +119,7 @@ class ModalNav extends React.Component {
                       <span className="fa fa-github"></span> Sign in with Github
                       </a>
 
-                    <hr />
+                    <hr className="hrStyling" />
 
                   </Modal.Body>
                   <Modal.Footer>

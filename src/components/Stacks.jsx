@@ -91,7 +91,7 @@ class Stacks extends Component {
     let stacksData = this.stacksData()
 
     return (
-      <Grid>
+      <div>
         <Row className='show-grid'>
           <Table>
             <tbody>
@@ -108,7 +108,7 @@ class Stacks extends Component {
             <Route exact path="/stacks/:_id" component={(routeprops) => <Card {...routeprops} {...this.props} stack={this.stack}/>}/>
           </Table>
         </Row>
-      </Grid>
+      </div>
     )
   }
 }
