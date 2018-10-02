@@ -18,23 +18,19 @@ class Stacks extends Component {
     this.state = {
       stacks: this.props.stacks,
       input: '',
+      userObj: {_id: null}
     }
     this.filterStacksHandle = this.filterStacksHandle.bind(this);
     this.deleteStackHandle = this.deleteStackHandle.bind(this);
   }
 
-  // deleteStackHandle(stack, index) {
-  //   if(window.confirm("Are you sure you want to delete this stack?")){
-  //     let stacks = [...this.state.stacks]
-  //     stacks.splice(index, 1);
-  //     this.setState({ stacks })
-  //  }
-  // }
-
   deleteStackHandle(_id) {
     if(window.confirm("Are you sure you want to delete this stack?")){
-      axios.post(`http://localhost:8080/stacks/delete/${_id}`)
-        .then(response => console.log(response))
+      return axios.post(`http://localhost:8080/stacks/delete/${_id}`)
+        .then(response => {
+          console.log(response)
+          this.props.getUserStacks(this.props.userObj._id)
+        })
         .catch(error => console.log(error));
     };
   };

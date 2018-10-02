@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Modal, Button, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
+import axios from 'axios';
 
 bootstrapUtils.addStyle(Navbar, 'custom');
 
@@ -38,28 +39,39 @@ class ModalNav extends React.Component {
     // Prevents page reload
     e.preventDefault();
 
-    // Initializes OAuth.io with API key
-    // Sign-up an account to get one
-    window.OAuth.initialize('_iSZVvDIMwLHtJgOQQ8gXsOftQI');
+    axios(`http://localhost:8080/users/token`, {withCredentials: true})
+    .then( (response) => {  
+      window.OAuth.initialize('_iSZVvDIMwLHtJgOQQ8gXsOftQI');
 
-    // Popup Github and ask for authorization
-    window.OAuth.popup('github').then((provider) => {
-
-      // Prompts 'welcome' message with User's name on successful login
-      // Check console logs for additional User info
-      provider.me().then((data) => {
-        console.log("data: ", data);
-        let userObj = data;
-        this.props.handleStoringUsers(userObj);
-        alert("Welcome " + data.name + "!");
+      // console.log("this is token", token)
+  
+      // Popup Github and ask for authorization
+      window.OAuth.popup('github', {
+        state: response.data.token
+      })
+      .done((result) => {
+        // Prompts 'welcome' message with User's name on successful login
+        // Check console logs for additional User info
+        console.log("this is result", result)
+        axios.post('http://localhost:8080/users/auth', {code: result.code}, {withCredentials: true})
+        .then(() => {
+          this.props.fetchingUser();
+          this.handleClose();
+        })
+        // result.me().then((data) => {
+        //   console.log("data: ", data);
+        //   let userObj = data;
+          
+        //   // alert("Welcome " + data.name + "!");
+        // });
+  
+        // // You can also call Github's API using .get()
+        // result.get('/user').then((data) => {
+        //   console.log('self data:', data);
+        // });
       });
-
-      // You can also call Github's API using .get()
-      provider.get('/user').then((data) => {
-        console.log('self data:', data);
-      });
-
     });
+
   }
   componentWillReceiveProps(nextProps){
     this.setState({user: nextProps.userObj})
@@ -84,20 +96,13 @@ class ModalNav extends React.Component {
             <Nav>
               <NavDropdown eventKey={1} title="Stacks" id="basic-nav-dropdown">
                 <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
-                <MenuItem eventKey={1.2}>All Stacks</MenuItem>
                 <MenuItem divider />
-                <MenuItem eventKey={1.3}><Link to={`/edit`}>Edit</Link></MenuItem>
+                <MenuItem eventKey={1.2}>All Stacks</MenuItem>
+                
               </NavDropdown>
               <NavItem eventKey={2}>
                 <Link to={`/quizroom`}>Quiz</Link>
               </NavItem>
-              {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-              </NavDropdown> */}
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} >

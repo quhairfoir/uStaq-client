@@ -72,7 +72,8 @@ class CardModal extends React.Component {
               <h4 className="card-title"></h4>
               <Carousel
                 activeIndex={this.props.currentIndex}
-                onSelect={this.handleSelect}>
+                onSelect={this.handleSelect}
+                onSlideEnd={this.props.handleCarouselSlide}>
                 {this.showCarouselItems()}
               </Carousel>
             </div>

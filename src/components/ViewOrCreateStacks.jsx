@@ -3,6 +3,8 @@ import Stacks from './Stacks';
 import Create from './Create';
 import Edit from './Edit';
 
+import axios from 'axios';
+
 class ViewOrCreateStacks extends Component {
   constructor(props) {
     super(props)
@@ -13,14 +15,20 @@ class ViewOrCreateStacks extends Component {
     }
   }
 
-  // TODO - deal w/actual save...
-  handleSaveEdit = (stackId) => {
-    console.log(stackId)
+  handleSaveEdit = (stack, stackId) => {
+    console.log(`AXIOS SAVE ${stackId}: ${stack}`);
+    axios.post(`http://localhost:8080/stacks/edit/${stackId}`, stack)
+    .then(response =>
+      console.log('Axios save:', response)
+    )
+    .catch(error =>
+      console.error(error)
+    )
     this.togglePageMode(null)
   }
 
   togglePageMode = (stackId) => {
-    let edit = this.state.edit ? false : true
+    let edit = !this.state.edit
     this.setState({ stackId }, () => {
       this.setState({ edit })
     })
@@ -33,7 +41,7 @@ class ViewOrCreateStacks extends Component {
     else {
       return (<div className="row">
         <div className="col-sm-8">
-          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} />
+          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
         </div>
         <div className="col-sm-4">
           <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />
