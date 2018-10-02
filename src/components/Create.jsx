@@ -44,36 +44,63 @@ class Create extends Component {
   render() {
     return (
       <div>
-        <Form inline onSubmit={this.onSubmit}>
+        <Form
+          inline
+          onSubmit={this.onSubmit}
+          style={{
+            width: '255px',
+          }}>
           <FormGroup controlId="formInlineUrl" className="create-form">
-            <ControlLabel className="add-title">Add a title for your stack:</ControlLabel>{" "}
-              <FormControl 
+            <ControlLabel className="add-title">
+              Add a title for your stack<span style={{ color: 'red'}}>&#42;</span>:
+            </ControlLabel>{" "}
+              <FormControl
+                style={{
+                  width: '250px',
+                  backgroundColor: '#ECF6FE'
+                }}
                 className="add-title"
                 name="title"
-                placeholder="..."
+                placeholder="Title"
               />{" "}
-            <ControlLabel className="add-title">Search topic:</ControlLabel>{" "}
+              <br /><br />
+            <ControlLabel className="add-title">Search topic in Wikipedia:</ControlLabel>{" "}
             <FormControl
+              style={{
+                width: '250px',
+                backgroundColor: '#ECF6FE'
+              }}
               className="add-title"
               name="wikiQuery"
               placeholder="Teach me about..."
             />{" "}
-            <br />
-            <Button className="btn btn-primary add-title" type="submit">
-              Create Cards!{" "}
+            <Button className="btn btn-primary create-form-btn text-center" type="submit">
+              Create Cards!
             </Button>
           </FormGroup>
+          <span style={{ fontFamily: 'Comic sans MS', fontSize: '2em' }}>OR</span>
+          <br /><br />
           <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>OR, paste your text here:</ControlLabel>
-            <br />
+            <ControlLabel className="add-title">
+              Generate cue cards from plain text:
+            </ControlLabel>
             <FormGroup>
             <FormControl
-              type="text"
+              style={{
+                width: '250px',
+                minHeight: '250px',
+                resize: "vertical",
+                backgroundColor: '#ECF6FE'
+              }}
+              componentClass="textarea"
               name="textBox"
-              placeholder="Teach me about..."
+              placeholder="Paste text here..."
               />
+              <Button className="btn btn-primary create-form-btn text-center" type="submit">
+                Create Cards!
+              </Button>
             </FormGroup>
-            
+
           </FormGroup>
         </Form>
       </div>

@@ -79,13 +79,13 @@ class ModalNav extends React.Component {
 
   render() {
     var styles={
-      "backgroundColor" : "purple",
+      "backgroundColor" : "dodgerblue",
       "color"           : "white"
   };
 
     return (
       <div>
-        <Navbar style={styles} inverse collapseOnSelect>
+        <Navbar style={styles} collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#brand">uStaq</a>
@@ -106,9 +106,9 @@ class ModalNav extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} >
-                {this.state.user ? 
+                {this.state.user ?
                 <div>{this.state.user.email}</div>
-                :                
+                :
                 <Button bsStyle="link" onClick={this.handleShow}>
                   Sign in
                 </Button>
