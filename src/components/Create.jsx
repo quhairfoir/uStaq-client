@@ -19,15 +19,18 @@ class Create extends Component {
   }
 
   makeProtoStack (e) {
+    let title = e.target.elements.title.value
+    let query = e.target.elements.wikiQuery.value
+    let text = e.target.elements.textBox.value
     let protoStack = {
-      title: e.target.elements.title.value ? e.target.elements.title.value : null,
-      query: e.target.elements.wikiQuery.value ? e.target.elements.wikiQuery.value : null,
-      text: e.target.elements.textBox.value ? e.target.elements.textBox.value : null,
-      type: e.target.elements.wikiQuery.value ? 'wiki' : e.target.elements.textBox.value ? 'text' : null
+      title: title ? title : query ? query : null,
+      query: query ? query : null,
+      text: text ? text : null,
+      type: query ? 'wiki' : text ? 'text' : null
     }
-    e.target.title.value = ''
-    e.target.wikiQuery.value = ''
-    e.target.textBox.value = ''
+    title = ''
+    query = ''
+    text = ''
     return protoStack
   }
 
