@@ -2,12 +2,10 @@ import React from 'react'
 import {Row, Button, Grid, FormGroup, FormControl, ControlLabel, PageHeader, Well, Panel} from 'react-bootstrap'
 // import {Route, Switch, Link} from 'react-router-dom'
 
-// Use Damerau-Levenshtein edit distance to detect almost-answers (look for character substitution, deletion, addition, transposition)
-import getEditDistance from 'damerau-levenshtein';
+// // Use Damerau-Levenshtein edit distance to detect almost-answers (look for character substitution, deletion, addition, transposition)
+// import getEditDistance from 'damerau-levenshtein';
 
 import '../styles/QuizRoom.css';
-
-let messages = [ { username: 'Dia', message: 'Sea Otters!' }, { username: 'Morag', message: 'Damn, I was going to guess that...' } ];
 
 class QuizRoom extends React.Component {
   constructor(props){
@@ -17,23 +15,12 @@ class QuizRoom extends React.Component {
         numSocketClients: 0,
         username: '',
         message: '',
-        messages,
-        question: 'Coffee comes from [blank].',
-        answer: 'Ethiopia'
+        messages: [],
+        question: '',
+        answer: ''
     }
 
     this.socket = null;
-
-    // this.socket = io('localhost:3001')
-    // this.socket.on('RECEIVE_MESSAGE', function(data){
-    //   addMessage(data);
-    // })
-  
-    // const addMessage = data => {
-    //     console.log(data);
-    //     this.setState({messages: [...this.state.messages, data]})
-    //     console.log(this.state.messages);
-    // }
   }
 
   componentDidMount() {
@@ -70,23 +57,15 @@ class QuizRoom extends React.Component {
       'Friendly stranger',
       'A voice in the crowd',
       'Some person',
-      'ROBOT',
       'Anonymous',
     ]
     return ANONYMOUS_NAMES[Math.floor(Math.random() * ANONYMOUS_NAMES.length)];
   }
 
   scrollToBottom() {
+    if (this.el === undefined) { return; }
+    
     this.el.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  checkMessageForAnswer() {
-    const { steps, similarity } = getEditDistance(this.state.message.toLowerCase(), this.state.answer.toLowerCase());
-    if (similarity === 1) {
-      this.sendSystemMessage('You got it!');
-    } else if (similarity >= 0.8) {
-      this.sendSystemMessage('Close...');
-    }
   }
 
   handleClick = (event) => {
@@ -100,7 +79,7 @@ class QuizRoom extends React.Component {
       message: this.state.message,
     };
     this.sendMessage(msg);
-    this.checkMessageForAnswer();
+    // this.checkMessageForAnswer();
   }
 
   sendMessage(msg, type = 'message') {
