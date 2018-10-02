@@ -30,9 +30,11 @@ class Edit extends React.Component {
       let sentences = stack.data[0].sentences
       let title = stack.data[0].title
 
-      this.setState({ stack: stack.data[0] });
-      this.setState({ sentences });
-      this.setState({ title })
+      this.setState({
+        stack: stack.data[0],
+        sentences,
+        title,
+      });
     })
     .catch(error => alert(error))
 
@@ -40,9 +42,13 @@ class Edit extends React.Component {
 
   toggleCardModal = (event) => {
     let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
-    this.setState({ currentSentence: index})
     let showCards = !this.state.showCards
-    this.setState({ showCards })
+    this.setState({
+      currentSentence: index,
+      showCards
+    }, () => {
+      this.resetIndicesToHide();
+    });
   }
 
   incrementCurrentSentence() {
@@ -145,7 +151,7 @@ class Edit extends React.Component {
   buildCardFront() {
     console.log(JSON.stringify(this.state.sentences[this.state.currentSentence].tokens));
     const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
-      this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "----" : token.text.content
+      this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "────" : token.text.content
     ).join(' ');
     return front;    
   }
@@ -163,7 +169,7 @@ class Edit extends React.Component {
   }
 
   render() {
-    let cardList = this.state.sentences === null ? <ListGroupItem>NOPE</ListGroupItem> : this.makeCardList()
+    let cardList = this.state.sentences === null ? <ListGroupItem></ListGroupItem> : this.makeCardList()
     return(
       <Grid>
         <Row>

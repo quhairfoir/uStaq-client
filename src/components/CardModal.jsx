@@ -42,7 +42,6 @@ class CardModal extends React.Component {
 
     return sentence.map((token, index) =>
       <span key={index} className={this.props.indicesToHide.includes(index) ? 'ghostly' : ''}>
-      <span key={index} className={((index === this.props.currentIndex) && this.props.indicesToHide.includes(index)) ? 'ghostly' : ''}></span>
         {token.text.content}
       </span>
     )
