@@ -84,9 +84,10 @@ class ModalNav extends React.Component {
       "color"           : "white"
   };
 
+
     return (
       <div>
-        <Navbar style={styles} collapseOnSelect>
+        <Navbar className="navBCustom" style={styles} collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand className="navuStaq">
               <a href="/">uStaq</a>

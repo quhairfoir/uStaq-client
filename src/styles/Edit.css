@@ -13,13 +13,49 @@
 
 .add-title {
   display: flex;
-
 }
 
 .navuStaq {
   font-size: 30px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   margin-top: 9px;
+}
+
+.navBCustom.navbar .navbar-brand {
+  color: navy;
+}
+
+.navBCustom a{
+  color: navy;
+}
+
+.navBCustom .navbar-default .navbar-collapse, .navBCustom .navbar-default .navbar-form {
+  margin-top: 0px;
+
+}
+
+.navBCustom.navbar {
+  background-image: linear-gradient(to bottom, #337ab7, #f8f8f8 90%);
+  padding: 10px;
+}
+
+.navBCustom.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.navBCustom.navbar-default .navbar-nav>li>a {
+  color: navy;
+}
+
+.navBCustom .navbar-default .navbar-nav>li>a:focus {
+  color: navy;
+
+}
+
+.navBCustom.navbar-default .navbar-nav>li>a:hover {
+  color:#337ab7;
+
 }
 
 .navUstaqItems {
