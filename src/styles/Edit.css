@@ -15,3 +15,28 @@
   display: flex;
 
 }
+
+.navuStaq {
+  font-size: 30px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  margin-top: 9px;
+}
+
+.navUstaqItems {
+  font-size: 20px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  margin-top: 9px;
+}
+
+.navSignin {
+  font-size: 20px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  
+}
+.navSignin btn btn-link {
+  color: #f46ac4;
+}
+
+.hrStyling {
+  color: blue;
+}
