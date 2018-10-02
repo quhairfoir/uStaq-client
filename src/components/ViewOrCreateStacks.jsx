@@ -44,11 +44,15 @@ class ViewOrCreateStacks extends Component {
   setLoadingDialogue = () => {
     let sentences = ['Your cards are beginning their journey...', 'of passing through a Google API...', 'ranking for relevance...', 'recursively making relational forests...', '...and making their way to you!'];
     sentences.forEach((sentence, index) => {
-    setTimeout(() => {
-      let msg = <p className="loading-message">{sentence}</p>
-      this.setState({ loadingMsgs: [...this.state.loadingMsgs, msg] })
-    }, (index + 1) * 2000)
+      setTimeout(() => {
+        let msg = <p className="loading-message">{sentence}</p>
+        this.setState({ loadingMsgs: [...this.state.loadingMsgs, msg] })
+      }, (index + 1) * 2000)
     })
+    setTimeout(() => {
+      let finalMsg = <div><br /><p className="loading-message">Wow... this stack is going to be huge.</p><br /><p>You'll have a <strong>LOT</strong> to learn.</p></div>
+      this.setState({ loadingMsgs: [...this.state.loadingMsgs, finalMsg] })
+    }, 16000)
   }
 
   renderSidebar() {
