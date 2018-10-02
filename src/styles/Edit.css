@@ -18,15 +18,15 @@
 .navuStaq {
   font-size: 30px;
   font-family: sans-serif, Verdana, 'Times New Roman';
-  margin-top: 9px;
+  margin-top: 2px;
 }
 
 .navBCustom.navbar .navbar-brand {
-  color: navy;
+  color: white;
 }
 
 .navBCustom a{
-  color: navy;
+  color: white;
 }
 
 .navBCustom .navbar-default .navbar-collapse, .navBCustom .navbar-default .navbar-form {
@@ -35,8 +35,10 @@
 }
 
 .navBCustom.navbar {
-  background-image: linear-gradient(to bottom, #337ab7, #f8f8f8 90%);
-  padding: 10px;
+  background-image: none;
+  background-color: #337ab7; 
+  background-repeat: no-repeat;
+  padding: 20px;
 }
 
 .navBCustom.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
@@ -45,27 +47,28 @@
 }
 
 .navBCustom.navbar-default .navbar-nav>li>a {
-  color: navy;
+  color: white;
+  font-size: 20px;
 }
 
 .navBCustom .navbar-default .navbar-nav>li>a:focus {
-  color: navy;
+  color: white;
 
 }
 
 .navBCustom.navbar-default .navbar-nav>li>a:hover {
-  color:#337ab7;
+  color:white;
 
 }
 
 .navUstaqItems {
-  font-size: 20px;
+  font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
-  margin-top: 9px;
+  margin-top: 3px;
 }
 
 .navSignin {
-  font-size: 20px;
+  font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   
 }

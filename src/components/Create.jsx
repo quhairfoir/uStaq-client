@@ -74,7 +74,7 @@ class Create extends Component {
               name="wikiQuery"
               placeholder="Teach me about..."
             />{" "}
-            <Button className="btn btn-primary create-form-btn text-center" type="submit">
+            <Button bsStyle="danger" className="create-form-btn text-center" type="submit">
               Create Cards!
             </Button>
           </FormGroup>
@@ -96,7 +96,7 @@ class Create extends Component {
               name="textBox"
               placeholder="Paste text here..."
               />
-              <Button className="btn btn-primary create-form-btn text-center" type="submit">
+              <Button bsStyle="danger" className="create-form-btn text-center" type="submit">
                 Create Cards!
               </Button>
             </FormGroup>
