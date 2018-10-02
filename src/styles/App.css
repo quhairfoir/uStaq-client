@@ -1,5 +1,6 @@
 .html {
   background-color: #2f6ad0;
+  font-family: sans-serif, Verdana, 'Times New Roman' ;
 }
 
 .App {
@@ -12,7 +13,7 @@
 } */
 
 .App-header {
-  background-color: #222;
+  /* background-color: #222; */
   height: 150px;
   padding: 20px;
   color: white;
@@ -94,13 +95,13 @@
   max-height: 300px;
   min-width: 100px;
   max-width: 250px;
-  
+
   display: block;
   margin: 20px;
   text-align: center;
   position: inherit;
 
-  padding-top: 3em;
+  /* padding-top: 3em; */
   border: 1px solid black;
 
   background: #eee;
@@ -118,6 +119,26 @@
 .eachTile:hover {
   box-shadow: 5px 5px 5px grey;
 }
+
+
+.create-form-btn {
+  width: 220px;
+  float: inherit;
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+
+.add-title {
+  font-weight: lighter;
+  padding-left: 10px;
+  padding-bottom: 3px;
+}
+
+.create-form {
+
+
+}
+
 
 body {
   margin: 20px;

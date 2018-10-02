@@ -80,7 +80,7 @@ class ModalNav extends React.Component {
 
   render() {
     var styles={
-      "backgroundColor" : "purple",
+      "backgroundColor" : "dodgerblue",
       "color"           : "white"
   };
 
@@ -107,7 +107,7 @@ class ModalNav extends React.Component {
             </Nav>
             <Nav pullRight>
               <NavItem eventKey={1} >
-                {this.state.user ? 
+                {this.state.user ?
                 <div>{this.state.user.email}</div>
                 :                
                 <Button className="navSignin" bsStyle="link" onClick={this.handleShow}>

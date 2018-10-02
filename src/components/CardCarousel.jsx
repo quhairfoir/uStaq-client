@@ -6,7 +6,15 @@ import '../styles/carousel.css';
 import {Carousel} from 'react-responsive-carousel';
 
 const CardCarousel = (props) => (
-  <Carousel showArrows={true} infiniteLoop useKeyboardArrows showIndicators={false} showThumbs={false} width="100%">
+  <Carousel
+    showArrows={true}
+    infiniteLoop
+    useKeyboardArrows
+    showIndicators={false}
+    showThumbs={false}
+    width="100%"
+    onChange={props.selectedItemHandle}>
+
     {
         props.stack.sentences.map((sentence, index) =>
           <div className="container" key={index}>
