@@ -88,7 +88,7 @@
 
 .title-card {
   opacity: 0;
-  background: #ccc;
+  background: #f8f4f0;
 
   position: absolute;
   top: -3px;
@@ -104,14 +104,15 @@
 }
 
 .top {
-  background: #f8f4f0;
+  background-image: url('../assets/notecard.png');
+  background-size: 100%;
 }
 
 .bottom {
   top: 0px;
   left: 0px;
   
-  background: #999;
+  /* background-image: url('../assets/notecard.png');; */
 }
 
 #title-card-0 {
@@ -144,9 +145,13 @@
   animation-delay: 2200ms;
 }
 #title-card-9 {
-  color: #442fd0;
+  color: #337ab7;
   background-color: #f4f2e8;
   animation-delay: 3000ms;
+}
+
+#tagline-text {
+  animation-delay: 3200ms;
 }
 
 @keyframes title-slide-down {
