@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Stacks from './Stacks';
 import Create from './Create';
 import Edit from './Edit';
-
+import '../styles/Loading.css'
 import axios from 'axios';
 
 
@@ -15,6 +15,7 @@ class ViewOrCreateStacks extends Component {
       edit: false,
       stackId: null,
       loading: false,
+      loadingMsgs: "Loading..."
     }
   }
 
@@ -40,17 +41,28 @@ class ViewOrCreateStacks extends Component {
     this.setState({ loading: !this.state.loading })
   }
 
+  setLoadingDialogue = () => {
+    let sentences = ['Your cards are beginning their journey...', 'of passing through a Google API...', 'ranking for relevance...', 'recursively making relational forests...', '...and making their way to you!'];
+    sentences.forEach((sentence, index) => {
+    setTimeout(() => {
+      let msg = <p className="loading-message">{sentence}</p>
+      this.setState({ loadingMsgs: [...this.state.loadingMsgs, msg] })
+    }, (index + 1) * 2000)
+    })
+  }
+
   renderSidebar() {
     if (!this.state.loading) {
       return (
         <div className="col-sm-4">
-          <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.toggleEdit} toggleLoading={this.toggleLoading} />
+          <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.toggleEdit} toggleLoading={this.toggleLoading} setLoadingDialogue={this.setLoadingDialogue} />
         </div>
       )
     } else {
       return (
-        <div className="col-sm-4">
-          <h3>Loading...</h3>
+        <div className="col-sm-4 loading-div">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          {this.state.loadingMsgs}
         </div>
       )
     }
@@ -75,7 +87,6 @@ class ViewOrCreateStacks extends Component {
 
 
   render () {
-
     let editORstacks = this.renderPage()
     return(
     <div className="container" style={{width: '100%'}}>

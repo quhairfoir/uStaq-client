@@ -39,6 +39,7 @@ class Create extends Component {
     let protoStack = this.makeProtoStack(e)
     this.props.toggleLoading()
     this.props.handleSubmitStack(protoStack)
+    this.props.setLoadingDialogue()
   }
 
   render() {

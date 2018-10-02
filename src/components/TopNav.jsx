@@ -95,12 +95,15 @@ class ModalNav extends React.Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavDropdown className="navUstaqItems" eventKey={1} title="Stacks" id="basic-nav-dropdown">
+              {/* <NavDropdown className="navUstaqItems" eventKey={1} title="Stacks" id="basic-nav-dropdown">
                 <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
                 <MenuItem divider />
                 <MenuItem eventKey={1.2}>All Stacks</MenuItem>
                 
-              </NavDropdown>
+              </NavDropdown> */}
+              <NavItem className="navUstaqItems" eventKey={2}>
+                <Link to={`/stacks`}>Stacks</Link>
+              </NavItem>
               <NavItem className="navUstaqItems" eventKey={2}>
                 <Link to={`/quizroom`}>Quiz</Link>
               </NavItem>
