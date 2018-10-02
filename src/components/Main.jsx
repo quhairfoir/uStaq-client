@@ -58,7 +58,7 @@ class Main extends React.Component {
         </div>
 
       <div id='tagline-text' className='intro-text'>
-          <h2>An e-learning website application</h2>
+          {/* <h2>An e-learning website application</h2> */}
       </div>
     </div>
     )
