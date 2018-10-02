@@ -55,7 +55,7 @@ class App extends Component {
   handleSubmitStack (proto) {
     if (proto.query === null && proto.text === null) {
      return alert("ERROR - cannot send empty request")
-    } else if (proto.title === null && proto.text === null) {
+    } else if (proto.title === null && proto.text) {
       return alert("ERROR - stack must have a title")
     } else if (proto.query && proto.text) {
       return alert("ERROR - cannot submit both query and text")
