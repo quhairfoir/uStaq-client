@@ -92,8 +92,8 @@ class ModalNav extends React.Component {
             <Nav>
               <NavDropdown className="navUstaqItems" eventKey={1} title="Stacks" id="basic-nav-dropdown">
                 <MenuItem eventKey={1.1}><Link to={`/stacks`}>My Stacks</Link></MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={1.2}>All Stacks</MenuItem>
+                {/* <MenuItem divider />
+                <MenuItem eventKey={1.2}>All Stacks</MenuItem> */}
                 
               </NavDropdown>
               <NavItem className="navUstaqItems" eventKey={2}>
