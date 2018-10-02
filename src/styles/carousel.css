@@ -198,7 +198,7 @@
       /* background: #000; */
       /* color: #fff; */
       padding: 10px;
-      font-size: 12px;
+      font-size: 16px;
       text-align: center;
       opacity: 1;
       -webkit-transition: opacity 0.35s ease-in-out;
@@ -271,6 +271,8 @@
   width: 550px;
 	position: absolute;
 	z-index: 1;
+  background-color: #1D3461;
+  color: #EDDDD4;
 }
 
 .back {
@@ -280,6 +282,8 @@
   width: 550px;
 	-webkit-transform: rotateX(-180deg);
 	overflow: scroll;
+  background-color: #DCECFB;
+  color: #4F3130;
 }
 
 .info-card.flipped .back {
