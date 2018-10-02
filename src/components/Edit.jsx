@@ -20,16 +20,17 @@ class Edit extends React.Component {
     this.handleUpperMouseOver = this.handleUpperMouseOver.bind(this);
     this.handleUpperMouseOut = this.handleUpperMouseOut.bind(this);
     this.handleUpperClick = this.handleUpperClick.bind(this);
+    this.handleCarouselSlide = this.handleCarouselSlide.bind(this);
   }
 
   componentDidMount() {
     console.log(this.props.stackId)
     axios(`http://localhost:8080/stacks/${this.props.stackId}`)
     .then(stack => {
-      console.log(stack)
       let sentences = stack.data[0].sentences
       let title = stack.data[0].title
 
+      this.setState({ stack: stack.data[0] });
       this.setState({ sentences });
       this.setState({ title })
     })
@@ -40,16 +41,13 @@ class Edit extends React.Component {
   toggleCardModal = (event) => {
     let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
     this.setState({ currentSentence: index})
-    let showCards = this.state.showCards ? false : true
+    let showCards = !this.state.showCards
     this.setState({ showCards })
   }
 
   incrementCurrentSentence() {
     this.setState({
-      currentSentence:
-        (this.state.currentSentence + 1) % this.state.sentences.length,
-    }, () => {
-      // this.resetIndicesToHide();
+      currentSentence: (this.state.currentSentence + 1) % this.state.sentences.length,
     });
   }
 
@@ -59,8 +57,6 @@ class Edit extends React.Component {
         this.state.currentSentence == 0
           ? this.state.sentences.length - 1
           : this.state.currentSentence - 1,
-    }, () => {
-      // this.resetIndicesToHide();
     });
   }
 
@@ -69,6 +65,10 @@ class Edit extends React.Component {
   }
 
   handleUpperMouseOut(startIndex, event) {
+    this.resetIndicesToHide();
+  }
+
+  handleCarouselSlide() {
     this.resetIndicesToHide();
   }
 
@@ -129,7 +129,7 @@ class Edit extends React.Component {
     let stateSentences = JSON.parse(JSON.stringify(this.state.sentences));
     let indicesToHide = this.state.indicesToHide.slice();
     stateSentences[this.state.currentSentence].indicesToHide = indicesToHide;
-    // stateSentences[this.state.currentSentence].front = this.buildCardFront();
+    stateSentences[this.state.currentSentence].front = this.buildCardFront();
 
     this.setState({
       sentences: stateSentences,
@@ -142,15 +142,18 @@ class Edit extends React.Component {
     this.setState({ showCards: true })
   }
 
-  // buildCardFront() {
-  //   const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
-  //     this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "---" : token.text.content
-  //   )
-  //   alert(front);
-  // }
+  buildCardFront() {
+    console.log(JSON.stringify(this.state.sentences[this.state.currentSentence].tokens));
+    const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
+      this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "----" : token.text.content
+    ).join(' ');
+    return front;    
+  }
 
   handleSave = () => {
-    this.props.handleSaveEdit(this.props.stackId)
+    let newStack = JSON.parse(JSON.stringify(this.state.stack));
+    newStack.sentences = JSON.parse(JSON.stringify(this.state.sentences));
+    this.props.handleSaveEdit(newStack, this.props.stackId)
   }
 
   makeCardList() {
@@ -187,6 +190,7 @@ class Edit extends React.Component {
             handleUpperMouseOver={this.handleUpperMouseOver}
             handleUpperMouseOut={this.handleUpperMouseOut}
             handleUpperClick={this.handleUpperClick}
+            handleCarouselSlide={this.handleCarouselSlide}
           />
         ) : null}
       </Grid>

@@ -42,6 +42,7 @@ class CardModal extends React.Component {
 
     return sentence.map((token, index) =>
       <span key={index} className={this.props.indicesToHide.includes(index) ? 'ghostly' : ''}>
+      <span key={index} className={((index === this.props.currentIndex) && this.props.indicesToHide.includes(index)) ? 'ghostly' : ''}></span>
         {token.text.content}
       </span>
     )
@@ -72,7 +73,8 @@ class CardModal extends React.Component {
               <h4 className="card-title"></h4>
               <Carousel
                 activeIndex={this.props.currentIndex}
-                onSelect={this.handleSelect}>
+                onSelect={this.handleSelect}
+                onSlideEnd={this.props.handleCarouselSlide}>
                 {this.showCarouselItems()}
               </Carousel>
             </div>
