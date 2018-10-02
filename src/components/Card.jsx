@@ -24,7 +24,7 @@ class Card extends Component {
       isFlipped: 'false',
       stack: {},
       selectedItem: '0',
-      isOpen: 'true',
+      isOpen: 'false',
       redirect: '/stacks'
     };
   }

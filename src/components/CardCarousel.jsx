@@ -21,10 +21,10 @@ const CardCarousel = (props) => (
             <div className="row">
               <div className={`info-card ${props.isFlipped ? 'flipped' : ''}`}>
                 <div className='front'>
-                  <p className="legend">{sentence.front}</p>
+                  <p className="legend">Card 1 front. {sentence.front}</p>
                 </div>
                 <div className='back'>
-                  <p className="legend">{sentence.back}</p>
+                  <p className="legend">Card 1 back. {sentence.back}</p>
                 </div>
               </div>
             </div>
