@@ -1,0 +1,145 @@
+.html {
+  background-color: #2f6ad0;
+  font-family: sans-serif, Verdana, 'Times New Roman' ;
+}
+
+.App {
+  text-align: center;
+}
+/*
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+} */
+
+.App-header {
+  /* background-color: #222; */
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.nav-item {
+  display: inline-block;
+  margin: 30px;
+}
+
+.stacks-collection {
+  display: inline-block;
+  margin: 30px;
+}
+
+.submit-button {
+  display: inline-block;
+}
+
+.purple-border textarea {
+  border: 1px solid powderblue;
+}
+.purple-border .form-control:focus {
+  border: 1px solid blue;
+  box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+}
+
+.green-border-focus .form-control:focus {
+  border: 1px solid #8bc34a;
+  box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+
+.show-grid {
+  display: flex;
+}
+
+.tile {
+  display: inline;
+}
+
+.stack-summary {
+  padding-top: 1.5em;
+}
+
+.edit-delete-btn-group {
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+
+#filterStacks {
+  width: 35%;
+  position: relative;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  font-style: italic;
+}
+
+.eachTile {
+  /* background-image: url("Tile.png");
+  min-height: 121px;
+  min-width: 311px; */
+  min-height: 120px;
+  max-height: 300px;
+  min-width: 100px;
+  max-width: 250px;
+
+  display: block;
+  margin: 20px;
+  text-align: center;
+  position: inherit;
+
+  /* padding-top: 3em; */
+  border: 1px solid black;
+
+  background: #eee;
+
+  clip-path:
+    polygon(
+      10px 0,
+      100% 0,
+      100% 100%,
+      0 100%,
+      0 10px
+    );
+  }
+
+.eachTile:hover {
+  box-shadow: 5px 5px 5px grey;
+}
+
+
+.create-form-btn {
+  width: 220px;
+  float: inherit;
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+
+.add-title {
+  font-weight: lighter;
+  padding-left: 10px;
+  padding-bottom: 3px;
+}
+
+.create-form {
+
+
+}
+
+
+body {
+  margin: 20px;
+}

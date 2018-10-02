@@ -17,12 +17,13 @@ class Card extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleCard = this.toggleCard.bind(this);
     this.keyHandle = this.keyHandle.bind(this);
+    this.selectedItemHandle = this.selectedItemHandle.bind(this);
 
     this.state = {
       stackId: (this.props.match.params._id || null),
-      // stackId: this.props.location.pathname.split("/")[2] || null,
       isFlipped: 'false',
       stack: {},
+      selectedItem: '0',
       isOpen: 'true',
       redirect: '/stacks'
     };
@@ -32,6 +33,12 @@ class Card extends Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  selectedItemHandle = () => {
+    this.setState({
+      selectedItem: this.state.selectedItem
+    })
   }
 
   toggleCard = () => {
@@ -45,12 +52,6 @@ class Card extends Component {
       case 32:
       this.toggleCard();
       console.log("You pressed spacebar");
-        break;
-      case 39:
-      console.log("You pressed right arrow");
-        break;
-      case 37:
-      console.log("You pressed left arrow");
         break;
       case 27:
       this.toggleModal();
@@ -67,9 +68,14 @@ class Card extends Component {
         return <Redirect to={this.state.redirect}/>
       } else {
         return (
-          <Modal show={this.state.isOpen} onClose={this.toggleModal} onKeyDown={this.keyHandle} isFlipped={this.state.isFlipped} >
+          <Modal
+            show={this.state.isOpen}
+            onClose={this.toggleModal}
+            onKeyDown={this.keyHandle}
+            isFlipped={this.state.isFlipped}
+            >
             <Modal.Body>
-              <CardCarousel stack={item} isFlipped={this.state.isFlipped} />
+              <CardCarousel stack={item} isFlipped={this.state.isFlipped} selectedItem={this.selectedItemHandle}/>
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
           </Modal>

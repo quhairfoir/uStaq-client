@@ -1,0 +1,17 @@
+.list-group {
+  height: 500px;
+  overflow: scroll;
+}
+
+.list-group li:hover {
+  color: #337ab7;
+}
+
+.create-form {
+  margin-top: 40px;
+}
+
+.add-title {
+  display: flex;
+
+}
