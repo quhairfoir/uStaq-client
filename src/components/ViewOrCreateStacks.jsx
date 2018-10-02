@@ -5,13 +5,16 @@ import Edit from './Edit';
 
 import axios from 'axios';
 
+
+
 class ViewOrCreateStacks extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       edit: false,
-      stackId: null
+      stackId: null,
+      loading: false,
     }
   }
 
@@ -27,26 +30,46 @@ class ViewOrCreateStacks extends Component {
     this.togglePageMode(null)
   }
 
-  togglePageMode = (stackId) => {
-    let edit = !this.state.edit
+  toggleEdit = (stackId) => {
     this.setState({ stackId }, () => {
-      this.setState({ edit })
+      this.setState({ edit: !this.state.edit })
     })
   }
 
-  renderPage() {
-    if (this.state.edit) {
-     return  <Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />
-    }
-    else {
-      return (<div className="row">
-        <div className="col-sm-8">
-          <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
-        </div>
+  toggleLoading = () => {
+    this.setState({ loading: !this.state.loading })
+  }
+
+  renderSidebar() {
+    if (!this.state.loading) {
+      return (
         <div className="col-sm-4">
-          <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.togglePageMode} />
+          <Create handleSubmitStack={this.props.handleSubmitStack} toggleEdit={this.toggleEdit} toggleLoading={this.toggleLoading} />
         </div>
-      </div>)
+      )
+    } else {
+      return (
+        <div className="col-sm-4">
+          <h3>Loading...</h3>
+        </div>
+      )
+    }
+  }
+  
+
+  renderPage() {
+    let createORloading = this.renderSidebar()
+    if (this.state.edit) {
+      return  (<Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />)
+    } else {
+      return (
+        <div className="row">
+          <div className="col-sm-8">
+            <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
+          </div>
+          {createORloading}
+        </div>
+      )
     }
   }
 

@@ -37,8 +37,8 @@ class Create extends Component {
   onSubmit (e) {
     e.preventDefault()
     let protoStack = this.makeProtoStack(e)
+    this.props.toggleLoading()
     this.props.handleSubmitStack(protoStack)
-
   }
 
   render() {
