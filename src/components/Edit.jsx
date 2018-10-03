@@ -40,6 +40,10 @@ class Edit extends React.Component {
 
   }
 
+  deleteCard = (event) => {
+    let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
+  }
+
   toggleCardModal = (event) => {
     let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
     let showCards = !this.state.showCards
