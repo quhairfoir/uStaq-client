@@ -80,7 +80,7 @@ class Create extends Component {
               Create Cards!
             </Button>
           </FormGroup>
-          <span style={{ fontFamily: 'Verdana', fontSize: '2em' }}>OR</span>
+          <span style={{ fontFamily: 'Comic sans MS', fontSize: '2em' }}>OR</span>
           <br /><br />
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel className="add-title">
