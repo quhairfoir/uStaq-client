@@ -37,6 +37,7 @@ class Create extends Component {
   onSubmit (e) {
     e.preventDefault()
     let proto = this.makeProtoStack(e)
+    const regex = /(\.\s)/g;
     let error = false
     if (proto.query === null && proto.text === null) {
       error = true
@@ -50,6 +51,9 @@ class Create extends Component {
       error = true
       return alert("ERROR - cannot submit both query and text")
     } 
+    if (regex.exec(proto.text).length < 2){
+      return alert("ERROR - must send at least two sentences")
+    }
     if (!error) {
       this.props.toggleLoading()
       this.props.handleSubmitStack(proto)
