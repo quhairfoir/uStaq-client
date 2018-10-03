@@ -57,9 +57,10 @@ class Main extends React.Component {
           </div>
         <span>
           <div id='title-card-10' className='title-card-new'>
-            <h1>
-              {/* An e-learning website application */}
-            </h1>
+            <h2>
+              {/* Welcome to uStaq! <br /> 
+              Sign in to start learning or jump right in with a fun quiz. */}
+            </h2>
           </div>
         </span>
       </div>
