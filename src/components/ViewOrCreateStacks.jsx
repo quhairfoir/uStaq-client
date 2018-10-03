@@ -39,9 +39,13 @@ class ViewOrCreateStacks extends Component {
   }
 
   toggleEdit = (stackId) => {
-    this.setState({ stackId }, () => {
+    if (stackId) {
+      this.setState({ stackId }, () => {
+        this.setState({ edit: !this.state.edit })
+      })
+    } else {
       this.setState({ edit: !this.state.edit })
-    })
+    }
   }
 
   toggleLoading = () => {
@@ -84,12 +88,12 @@ class ViewOrCreateStacks extends Component {
     let createORloading = this.renderSidebar()
     if (this.state.userObj) {
       if (this.state.edit) {
-        return  (<Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} />)
+        return  (<Edit stackId={this.state.stackId} handleSaveEdit={this.handleSaveEdit} toggleEdit={this.toggleEdit} />)
       } else {
         return (
           <div className="row">
             <div className="col-sm-8">
-              <Stacks stacks={this.props.stacks} toggleEdit={this.togglePageMode} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
+              <Stacks stacks={this.props.stacks} toggleEdit={this.toggleEdit} getUserStacks={this.props.getUserStacks} userObj={this.props.userObj} />
             </div>
             {createORloading}
           </div>
