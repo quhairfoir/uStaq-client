@@ -41,8 +41,7 @@ class Edit extends React.Component {
   }
 
   deleteCard = (event) => {
-    alert(event.target.parentNode.dataset.index)
-    let index = event === undefined ? 0 : Number(event.target.parentNode.dataset.index)
+    let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
     this.setState(
       { sentences: [...this.state.sentences.slice(0, index), ...this.state.sentences.slice(index +1)] })
   }
@@ -176,7 +175,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}><Button bsSize="xsmall" bsStyle="danger" className="delete-card-btn" onClick={this.deleteCard}><span className="glyphicon glyphicon-trash"></span></Button><p className="edit-card-text" onClick={this.toggleCardModal}>{sentence.text.content}</p></ListGroupItem>
+      <ListGroupItem data-index={index}><Button bsSize="xsmall" bsStyle="danger" className="delete-card-btn" onClick={this.deleteCard}><span data-index={index} className="glyphicon glyphicon-trash"></span></Button><p data-index={index} className="edit-card-text" onClick={this.toggleCardModal}>{sentence.text.content}</p></ListGroupItem>
     ))
   }
 
