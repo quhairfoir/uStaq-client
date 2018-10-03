@@ -107,17 +107,11 @@ class ModalNav extends React.Component {
                 </Button>
                 }
                 <Modal show={this.state.show} onHide={this.handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Welcome back.</Modal.Title>
-                  </Modal.Header>
                   <Modal.Body>
-                    <h4>Sign in to access your personalized homepage.</h4>
+                    <h4>Sign in to access your collection of stacks.</h4>
                     <a href="" onClick={this.handleClick} className="btn btn-social btn-github">
                       <span className="fa fa-github"></span> Sign in with Github
                       </a>
-
-                    <hr className="hrStyling" />
-
                   </Modal.Body>
                   <Modal.Footer>
                     <Button onClick={this.handleClose}>Close</Button>

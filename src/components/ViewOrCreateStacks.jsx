@@ -35,7 +35,7 @@ class ViewOrCreateStacks extends Component {
     .catch(error =>
       console.error(error)
     )
-    this.togglePageMode(null)
+    this.toggleEdit(null)
   }
 
   toggleEdit = (stackId) => {

@@ -107,7 +107,7 @@ class gameSystem {
 
     if (Object.keys(this.answerHash).length === 0) {
       wss.broadcastSystemMessage(`You got it! Get ready for the next question...`, true, '#e0377b');
-      setTimeout(() => this.nextQuestion(), 3000);
+      setTimeout(() => this.nextQuestion(), 4000);
     }
   }
 }
