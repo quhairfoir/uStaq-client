@@ -98,13 +98,13 @@ class ModalNav extends React.Component {
               </NavItem>
             </Nav>
             <Nav pullRight>
-              <NavItem eventKey={1} >
+              <NavItem eventKey={1} id="user-name" >
                 {this.state.user ?
                 <div>{this.state.user.email}</div>
                 :                
-                <Button className="navSignin" bsStyle="link" onClick={this.handleShow}>
+                <NavItem className="navSignin" bsStyle="link" onClick={this.handleShow}>
                   Sign in
-                </Button>
+                </NavItem>
                 }
                 <Modal show={this.state.show} onHide={this.handleClose}>
                   <Modal.Body>
