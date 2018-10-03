@@ -12,7 +12,7 @@ class Edit extends React.Component {
       showCards: false,
       sentences: null,
       title: null,
-      currentSentence: 0,
+      currentSentence: null,
       indicesToHide: [],
     };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
@@ -40,15 +40,11 @@ class Edit extends React.Component {
 
   }
 
-  // removeFromArray(array, element) {
-  //   const index = array.indexOf(element);
-  //   if (index !== -1) {
-  //       array.splice(index, 1);
-  //   }
-  // }
-
-  deleteCard = () => {
-    this.state.sentences.splice(this.state.currentSentence, 1)
+  deleteCard = (event) => {
+    alert(event.target.parentNode.dataset.index)
+    let index = event === undefined ? 0 : Number(event.target.parentNode.dataset.index)
+    this.setState(
+      { sentences: [...this.state.sentences.slice(0, index), ...this.state.sentences.slice(index +1)] })
   }
 
   toggleCardModal = (event) => {
@@ -154,6 +150,11 @@ class Edit extends React.Component {
     })
   };
 
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps)
+    return true
+  }
+
   handleCardClick = (index) => {
     console.log(index)
     this.setState({ showCards: true })
@@ -175,7 +176,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}>{sentence.text.content}<button className="delete-card-btn" onClick={this.deleteCard}>delete</button></ListGroupItem>
+      <ListGroupItem data-index={index}><p onClick={this.toggleCardModal}>{sentence.text.content}</p><button className="delete-card-btn" onClick={this.deleteCard}>delete</button></ListGroupItem>
     ))
   }
 
@@ -189,7 +190,7 @@ class Edit extends React.Component {
           </PageHeader>
         </Row>
         <Row>
-          <ListGroup onClick={this.toggleCardModal}>
+          <ListGroup /*onClick={this.toggleCardModal}*/ >
             {cardList}
           </ListGroup>
         </Row>
