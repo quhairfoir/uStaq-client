@@ -120,11 +120,18 @@
     ); */
   }
 
-.eachTile:hover {
-  box-shadow: 5px 5px 5px grey;
+.eachTile {
+  box-shadow: 5px 5px 5px #aaa;
 }
 
+.eachTile:hover {
+  animation: glow-shadow 0.5s ease-in-out 0s infinite alternate;
+}
 
+@keyframes glow-shadow {
+    0%   { box-shadow: 5px 5px 5px #aaa; }
+    100% { box-shadow: 6px 6px 6px black; }
+}
 .create-form-btn {
   width: 220px;
   float: inherit;
