@@ -1,0 +1,72 @@
+.create-form {
+  margin-top: 40px;
+}
+
+.add-title {
+  display: flex;
+}
+
+.navuStaq {
+  font-size: 30px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  margin-top: 2px;
+}
+
+.navBCustom.navbar .navbar-brand {
+  color: white;
+}
+
+.navBCustom a{
+  color: navy;
+}
+
+.navBCustom .navbar-default .navbar-collapse, .navBCustom .navbar-default .navbar-form {
+  margin-top: 0px;
+
+}
+
+.navBCustom.navbar {
+  background-image: none;
+  background-color: #3893C7; 
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+
+.navBCustom.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.navBCustom.navbar-default .navbar-nav>li>a {
+  color: white;
+  font-size: 20px;
+}
+
+.navBCustom .navbar-default .navbar-nav>li>a:focus {
+  color: white;
+
+}
+
+.navBCustom.navbar-default .navbar-nav>li>a:hover {
+  color:white;
+
+}
+
+.navUstaqItems {
+  font-size: 15px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  margin-top: 3px;
+}
+
+.navSignin {
+  font-size: 15px;
+  font-family: sans-serif, Verdana, 'Times New Roman';
+  
+}
+.navSignin btn btn-link {
+  color: #f46ac4;
+}
+
+.hrStyling {
+  color: blue;
+}
