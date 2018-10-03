@@ -59,6 +59,15 @@ class Create extends Component {
     }
   }
 
+  changeWikiTopic = (event) => {
+    const title = document.getElementById('new-stack-title');
+    if (title.value === '' && event.target.value !== '') {
+      title.placeholder = event.target.value;
+    } else if (event.target.value === '') {
+      title.placeholder = 'Title';
+    }
+  }
+
   render() {
     return (
       <div>
@@ -73,6 +82,7 @@ class Create extends Component {
               Add a title for your stack:
             </ControlLabel>{" "}
               <FormControl
+                id="new-stack-title"
                 style={{
                   width: '250px',
                   backgroundColor: '#FEF9ED'
@@ -93,6 +103,7 @@ class Create extends Component {
               className="add-title"
               name="wikiQuery"
               placeholder="Teach me about..."
+              onChange={this.changeWikiTopic}
             />{" "}
           </FormGroup>
           <br /><br />
