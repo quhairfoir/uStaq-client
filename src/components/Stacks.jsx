@@ -74,7 +74,7 @@ class Stacks extends Component {
                   </Row>
                   <Row className="stack-summary">
                     <Link to={`/stacks/${stack._id}`}>
-                      <strong>'{stack.title}'</strong> <br/> <strong>{stack.sentences.length}</strong> cue cards
+                      <strong>{stack.title}</strong> <br/> <strong>{stack.sentences.length}</strong> cards
                 </Link>
                   </Row>
                 </Col>

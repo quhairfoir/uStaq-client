@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import Main from './Main'
-import Edit from './Edit'
 import ViewOrCreateStacks from './ViewOrCreateStacks'
 import TopNav from './TopNav'
 import QuizRoom from './QuizRoom'
-// import {Grid} from 'react-bootstrap'
-// import { render } from 'react-dom';
-import faker from 'faker'
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap-social/bootstrap-social.css';
 import axios from 'axios';
@@ -23,7 +19,6 @@ class App extends Component {
       stacks: []
 
     }
-    // this.handleStoringUsers = this.handleStoringUsers.bind(this);
     this.handleSubmitStack = this.handleSubmitStack.bind(this)
     this.fetchingUser = this.fetchingUser.bind(this);
   }
@@ -31,7 +26,6 @@ class App extends Component {
   fetchingUser() {
     axios('http://localhost:8080/users', {withCredentials: true})
     .then(response => {
-      // console.log("RESPONSE!", response.data)
       if (response.data) {
       this.getUserStacks(response.data._id)
       this.setState({ userObj: response.data });
