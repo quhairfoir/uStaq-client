@@ -37,8 +37,9 @@ class Create extends Component {
   onSubmit (e) {
     e.preventDefault()
     let protoStack = this.makeProtoStack(e)
+    this.props.toggleLoading()
     this.props.handleSubmitStack(protoStack)
-
+    this.props.setLoadingDialogue()
   }
 
   render() {
@@ -57,12 +58,14 @@ class Create extends Component {
               <FormControl
                 style={{
                   width: '250px',
-                  backgroundColor: '#ECF6FE'
+                  backgroundColor: '#FEF9ED'
                 }}
                 className="add-title"
                 name="title"
                 placeholder="Title"
               />{" "}
+              <br /><br />
+              <span style={{ fontFamily: 'Verdana', fontSize: '1em' }}>THEN</span>
               <br /><br />
             <ControlLabel className="add-title">Search topic in Wikipedia:</ControlLabel>{" "}
             <FormControl
@@ -74,11 +77,8 @@ class Create extends Component {
               name="wikiQuery"
               placeholder="Teach me about..."
             />{" "}
-            <Button className="btn btn-primary create-form-btn text-center" type="submit">
-              Create Cards!
-            </Button>
           </FormGroup>
-          <span style={{ fontFamily: 'Comic sans MS', fontSize: '2em' }}>OR</span>
+          <span style={{ fontFamily: 'Verdana', fontSize: '1em' }}>OR</span>
           <br /><br />
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel className="add-title">
@@ -96,7 +96,7 @@ class Create extends Component {
               name="textBox"
               placeholder="Paste text here..."
               />
-              <Button className="btn btn-primary create-form-btn text-center" type="submit">
+              <Button bsStyle="success" className="create-form-btn text-center" type="submit">
                 Create Cards!
               </Button>
             </FormGroup>
