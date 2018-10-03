@@ -108,7 +108,7 @@ class ViewOrCreateStacks extends Component {
   render () {
     let editORstacks = this.renderPage()
     return(
-    <div className="container" style={{width: '100%'}}>
+    <div className="container imgResponsive" style={{width: '100%'}}>
       {editORstacks}
     </div>
   // <span>

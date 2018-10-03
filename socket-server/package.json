@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
+    "damerau-levenshtein": "^1.0.4",
     "nodemon": "^1.18.4",
     "socket.io": "^2.1.1"
   }

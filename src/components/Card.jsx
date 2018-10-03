@@ -21,10 +21,10 @@ class Card extends Component {
 
     this.state = {
       stackId: (this.props.match.params._id || null),
-      isFlipped: 'false',
+      isFlipped: false,
       stack: {},
-      selectedItem: '0',
-      isOpen: 'true',
+      currentSlide: 0,
+      isOpen: true,
       redirect: '/stacks'
     };
   }
@@ -35,11 +35,14 @@ class Card extends Component {
     });
   }
 
-  selectedItemHandle = () => {
-    this.setState({
-      selectedItem: this.state.selectedItem
-    })
-  }
+  selectedItemHandle = (index) => {
+        const { currentSlide } = this.state;
+        if (currentSlide !== index) {
+            this.setState({
+                currentSlide: index
+            });
+        }
+    }
 
   toggleCard = () => {
     this.setState({
@@ -72,10 +75,15 @@ class Card extends Component {
             show={this.state.isOpen}
             onClose={this.toggleModal}
             onKeyDown={this.keyHandle}
-            isFlipped={this.state.isFlipped}
             >
             <Modal.Body>
-              <CardCarousel stack={item} isFlipped={this.state.isFlipped} selectedItem={this.selectedItemHandle}/>
+              <CardCarousel
+                stack={item}
+                onKeyDown={this.keyHandle}
+                onChange={this.selectedItemHandle}
+                isFlipped={this.state.isFlipped}
+                selectedItem={this.state.currentSlide}
+                />
               <Button onClick={this.toggleModal} className="card-button">Close</Button>
             </Modal.Body>
           </Modal>
