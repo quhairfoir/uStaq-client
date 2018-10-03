@@ -36,10 +36,25 @@ class Create extends Component {
 
   onSubmit (e) {
     e.preventDefault()
-    let protoStack = this.makeProtoStack(e)
-    this.props.toggleLoading()
-    this.props.handleSubmitStack(protoStack)
-    this.props.setLoadingDialogue()
+    let proto = this.makeProtoStack(e)
+    let error = false
+    if (proto.query === null && proto.text === null) {
+      error = true
+      return alert("ERROR - cannot send empty request")
+    } 
+    if (proto.title === null && proto.text) {
+      error = true
+      return alert("ERROR - stack must have a title")
+    } 
+    if (proto.query && proto.text) {
+      error = true
+      return alert("ERROR - cannot submit both query and text")
+    } 
+    if (!error) {
+      this.props.toggleLoading()
+      this.props.handleSubmitStack(proto)
+      this.props.setLoadingDialogue()
+    }
   }
 
   render() {
