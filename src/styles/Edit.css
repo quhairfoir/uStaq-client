@@ -26,7 +26,8 @@
 }
 
 .navBCustom a{
-  color: navy;
+  color: white;
+  font-size: 30px;
 }
 
 .navBCustom .navbar-default .navbar-collapse, .navBCustom .navbar-default .navbar-form {
@@ -41,9 +42,27 @@
   padding: 20px;
 }
 
-.navBCustom.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+.navBCustom.navbar-default .navbar-nav>.open>a, 
+.navbar-default .navbar-nav>.open>a:focus, 
+.navbar-default .navbar-nav>.open>a:hover {
   background: transparent;
   box-shadow: none;
+}
+/* Francis mods dont judge me*/
+.navbar-default .btn-link{
+  color:white;
+  font-size:30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border:1px solid white;
+  padding: 0.5em 1em;
+}
+.carousel-control.left, .carousel-control.right{
+  background-image: none;
+}
+.navbar-header a,
+.navUstaqItems a{
+  padding:40px;
 }
 
 .navBCustom.navbar-default .navbar-nav>li>a {
