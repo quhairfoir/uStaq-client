@@ -57,14 +57,17 @@ class QuizRoom extends React.Component {
         } else if (newMessage.message.state === 'question') {
           this.setState({ question: newMessage.message.field });
         } else if (newMessage.message.state === 'indicesToReveal') {
-          this.setState({ indicesToReveal: newMessage.message.field });
+          this.setState({ indicesToReveal: newMessage.message.field || [] });
         }
       }
     }
   }
 
   createQuestionHeading() {
-    return <div>{this.state.question}</div>;
+    return this.state.question.split(' ').map((word, index) =>
+      <span key={index} className={this.state.indicesToReveal.includes(index) ? 'revealed' : ''}>
+        {word}{' '}
+      </span>)
   }
 
   generateName() {

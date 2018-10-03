@@ -24,3 +24,7 @@
 .messages > div {
   font-size: 16px;
 }
+
+.revealed {
+  color: #e0377b;
+}
