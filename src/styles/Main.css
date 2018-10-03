@@ -103,18 +103,6 @@
   animation: title-slide-down 0.5s ease-in forwards;
 }
 
-.title-card-new {
-  opacity: 0;
-
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  height: 100%;
-  width: 100%;
-
-  animation: title-slide-down 0.5s ease-in forwards;
-}
-
 .top {
   background-image: url('../assets/notecard.png');
   background-size: 100%;
@@ -162,9 +150,19 @@
   animation-delay: 3000ms;
 }
 
-#title-card-10 {
+#intro-text {
+  opacity: 0;
+
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  height: 100%;
+  width: 100%;
+
+  animation: intro-fade-in 1.5s ease-in forwards;
+
   margin-top: 55vh;
-  animation-delay: 4200ms;
+  animation-delay: 4800ms;
 }
 
 @keyframes title-slide-down {
@@ -182,6 +180,16 @@
 @keyframes title-fade-out {
   to {
     opacity: 0;
+  }
+}
+
+@keyframes intro-fade-in {
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
   }
 }
 
