@@ -164,7 +164,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}><strong>Card {index}</strong>: {sentence.text.content}</ListGroupItem>
+      <ListGroupItem data-index={index}>{sentence.text.content}</ListGroupItem>
     ))
   }
 
@@ -183,7 +183,8 @@ class Edit extends React.Component {
           </ListGroup>
         </Row>
         <Row>
-          <Button onClick={this.handleSave}>Save</Button>
+          <Button bsStyle="success" onClick={this.handleSave}>Save</Button>
+          <Button onClick={this.props.toggleEdit}>Cancel</Button>
         </Row>
         {this.state.showCards ? (
           <CardModal
