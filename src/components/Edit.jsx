@@ -12,7 +12,7 @@ class Edit extends React.Component {
       showCards: false,
       sentences: null,
       title: null,
-      currentSentence: 0,
+      currentSentence: null,
       indicesToHide: [],
     };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
@@ -38,6 +38,13 @@ class Edit extends React.Component {
     })
     .catch(error => alert(error))
 
+  }
+
+  deleteCard = (event) => {
+    alert(event.target.parentNode.dataset.index)
+    let index = event === undefined ? 0 : Number(event.target.parentNode.dataset.index)
+    this.setState(
+      { sentences: [...this.state.sentences.slice(0, index), ...this.state.sentences.slice(index +1)] })
   }
 
   toggleCardModal = (event) => {
@@ -143,6 +150,11 @@ class Edit extends React.Component {
     })
   };
 
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps)
+    return true
+  }
+
   handleCardClick = (index) => {
     console.log(index)
     this.setState({ showCards: true })
@@ -164,7 +176,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}>{sentence.text.content}</ListGroupItem>
+      <ListGroupItem data-index={index}><Button bsSize="xsmall" bsStyle="danger" className="delete-card-btn" onClick={this.deleteCard}><span className="glyphicon glyphicon-trash"></span></Button><p className="edit-card-text" onClick={this.toggleCardModal}>{sentence.text.content}</p></ListGroupItem>
     ))
   }
 
@@ -174,11 +186,11 @@ class Edit extends React.Component {
       <Grid>
         <Row>
           <PageHeader id="smallerHeader">
-            <small>{this.state.title}</small>
+            <small>Edit: {this.state.title}</small>
           </PageHeader>
         </Row>
         <Row>
-          <ListGroup onClick={this.toggleCardModal}>
+          <ListGroup /*onClick={this.toggleCardModal}*/ >
             {cardList}
           </ListGroup>
         </Row>
