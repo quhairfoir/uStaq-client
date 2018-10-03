@@ -10,14 +10,14 @@ import '../styles/QuizRoom.css';
 class QuizRoom extends React.Component {
   constructor(props){
     super(props)
-
     this.state = {
-        numSocketClients: 0,
-        username: '',
-        message: '',
-        messages: [],
-        question: '',
-        answer: ''
+      numSocketClients: 0,
+      username: '',
+      message: '',
+      messages: [],
+      question: '',
+      answer: '',
+      indicesToReveal: [],
     }
 
     this.socket = null;
@@ -28,7 +28,7 @@ class QuizRoom extends React.Component {
     this.scrollToBottom();
     this.setUpServerConnection();
     
-    this.setState({username})
+    this.setState({ username })
   }
 
   componentDidUpdate() {
@@ -45,11 +45,26 @@ class QuizRoom extends React.Component {
     }
 
     this.socket.onmessage = evt => {
-      let newMessage = JSON.parse(evt.data).data;
-      const messages = [...this.state.messages, newMessage];
-      this.setState({ numSocketClients: JSON.parse(evt.data).numSocketClients });
-      this.setState({ messages });
+      let packet = JSON.parse(evt.data)
+      let newMessage = packet.data;
+      if (packet.type === 'message' || packet.display) {
+        const messages = [...this.state.messages, newMessage];
+        this.setState({ numSocketClients: JSON.parse(evt.data).numSocketClients });
+        this.setState({ messages });
+      } else {
+        if (newMessage.message.state === 'topic') {
+          // ...
+        } else if (newMessage.message.state === 'question') {
+          this.setState({ question: newMessage.message.field });
+        } else if (newMessage.message.state === 'indicesToReveal') {
+          this.setState({ indicesToReveal: newMessage.message.field });
+        }
+      }
     }
+  }
+
+  createQuestionHeading() {
+    return <div>{this.state.question}</div>;
   }
 
   generateName() {
@@ -108,13 +123,13 @@ class QuizRoom extends React.Component {
         <Row>
           <Panel>
             <Panel.Heading>
-              <h2>{this.state.question}</h2>
+              <h2>{this.createQuestionHeading()}</h2>
             </Panel.Heading>
             <Panel.Body id="messageBox">
               <div className="messages">
                 {this.state.messages.map(message => {
                   return (
-                    <div ref={el => { this.el = el; }}><strong>{message.username}</strong>: {message.message}</div>
+                    <div ref={el => { this.el = el; }}><strong>{message.username}</strong>: <span style={{color:message.colour}}>{message.message}</span></div>
                   )
                 })}
               </div>

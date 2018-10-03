@@ -32,7 +32,6 @@ class gameSystem {
     let stackData = this.chooseNewStack();
     this.stack = stackData.sentences;
     this.topic = stackData.title;
-    this.answerSet = new Set;
     wss.broadcastSystemMessage(`The new topic is: ${this.topic}`)
     this.currentQuestion = null;
     this.nextQuestion();
@@ -59,8 +58,17 @@ class gameSystem {
     }
     this.question = this.stack[this.currentQuestion].front;
     this.answer = this.stack[this.currentQuestion].back;
-    this.answerSet = new Set(this.stack[this.currentQuestion].indicesToHide.map(i => this.stack[this.currentQuestion].tokens[i].text.content));
+    this.answerHash = {};
+    this.stack[this.currentQuestion].indicesToHide.forEach(i => {
+      let word = this.stack[this.currentQuestion].tokens[i].text.content;
+      if (this.answerHash[word] === undefined) {
+        this.answerHash[word] = [];
+      }
+      this.answerHash[word].push(i);
+    });
+    this.indicesToReveal = [];
     wss.broadcastSystemMessage(`Next question: ${this.question}`);
+    wss.broadcastSystemMessage({ state: 'question', field: this.question }, false);
   }
 
   checkMessageForAnswer(msg) {
@@ -69,10 +77,10 @@ class gameSystem {
     let correctGuesses = new Set;
 
     for (let word of msgWords) {
-      for (let answer of this.answerSet) {
+      for (let answer of Object.keys(this.answerHash)) {
         const { steps, similarity } = getEditDistance(word.toLowerCase(), answer.toLowerCase());
         if (similarity === 1) {
-          wss.broadcastSystemMessage(`${answer}! You got it!`);
+          wss.broadcastSystemMessage(`${answer}! You got it!`, true, '#f0478b');
           correctGuesses.add(answer);
         } else if (steps === 1 || similarity >= 0.8) {
           wss.broadcastSystemMessage(`${word} is close...`);
@@ -81,9 +89,23 @@ class gameSystem {
     }
 
     for (let correctGuess of correctGuesses) {
-      this.answerSet.delete(correctGuess);
+      // Update question appearance with correct guesses; pass on information to site.
+      let questionArray = this.question.split(' ');
+      
+      for (let correctGuessIndex of this.answerHash[correctGuess]) {
+        questionArray[correctGuessIndex] = this.stack[this.currentQuestion].tokens[correctGuessIndex].text.content;
+      }
+
+      this.question = questionArray.join(' ');
+      wss.broadcastSystemMessage({ state: 'question', field: this.question }, false);
+
+      this.indicesToReveal = this.indicesToReveal.concat(this.answerHash[correctGuess]);
+      wss.broadcastSystemMessage({ state: 'indicesToReveal', field: this.indicesToReveal }, false);
+
+      delete this.answerHash[correctGuess];
     }
-    if (this.answerSet.size === 0) {
+
+    if (Object.keys(this.answerHash).length === 0) {
       this.nextQuestion();
     }
   }
@@ -96,8 +118,8 @@ const staqBot = new gameSystem;
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  wss.broadcastSystemMessage(`A new user has joined the chat. Welcome! The current topic is ${staqBot.topic}`);
-  wss.broadcastSystemMessage(`Q: ${staqBot.question}`); //  A: ${staqBot.answerSet}`);
+  wss.broadcastSystemMessage(`A new user has joined the chat. We're learning about the following topic: ${staqBot.topic}. Good luck!`);
+  wss.broadcastSystemMessage({ state: 'question', field: staqBot.question }, false);
 
   ws.id = uuid();
 
@@ -120,7 +142,6 @@ wss.on('connection', (ws) => {
 
     if (parsedPacket.type === 'message') {
       wss.broadcast(parsedPacket);
-      console.log(JSON.stringify(parsedPacket))
       staqBot.checkMessageForAnswer(parsedPacket.data.message)
 
       // for debugging
@@ -129,8 +150,16 @@ wss.on('connection', (ws) => {
         staqBot.nextQuestion();
       }
       if (parsedPacket.data.message === 'hint') {
-        let word = Array.from(staqBot.answerSet)[0];
+        let answerList = Object.keys(staqBot.answerHash);
+        let word = answerList[Math.floor(Math.random() * answerList.length)];
         wss.broadcastSystemMessage(`Okay, here's a hint: ${word.substr(0, word.length / 2) + '...'}`);
+      }
+      if (parsedPacket.data.message === 'answer') {
+        wss.broadcastSystemMessage(`Here's what you're missing: ${Object.keys(staqBot.answerHash).split(' ')}`);
+      }
+      if (parsedPacket.data.message === 'test') {
+        // wss.broadcastSystemMessage({ state: 'topic', field: staqBot.topic }, false);
+        // wss.broadcastSystemMessage({ state: 'question', field: staqBot.question }, false);
       }
     } else if (parsedPacket.type === 'system') {
       wss.broadcastSystemMessage(parsedPacket.data);
@@ -157,13 +186,14 @@ wss.broadcast = function broadcast(packet) {
   });
 };
 
-wss.broadcastSystemMessage = function broadcastSystemMessage(msgText, display = true) {
+wss.broadcastSystemMessage = function broadcastSystemMessage(msgText, display = true, colour = '#4a4a4a') {
   const packet = {
     type: 'system',
     display,
     data: {
       username: '🤖 [StaqBot]',
       message: msgText,
+      colour, // '#f68ed2'
     },
   }
   wss.broadcast(packet);
