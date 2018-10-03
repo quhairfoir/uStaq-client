@@ -7,7 +7,7 @@
   color: #337ab7;
 }
 
-/* .create-form {
+.create-form {
   margin-top: 40px;
 }
 
@@ -25,9 +25,10 @@
   color: white;
 }
 
-.navBCustom a{
-  color: white;
+.navBCustom a {
+  color: white !important;
   font-size: 30px;
+  text-decoration: none;
 }
 
 .navBCustom .navbar-default .navbar-collapse, .navBCustom .navbar-default .navbar-form {
@@ -50,10 +51,8 @@
 /* Francis mods dont judge me*/
 .navbar-default .btn-link{
   color:white;
-  font-size:30px;
+  /* font-size:14px; */
   text-decoration: none;
-  text-transform: uppercase;
-  border:1px solid white;
   /* padding: 10px 10px; */
 }
 .carousel-control.left, .carousel-control.right{
@@ -62,6 +61,7 @@
 /* .navbar-header a, */
 .navUstaqItems a{
   padding: 20px;
+  color: white;
 }
 
 .navBCustom.navbar-default .navbar-nav>li>a {
@@ -79,9 +79,18 @@
 .navBCustom.navbar-default .navbar-nav>li>a:hover {
   color:white;
   font-family: sans-serif, Verdana, 'Times New Roman';
-
 }
 
+#user-name {
+  opacity: 0;
+  animation: hold-on-a-second 0.25s ease-in forwards;
+}
+
+@keyframes hold-on-a-second {
+  to {
+    opacity: 1;
+  }
+}
 /* .navUstaqItems {
   font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
@@ -92,4 +101,5 @@
   font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   
-}
+} */
+
