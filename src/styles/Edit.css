@@ -8,7 +8,12 @@
 }
 
 .delete-card-btn {
-  z-index: Infinity;
+  /* z-index: Infinity; */
+  float: right;
+}
+
+.edit-card-text {
+  font-size: 1.25em;
 }
 
 /* .create-form {

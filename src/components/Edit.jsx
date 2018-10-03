@@ -176,7 +176,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}><p onClick={this.toggleCardModal}>{sentence.text.content}</p><button className="delete-card-btn" onClick={this.deleteCard}>delete</button></ListGroupItem>
+      <ListGroupItem data-index={index}><Button bsSize="xsmall" bsStyle="danger" className="delete-card-btn" onClick={this.deleteCard}><span className="glyphicon glyphicon-trash"></span></Button><p className="edit-card-text" onClick={this.toggleCardModal}>{sentence.text.content}</p></ListGroupItem>
     ))
   }
 
@@ -186,7 +186,7 @@ class Edit extends React.Component {
       <Grid>
         <Row>
           <PageHeader id="smallerHeader">
-            <small>{this.state.title}</small>
+            <small>Edit: {this.state.title}</small>
           </PageHeader>
         </Row>
         <Row>
