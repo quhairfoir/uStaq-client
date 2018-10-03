@@ -54,7 +54,7 @@
   text-decoration: none;
   text-transform: uppercase;
   border:1px solid white;
-  padding: 0.5em 1em;
+  /* padding: 10px 10px; */
 }
 .carousel-control.left, .carousel-control.right{
   background-image: none;
@@ -66,7 +66,7 @@
 
 .navBCustom.navbar-default .navbar-nav>li>a {
   color: white;
-  font-size: 20px;
+  font-size: 30px;
   font-family: sans-serif, Verdana, 'Times New Roman';
 }
 
@@ -82,14 +82,14 @@
 
 }
 
-.navUstaqItems {
+/* .navUstaqItems {
   font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   /* margin-top: 3px; */
-}
-
+/* } */
+/* 
 .navSignin {
   font-size: 15px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   
-}
+} */
