@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
-import Grid from "react-bootstrap/lib/Grid";
 import Form from "react-bootstrap/lib/Form";
 import FormGroup from "react-bootstrap/lib/FormGroup";
 import ControlLabel from "react-bootstrap/lib/ControlLabel";
-import Col from "react-bootstrap/lib/Col";
 import Button from "react-bootstrap/lib/Button";
-import Row from "react-bootstrap/lib/Row";
 import FormControl from "react-bootstrap/lib/FormControl";
-import '../styles/Edit.css'
+import '../styles/Dia.css'
 
 class Create extends Component {
   constructor(props) {
@@ -23,9 +20,9 @@ class Create extends Component {
     let query = e.target.elements.wikiQuery.value
     let text = e.target.elements.textBox.value
     let protoStack = {
-      title: title ? title : query ? query : null,
-      query: query ? query : null,
-      text: text ? text : null,
+      title: title || query || null,
+      query: query || null,
+      text: text || null,
       type: query ? 'wiki' : text ? 'text' : null
     }
     title = ''
@@ -36,10 +33,30 @@ class Create extends Component {
 
   onSubmit (e) {
     e.preventDefault()
-    let protoStack = this.makeProtoStack(e)
-    this.props.toggleLoading()
-    this.props.handleSubmitStack(protoStack)
-    this.props.setLoadingDialogue()
+    let proto = this.makeProtoStack(e)
+    const regex = /(\.\s)/g;
+    let error = false
+    if (proto.query === null && proto.text === null) {
+      error = true
+      return alert("ERROR - cannot send empty request")
+    } 
+    if (proto.title === null && proto.text) {
+      error = true
+      return alert("ERROR - stack must have a title")
+    } 
+    if (proto.query && proto.text) {
+      error = true
+      return alert("ERROR - cannot submit both query and text")
+    } 
+    if (proto.text && regex.exec(proto.text).length < 2){
+      error = true
+      return alert("ERROR - must send at least two sentences")
+    }
+    if (!error) {
+      this.props.toggleLoading()
+      this.props.handleSubmitStack(proto)
+      this.props.setLoadingDialogue()
+    }
   }
 
   render() {
@@ -78,6 +95,7 @@ class Create extends Component {
               placeholder="Teach me about..."
             />{" "}
           </FormGroup>
+          <br /><br />
           <span style={{ fontFamily: 'Verdana', fontSize: '1em' }}>OR</span>
           <br /><br />
           <FormGroup controlId="formControlsTextarea">
