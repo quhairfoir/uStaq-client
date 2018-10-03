@@ -41,7 +41,6 @@ class Edit extends React.Component {
   }
 
   deleteCard = (event) => {
-    alert(event.target.getAttribute("data-index"))
     let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
     this.setState(
       { sentences: [...this.state.sentences.slice(0, index), ...this.state.sentences.slice(index +1)] })
