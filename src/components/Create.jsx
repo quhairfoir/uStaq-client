@@ -53,7 +53,7 @@ class Create extends Component {
           }}>
           <FormGroup controlId="formInlineUrl" className="create-form">
             <ControlLabel className="add-title">
-              Add a title for your stack<span style={{ color: 'red'}}>&#42;</span>:
+              Add a title for your stack:
             </ControlLabel>{" "}
               <FormControl
                 style={{
