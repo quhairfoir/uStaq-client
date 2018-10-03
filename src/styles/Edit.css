@@ -7,6 +7,10 @@
   color: #337ab7;
 }
 
+.delete-card-btn {
+  z-index: Infinity;
+}
+
 /* .create-form {
   margin-top: 40px;
 }

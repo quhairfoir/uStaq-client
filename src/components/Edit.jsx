@@ -40,8 +40,15 @@ class Edit extends React.Component {
 
   }
 
-  deleteCard = (event) => {
-    let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
+  // removeFromArray(array, element) {
+  //   const index = array.indexOf(element);
+  //   if (index !== -1) {
+  //       array.splice(index, 1);
+  //   }
+  // }
+
+  deleteCard = () => {
+    this.state.sentences.splice(this.state.currentSentence, 1)
   }
 
   toggleCardModal = (event) => {
@@ -168,7 +175,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}>{sentence.text.content}</ListGroupItem>
+      <ListGroupItem data-index={index}>{sentence.text.content}<button className="delete-card-btn" onClick={this.deleteCard}>delete</button></ListGroupItem>
     ))
   }
 
