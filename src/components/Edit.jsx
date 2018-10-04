@@ -102,6 +102,8 @@ class Edit extends React.Component {
     } else {
       if (sentence.tokens[startIndex].hoverable) {
         indicesToHide = this.buildHideSubTree(startIndex)
+      } else {
+        indicesToHide = this.state.indicesToHide
       }
     }
 
@@ -141,7 +143,7 @@ class Edit extends React.Component {
     let stateSentences = JSON.parse(JSON.stringify(this.state.sentences));
     let indicesToHide = this.state.indicesToHide.slice();
     stateSentences[this.state.currentSentence].indicesToHide = indicesToHide;
-    stateSentences[this.state.currentSentence].front = this.buildCardFront();
+    stateSentences[this.state.currentSentence].front = this.buildCardFront(indicesToHide);
 
     this.setState({
       sentences: stateSentences,
@@ -159,10 +161,10 @@ class Edit extends React.Component {
     this.setState({ showCards: true })
   }
 
-  buildCardFront() {
+  buildCardFront(indicesToHide) {
     console.log(JSON.stringify(this.state.sentences[this.state.currentSentence].tokens));
     const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) =>
-      this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "────" : token.text.content
+      indicesToHide.includes(index) ? "────" : token.text.content
     ).join(' ');
     return front;
   }
