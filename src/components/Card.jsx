@@ -52,13 +52,19 @@ class Card extends Component {
 
   keyHandle(event) {
     switch (event.keyCode) {
+      case 39:  // Right arrow.
+        setTimeout(() => this.setState({ currentSlide: this.state.currentSlide + 1 }), 50);
+        break;
+      case 37: // Left arrow.
+        setTimeout(() => this.setState({ currentSlide: this.state.currentSlide - 1 }), 50);
+        break;
       case 32:
-      this.toggleCard();
-      console.log("You pressed spacebar");
+        this.toggleCard();
+        console.log("You pressed spacebar");
         break;
       case 27:
-      this.toggleModal();
-      console.log("You pressed escape");
+        this.toggleModal();
+        console.log("You pressed escape");
         break;
       default:
     }
