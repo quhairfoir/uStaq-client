@@ -23,11 +23,11 @@ class CardModal extends React.Component {
         <div className="blanko"> {this.lowerDiv(sentenceObj)}</div>
       </Carousel.Item>)
   }
-  
+
   upperDiv(sentenceObj) {
     let sentence = sentenceObj.tokens;
 
-    return sentence.map((token, index) => 
+    return sentence.map((token, index) =>
       <span key={index} onMouseOver={(event) => this.props.handleUpperMouseOver(index, event)}
                         onMouseOut={(event) => this.props.handleUpperMouseOut(index, event)}
                         onClick={(event) => this.props.handleUpperClick(index, event)}
@@ -66,6 +66,9 @@ class CardModal extends React.Component {
       <div>
         <Modal bsSize="large" show={true} onHide={this.props.toggleShow}>
           <Modal.Header closeButton>
+            <Modal.Title style={{textAlign: 'center', fontWeight: 'lighter', }}>
+              Editing: '{this.props.title}' stack
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="card card-body">
@@ -78,9 +81,9 @@ class CardModal extends React.Component {
               </Carousel>
             </div>
           </Modal.Body>
-          {/* <Modal.Footer>
-            <Button onClick={this.props.toggleShow}>Close</Button>
-          </Modal.Footer> */}
+          <Modal.Footer style={{textAlign: 'center', fontWeight: 'lighter', }}>
+            <small>Hold 'Cmd(⌘)' for custom selection </small>
+          </Modal.Footer>
         </Modal>
 
 

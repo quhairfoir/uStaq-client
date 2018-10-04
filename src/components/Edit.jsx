@@ -161,10 +161,10 @@ class Edit extends React.Component {
 
   buildCardFront() {
     console.log(JSON.stringify(this.state.sentences[this.state.currentSentence].tokens));
-    const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
+    const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) =>
       this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "────" : token.text.content
     ).join(' ');
-    return front;    
+    return front;
   }
 
   handleSave = () => {
@@ -202,6 +202,7 @@ class Edit extends React.Component {
             toggleShow = {this.toggleCardModal}
             incrementCurrentSentence={this.incrementCurrentSentence}
             decrementCurrentSentence={this.decrementCurrentSentence}
+            title={this.state.title}
             sentences={this.state.sentences}
             currentIndex={this.state.currentSentence}
             indicesToHide={this.state.indicesToHide}
