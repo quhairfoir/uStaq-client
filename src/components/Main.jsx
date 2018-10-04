@@ -57,10 +57,12 @@ class Main extends React.Component {
           </div>
         <span>
           <div id='intro-text'>
-            <h2>
-              Welcome to uStaq! <br /> 
-              Sign in to start learning or jump right in with a fun quiz.
-            </h2>
+            <h1>
+              Welcome to uStaq! 
+            </h1> 
+              <h4>
+                Sign in to start learning or jump right in with a fun quiz.
+              </h4>
           </div>
         </span>
       </div>

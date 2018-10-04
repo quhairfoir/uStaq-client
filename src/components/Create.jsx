@@ -79,7 +79,7 @@ class Create extends Component {
           }}>
           <FormGroup controlId="formInlineUrl" className="create-form">
             <ControlLabel className="add-title">
-              Add a title for your stack:
+              Add a title for your new stack:
             </ControlLabel>{" "}
               <FormControl
                 id="new-stack-title"
