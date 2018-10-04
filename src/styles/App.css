@@ -68,11 +68,15 @@
 }
 
 .stack-summary {
-  padding-top: 1.5em;
+  padding-top: 0.6em;
 }
 
 .stack-summary a {
   color: #393e46;
+
+  font-size: 1.5em;
+  font-weight: lighter;
+  vertical-align: middle;
 }
 
 .edit-delete-btn-group {
