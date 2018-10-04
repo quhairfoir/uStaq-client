@@ -7,7 +7,16 @@
   color: #337ab7;
 }
 
-.create-form {
+.delete-card-btn {
+  /* z-index: Infinity; */
+  float: right;
+}
+
+.edit-card-text {
+  font-size: 1.25em;
+}
+
+/* .create-form {
   margin-top: 40px;
 }
 
@@ -19,7 +28,7 @@
   font-size: 30px;
   font-family: sans-serif, Verdana, 'Times New Roman';
   /* margin-top: 2px; */
-}
+
 
 .navBCustom.navbar .navbar-brand {
   color: white;

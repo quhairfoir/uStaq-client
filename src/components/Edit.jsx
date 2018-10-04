@@ -12,7 +12,7 @@ class Edit extends React.Component {
       showCards: false,
       sentences: null,
       title: null,
-      currentSentence: 0,
+      currentSentence: null,
       indicesToHide: [],
     };
     this.incrementCurrentSentence = this.incrementCurrentSentence.bind(this);
@@ -38,6 +38,12 @@ class Edit extends React.Component {
     })
     .catch(error => alert(error))
 
+  }
+
+  deleteCard = (event) => {
+    let index = event === undefined ? 0 : Number(event.target.getAttribute("data-index"))
+    this.setState(
+      { sentences: [...this.state.sentences.slice(0, index), ...this.state.sentences.slice(index +1)] })
   }
 
   toggleCardModal = (event) => {
@@ -96,6 +102,8 @@ class Edit extends React.Component {
     } else {
       if (sentence.tokens[startIndex].hoverable) {
         indicesToHide = this.buildHideSubTree(startIndex)
+      } else {
+        indicesToHide = this.state.indicesToHide
       }
     }
 
@@ -135,7 +143,7 @@ class Edit extends React.Component {
     let stateSentences = JSON.parse(JSON.stringify(this.state.sentences));
     let indicesToHide = this.state.indicesToHide.slice();
     stateSentences[this.state.currentSentence].indicesToHide = indicesToHide;
-    stateSentences[this.state.currentSentence].front = this.buildCardFront();
+    stateSentences[this.state.currentSentence].front = this.buildCardFront(indicesToHide);
 
     this.setState({
       sentences: stateSentences,
@@ -143,17 +151,22 @@ class Edit extends React.Component {
     })
   };
 
+  shouldComponentUpdate(nextProps) {
+    console.log(nextProps)
+    return true
+  }
+
   handleCardClick = (index) => {
     console.log(index)
     this.setState({ showCards: true })
   }
 
-  buildCardFront() {
+  buildCardFront(indicesToHide) {
     console.log(JSON.stringify(this.state.sentences[this.state.currentSentence].tokens));
-    const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) => 
-      this.state.sentences[this.state.currentSentence].indicesToHide.includes(index) ? "────" : token.text.content
+    const front = this.state.sentences[this.state.currentSentence].tokens.map((token, index) =>
+      indicesToHide.includes(index) ? "────" : token.text.content
     ).join(' ');
-    return front;    
+    return front;
   }
 
   handleSave = () => {
@@ -164,7 +177,7 @@ class Edit extends React.Component {
 
   makeCardList() {
     return this.state.sentences.map((sentence, index) => (
-      <ListGroupItem data-index={index}>{sentence.text.content}</ListGroupItem>
+      <ListGroupItem data-index={index}><Button bsSize="xsmall" bsStyle="danger" className="delete-card-btn" onClick={this.deleteCard}><span data-index={index} className="glyphicon glyphicon-trash"></span></Button><p data-index={index} className="edit-card-text" onClick={this.toggleCardModal}>{sentence.text.content}</p></ListGroupItem>
     ))
   }
 
@@ -174,11 +187,11 @@ class Edit extends React.Component {
       <Grid>
         <Row>
           <PageHeader id="smallerHeader">
-            <small>{this.state.title}</small>
+            <small>Edit: {this.state.title}</small>
           </PageHeader>
         </Row>
         <Row>
-          <ListGroup onClick={this.toggleCardModal}>
+          <ListGroup /*onClick={this.toggleCardModal}*/ >
             {cardList}
           </ListGroup>
         </Row>
@@ -191,6 +204,7 @@ class Edit extends React.Component {
             toggleShow = {this.toggleCardModal}
             incrementCurrentSentence={this.incrementCurrentSentence}
             decrementCurrentSentence={this.decrementCurrentSentence}
+            title={this.state.title}
             sentences={this.state.sentences}
             currentIndex={this.state.currentSentence}
             indicesToHide={this.state.indicesToHide}
