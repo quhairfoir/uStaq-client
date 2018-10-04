@@ -106,6 +106,7 @@
 .top {
   background-image: url('../assets/notecard.png');
   background-size: 100%;
+  background-repeat: none;
 }
 
 .bottom {
